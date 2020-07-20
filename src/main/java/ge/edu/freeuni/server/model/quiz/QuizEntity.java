@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class QuizEntity {
 
-	private String title;
+	private long id;
+	private long creator_id;
 
+	private String name;
 }
