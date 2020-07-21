@@ -1,2 +1,12 @@
 server:
   port: 8080
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://localhost
+    data-username: root
+    data-password: admin
