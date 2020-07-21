@@ -11,7 +11,7 @@ import java.sql.Statement;
 @Component
 public class dbConnector {
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/playlist";
+    private static final String URL = "jdbc:mysql://localhost:3306/quiz_website";
     private static final String USER = "username";
     private static final String PASSWORD = "12345678";
     public static Statement statement;
@@ -21,6 +21,5 @@ public class dbConnector {
         Class.forName(DRIVER_NAME);
         Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
         statement = con.createStatement();
-        statement.executeQuery("use quiz_website;\n");
     }
 }
