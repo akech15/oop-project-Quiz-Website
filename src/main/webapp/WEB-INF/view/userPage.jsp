@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String[] arr = (String[]) request.getAttribute("arr");
-//    String username = request.getParameter("username");
+    //String[] arr = (String[]) request.getAttribute("arr");
+    String username = request.getParameter("username");
 
 %>
 
@@ -18,15 +18,15 @@
 </head>
 <body>
 
-<h1> Welcome  <% request.getParameter("username"); %> </h1>
+<h1> Welcome  ${username} </h1>
 
 <%
 
-    for (String str:
-         arr) {
-        out.print(str);
+
+        out.print(username);
+        out.print("qnaa");
         out.print("<br>");
-    }
+    //}
 %>
 
 </body>

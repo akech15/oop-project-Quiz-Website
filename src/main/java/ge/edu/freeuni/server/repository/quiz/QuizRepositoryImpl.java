@@ -1,12 +1,8 @@
-package ge.edu.freeuni.server.repository;
+package ge.edu.freeuni.server.repository.quiz;
 
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
+import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 @Repository
 public class QuizRepositoryImpl implements QuizRepository {
