@@ -13,14 +13,29 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     UserRepositoryImpl userRepository;
 
+    private User activeUser;
+
+    public User getActiveUser() {
+        return activeUser;
+    }
+
+    private void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
+    }
+
+    private void cancelActiveUser(){
+        this.activeUser = null;
+    }
+
     @Override
     public boolean logIn(User user) throws SQLException {
-
-        return userRepository.isValid(user);
+        boolean isValid = userRepository.isValid(user);
+        if(isValid) setActiveUser(user);
+        return isValid;
     }
 
     @Override
     public void logOut(User user) {
-
+        cancelActiveUser();
     }
 }

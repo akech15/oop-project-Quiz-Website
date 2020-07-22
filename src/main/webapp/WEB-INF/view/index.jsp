@@ -21,8 +21,6 @@
 
 <p><a href="/createAccount.jsp">Create New Account</a></p>
 
-<link href="HomePage.css"
-      rel="stylesheet">
 
 </body>
 </html>

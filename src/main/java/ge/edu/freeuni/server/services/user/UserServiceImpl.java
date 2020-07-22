@@ -14,7 +14,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(User user) throws SQLException {
-
         return userRepository.addUserToDB(user);
     }
 
