@@ -2,7 +2,9 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/controlbar.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/controlbar.css"/>
+
+    <title>Challenges</title>
 </head>
 <body>
 
@@ -13,14 +15,16 @@
     <a class="active" href="/challengepage">Challenge</a>
     <a href="/friendrequestpage">Friend Requests</a>
 
-    <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search People">
+    <form class="example" action="???????" style="margin:auto;max-width:300px">
+        <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search People">
     </form>
 </div>
 
-<ul id="myUL">
+<ul id="searchUL">
 
 </ul>
+
+<script src="../../searchSuggestions.js"></script>
 
 </body>
 </html>

@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/controlbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/homepage.css" />
+
+    <title>User Page</title>
+
 </head>
 <body>
 
@@ -14,9 +17,9 @@
     <a href="/challengepage">Challenge</a>
     <a href="/friendrequestpage">Friend Requests</a>
 
-    <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+    <form class="example" action="??????????" style="margin:auto;max-width:300px">
 
-        <input type="text" id="myInput" onkeyup="searchSuggestions()" placeholder="Search People">
+        <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search People">
 
     </form>
     <p id = "welcome">Welcome ${username}, here is your quizes</p>
@@ -52,28 +55,11 @@
     </div>
 </div>
 
-<ul id="searcBox">
+<ul id="searchUL">
 
 </ul>
 
-<script>
-    function searchSuggestions() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("searcBox");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-</script>
+<script src="../../searchSuggestions.js"></script>
 
 </body>
 </html>
