@@ -8,9 +8,10 @@
     content: "";
 }
 
+
 .column {
     padding: 10px;
-    height: 600px;
+    height: 700px;
     width: 33.33%;
     float: left;
     border: 1px solid #ccc;
