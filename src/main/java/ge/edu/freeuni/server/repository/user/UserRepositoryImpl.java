@@ -12,6 +12,7 @@ import java.util.List;
 public class UserRepositoryImpl implements UserRepository {
     private int idCounter = 1;
 
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 

@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface QuizRepository {
 
-	QuizEntity getById(long id);
-	List<String> getAllQuiz();
-	boolean addQuiz(Quiz quiz);
+    QuizEntity getById(long id);
+
+    List<String> getAllQuizNames();
+
+    boolean addQuiz(Quiz quiz);
 }

@@ -3,11 +3,13 @@ package ge.edu.freeuni.server.model.quiz;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class QuizEntity {
 	private long id;
 	private long creator_id;
 	private String name;
-	private String creation_date;
+	private Date creation_date;
 }
