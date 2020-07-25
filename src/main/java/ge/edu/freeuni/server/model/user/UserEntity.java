@@ -1,7 +1,6 @@
 package ge.edu.freeuni.server.model.user;
 
 import lombok.*;
-import org.graalvm.compiler.lir.LIRInstruction;
 
 @Setter
 @Getter

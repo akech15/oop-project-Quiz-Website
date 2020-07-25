@@ -18,7 +18,6 @@ import java.util.List;
 
 @Repository
 public class QuizRepositoryImpl implements QuizRepository {
-    private int quizIdCounter;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -27,13 +26,13 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
-    public QuizEntity getById(long id) {
+    public QuizEntity getQuizById(long id) {
         String query = "select * from quiz where id = " + id;
         return null;
     }
 
     @Override
-    public List<String> getAllQuiz() {
+    public List<String> getAllQuizNames() {
         List<String> result = new ArrayList<>();
         String query = "select name from quiz";
         result.addAll(jdbcTemplate.queryForList(query, String.class));
@@ -41,12 +40,13 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
-    public boolean addQuiz(Quiz quiz) {
+    public boolean addQuiz(QuizEntity quizEntity) {
         String querry = "INSERT INTO quiz (id, name, creator_id, description)" +
-                " values (" + quizIdCounter + ", " + quiz.getName() + ", " +
-                quiz.getCreator_id() + ", " + quiz.getDescription() + ");";
+                " values (" +
+                quizEntity.getName() + ", " +
+                quizEntity.getCreatorId() + ", " +
+                quizEntity.getDescription() + ");";
         jdbcTemplate.execute(querry);
-        quizIdCounter++;
         return true;
     }
 }
