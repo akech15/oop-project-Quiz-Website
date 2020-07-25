@@ -1,7 +1,6 @@
 package ge.edu.freeuni.server.services.authentication;
 
 import ge.edu.freeuni.api.model.user.User;
-import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public boolean logIn(User user) throws SQLException {
-        boolean isValid = userRepository.isValid(user);
+        boolean isValid = userRepository.isUserValid(user);
         if(isValid) setActiveUser(user);
         return isValid;
     }

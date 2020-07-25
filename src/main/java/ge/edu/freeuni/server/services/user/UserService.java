@@ -11,7 +11,7 @@ public interface UserService {
      * @return if added to the database returns true
      *         false otherwise
      */
-    boolean addUser(User user) throws SQLException;
+    boolean addUser(User user) ;
 
     /**
      *

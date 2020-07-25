@@ -9,6 +9,8 @@ import lombok.*;
 @Builder
 public class Quiz {
 
-	private String title;
+    private long creator_id;
+    private String name;
+    private String creation_date;
 
 }
