@@ -8,6 +8,11 @@
     <title>User Page</title>
 
 </head>
+<div class="header">
+    <div contenteditable>
+        QUI<span style="color: gold">ZZ</span>ERS
+    </div>
+</div>
 <body>
 
 
@@ -28,7 +33,7 @@
 
 <div class="row">
     <div class="column" >
-        <h2>list of available quizes</h2>
+        <h2>List of most popular quizzes</h2>
         <p>quiz 1...</p>
         <p>quiz 2...</p>
         <p>quiz 3...</p>
@@ -43,15 +48,15 @@
         <a href="/friendrequestpage">view more</a>
     </div>
     <div class="column">
-        <h2>list of taken quizes</h2>
+        <h2>List of taken quizzes</h2>
         <p>quiz1</p>
         <%--        change count and view more logic--%>
         <a href="/friendrequestpage">view more</a>
     </div>
     <div class="column" >
-        <h2>my quizes</h2>
+        <h2>My quizzes</h2>
         <%--        change count and view more logic--%>
-        <a href="/friendrequestpage">create new quiz</a>
+        <a href="/createQuiz.jsp">create new quiz</a>
     </div>
 </div>
 

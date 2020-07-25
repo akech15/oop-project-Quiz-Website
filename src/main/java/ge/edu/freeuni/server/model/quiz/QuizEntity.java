@@ -1,15 +1,26 @@
 package ge.edu.freeuni.server.model.quiz;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.Date;
+import ge.edu.freeuni.api.helper.UserHelperImpl;
+import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class QuizEntity {
 	private long id;
-	private long creator_id;
+	private long creatorId;
 	private String name;
-	private Date creation_date;
+	private String creationDate;
+	private String description;
+
+	public QuizEntity(long creatorId, String name, String description) {
+		setCreatorId(creatorId);
+		setName(name);
+		setDescription(description);
+		setCreationDate(null);
+		setId(-1);
+	}
+
 }

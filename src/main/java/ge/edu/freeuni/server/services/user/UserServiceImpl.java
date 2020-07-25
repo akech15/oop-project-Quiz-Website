@@ -1,5 +1,7 @@
 package ge.edu.freeuni.server.services.user;
 
+import ge.edu.freeuni.api.helper.QuizHelperImpl;
+import ge.edu.freeuni.api.helper.UserHelperImpl;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepositoryImpl userRepository;
 
+
     @Override
     public boolean addUser(User user) {
-        return userRepository.addUserToDB(user);
+        return userRepository.addUserToDB(UserHelperImpl.userToEntity(user));
     }
 
     @Override

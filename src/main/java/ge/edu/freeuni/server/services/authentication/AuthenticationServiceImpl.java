@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+
     @Autowired
     UserRepositoryImpl userRepository;
 

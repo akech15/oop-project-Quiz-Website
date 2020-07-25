@@ -34,6 +34,7 @@ create table quiz
     name          varchar(50) not null,
     creator_id    int         not null,
     creation_date DATETIME,
+    description   varchar(100),
     primary key (id),
     foreign key (creator_id) references user (id)
 );
