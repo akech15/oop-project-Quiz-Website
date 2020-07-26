@@ -16,7 +16,7 @@
 <div class="bgimg w3-display-container w3-text-white">
 
     <div class="w3-display-topleft w3-container w3-xlarge">
-        <p><button onclick="document.getElementById('login').style.display='block'" class="w3-button w3-deep-purple">Log In</button></p>
+        <p><button onclick="document.getElementById('login').style.display='block'" class="w3-button w3-black">Log In</button></p>
         <p><button onclick="document.getElementById('about').style.display='block'" class="w3-button w3-black">About Quiz Time</button></p>
     </div>
 
@@ -49,7 +49,7 @@
 <!-- About Quiz Time -->
 <div id="about" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
-        <div class="w3-container w3-deep-purple">
+        <div class="w3-container w3-black">
             <span onclick="document.getElementById('about').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
             <h1>About Quiz time</h1>
         </div>
@@ -94,6 +94,20 @@
     </div>
 </div>
 
+<script>
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("login")) {
+            document.getElementById("login").style.display = "none";
+        } else if(event.target == document.getElementById("about")){
+            document.getElementById("about").style.display = "none";
+        } else if(event.target == document.getElementById("topUsers")){
+            document.getElementById("topUsers").style.display = "none";
+        } else if(event.target == document.getElementById("topQuizzes")){
+            document.getElementById("topQuizzes").style.display = "none";
+        }
+    }
+
+</script>
 </body>
 </html>
 

@@ -36,6 +36,7 @@
     </div>
 
 </div>
+
 <!-- About Quiz -->
 <div id="aboutQuiz" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
@@ -72,6 +73,18 @@
 <div id="startQuiz" class="button">
 
 </div>
+
+
+<script>
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("aboutQuiz")) {
+            document.getElementById("aboutQuiz").style.display = "none";
+        } else if(event.target == document.getElementById("aboutAuthor")){
+            document.getElementById("aboutQuiz").style.display = "none";
+        }
+    }
+
+</script>
 
 </body>
 </html>

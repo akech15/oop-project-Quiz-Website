@@ -1,4 +1,3 @@
-<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
