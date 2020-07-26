@@ -1,7 +1,8 @@
 package ge.edu.freeuni.server.model.quiz;
 
-import ge.edu.freeuni.api.helper.UserHelperImpl;
 import lombok.*;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ public class QuizEntity {
 	private long id;
 	private long creatorId;
 	private String name;
-	private String creationDate;
+	private Date creationDate;
 	private String description;
 
 	public QuizEntity(long creatorId, String name, String description) {

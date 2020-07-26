@@ -1,19 +1,16 @@
 package ge.edu.freeuni.server.repository.quiz;
 
-import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -22,31 +19,61 @@ public class QuizRepositoryImpl implements QuizRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public QuizRepositoryImpl() {
-    }
+    private RowMapper<QuizEntity> quizRawMapper = (ResultSet result, int numRow) ->
+    {
+        QuizEntity entity1 = new QuizEntity();
+        entity1.setId(result.getLong("id"));
+        entity1.setCreationDate(result.getDate("creation_date"));
+        entity1.setDescription(result.getString("description"));
+        entity1.setName(result.getString("name"));
+        entity1.setCreatorId(result.getLong("creator_id"));
+        return entity1;
+    };
 
     @Override
     public QuizEntity getQuizById(long id) {
-        String query = "select * from quiz where id = " + id;
-        return null;
+        String query = String.format("select * from quiz where id = %s", id);
+        return jdbcTemplate.queryForObject(query, quizRawMapper);
+
     }
 
     @Override
     public List<String> getAllQuizNames() {
         List<String> result = new ArrayList<>();
-        String query = "select name from quiz";
+        String query = "select q.name from quiz q";
         result.addAll(jdbcTemplate.queryForList(query, String.class));
         return result;
     }
 
     @Override
     public boolean addQuiz(QuizEntity quizEntity) {
-        String querry = "INSERT INTO quiz (id, name, creator_id, description)" +
-                " values (" +
-                quizEntity.getName() + ", " +
-                quizEntity.getCreatorId() + ", " +
-                quizEntity.getDescription() + ");";
-        jdbcTemplate.execute(querry);
+        Date date = quizEntity.getCreationDate();
+        java.sql.Date dateDB = getDbDate(date);
+        String query = String.format(
+                "INSERT INTO quiz (name, creator_id, description, creation_date )" +
+                        " values (\'%s\', \'%s\', \'%s\', \'%s\');",
+                quizEntity.getName(),
+                quizEntity.getCreatorId(),
+                quizEntity.getDescription(),
+                dateDB);
+        System.out.println(query);
+        jdbcTemplate.execute(query);
         return true;
+    }
+
+    @Override
+    public void clearDBase() {
+        
+    }
+
+    private java.sql.Date getDbDate(Date date) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); // your template here
+            String d = formatter.format(date);
+            java.util.Date dateStr = formatter.parse(d);
+            return new java.sql.Date(dateStr.getTime());
+        } catch (Exception ex) {
+            throw new IllegalStateException();
+        }
     }
 }
