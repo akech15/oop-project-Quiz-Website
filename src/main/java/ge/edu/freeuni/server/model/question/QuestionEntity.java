@@ -14,5 +14,5 @@ public class QuestionEntity {
     private String category;
     private String question;
     private String type;
-    private String correct_answer;
+    private String answers;
 }
