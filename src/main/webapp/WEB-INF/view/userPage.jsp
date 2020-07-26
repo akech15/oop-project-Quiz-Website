@@ -22,7 +22,7 @@
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search People">
 
     </form>
-    <p id = "welcome">Welcome ${username}, here is your quizes</p>
+    <p id = "welcome">Welcome ${username}, here is your quizzes</p>
 </div>
 
 <div class="bgimg w3-display-container w3-text-white">
