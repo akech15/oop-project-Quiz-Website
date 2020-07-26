@@ -6,7 +6,6 @@ import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -22,6 +21,16 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public boolean addQuiz(Quiz quiz) {
         return quizRepository.addQuiz(quizHelper.quizToEntity(quiz));
+    }
+
+    @Override
+    public List<String> getAllQuizNames() {
+        return quizRepository.getAllQuizNames();
+    }
+
+    @Override
+    public int getCreator(String quizName) {
+        return quizRepository.getCreatorId(quizName);
     }
 
 }

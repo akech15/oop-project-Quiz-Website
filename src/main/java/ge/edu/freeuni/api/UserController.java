@@ -2,13 +2,11 @@ package ge.edu.freeuni.api;
 
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
+import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
 import ge.edu.freeuni.server.services.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -20,6 +18,8 @@ public class UserController {
     private AuthenticationServiceImpl authenticationService;
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private QuizServiceImpl quizService;
 
     @GetMapping("/")
     public String index() {
@@ -30,6 +30,7 @@ public class UserController {
     public String login(@RequestParam String username, @RequestParam String password,
                         Map<String, Object> model) throws SQLException {
         model.put("username", username);
+        model.put("quizNames", quizService.getAllQuizNames());
         User user = new User(username, password);
         boolean validUser = authenticationService.logIn(user);
         if (validUser) {

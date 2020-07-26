@@ -3,14 +3,11 @@ package ge.edu.freeuni;
 
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +18,6 @@ public class QuizTest {
     @Autowired
     private QuizRepositoryImpl quizRepository;
 
-    @AfterEach
-    public void clearDBase(){
-        quizRepository.clearDBase();
-    }
 
     @Test
     public void addQuiz() {
@@ -45,9 +38,16 @@ public class QuizTest {
     }
 
     @Test
-    public void getAllQuizName(){
+    public void getAllQuizName() {
+        QuizEntity entity = new QuizEntity();
+        entity.setName("starting quiz");
+        entity.setDescription("description");
+        entity.setCreatorId(1);
+        entity.setCreationDate(new Date());
+        quizRepository.addQuiz(entity);
         List<String> list = quizRepository.getAllQuizNames();
-
+        Assertions.assertEquals(5, list.size());
+        Assertions.assertEquals("starting quiz", list.get(0));
     }
 
 }

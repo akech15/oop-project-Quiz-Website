@@ -1,6 +1,5 @@
 package ge.edu.freeuni.server.repository.user;
 
-import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,8 +10,6 @@ import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-    private int idCounter = 1;
-
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -23,7 +20,6 @@ public class UserRepositoryImpl implements UserRepository {
         String password = userEntity.getPassword();
         if (isUsernameUsed(username))
             return false;
-        idCounter++;
         jdbcTemplate.execute("insert into user (username, password) values ("
                 + "\"" + username + "\" , \"" + password + "\");");
         return true;

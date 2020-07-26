@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,9 +61,11 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
-    public void clearDBase() {
-        
+    public int getCreatorId(String quizName) {
+        String query = "select creator_id from quiz where name=" + quizName;
+        return jdbcTemplate.queryForObject(query, Integer.class);
     }
+
 
     private java.sql.Date getDbDate(Date date) {
         try {

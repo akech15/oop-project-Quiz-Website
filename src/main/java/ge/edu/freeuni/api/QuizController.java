@@ -19,7 +19,6 @@ public class QuizController {
 
     @RequestMapping("createNewQuiz")
     public String createQuiz(Map<String, Object> model) {
-
         return "createQuiz";
     }
 
