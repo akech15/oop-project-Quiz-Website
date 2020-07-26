@@ -1,6 +1,5 @@
 package ge.edu.freeuni.server.services.user;
 
-import ge.edu.freeuni.api.helper.QuizHelperImpl;
 import ge.edu.freeuni.api.helper.UserHelperImpl;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;

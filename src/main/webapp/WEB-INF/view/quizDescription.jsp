@@ -1,4 +1,6 @@
-<%--
+<%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
+<%@ page import="ge.edu.freeuni.api.model.user.User" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: m.ormotsadze
   Date: 7/26/2020
@@ -9,7 +11,12 @@
 <html>
 <head>
     <title>ABOUT QUIZ</title>
-
+    <%
+        Quiz quiz = (Quiz) request.getAttribute("quiz");
+        User creator = (User) request.getAttribute("creator");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); // your template here
+        String date = formatter.format(quiz.getCreationDate());
+    %>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/quizDescription.css"/>
 </head>
@@ -38,9 +45,24 @@
         </div>
 
         <div class="w3-container">
-            <h5>Name: <b>bazidan wamogebuli info</b></h5>
-            <h5>Description: <b>bazidan wamogebuli info</b></h5>
-            <h5>creation date: <b>bazidan wamogebuli info</b></h5>
+
+            <h5>Name: <b><%=quiz.getName()%></b></h5>
+            <h5>Description: <b><%=quiz.getDescription()%></b></h5>
+            <h5>creation date: <b><%=date%></b></h5>
+        </div>
+    </div>
+</div>
+
+<!-- About Author -->
+<div id="aboutAuthor" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black w3-display-container">
+            <span onclick="document.getElementById('aboutAuthor').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+            <h1>About Quiz</h1>
+        </div>
+
+        <div class="w3-container">
+            <h5>Creator Username: <b><%=creator.getUsername()%></b></h5>
         </div>
     </div>
 </div>

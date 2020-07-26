@@ -11,4 +11,5 @@ public interface UserRepository {
 
     long getIdByUsername(String username);
 
+    UserEntity getUserById(long id);
 }

@@ -42,6 +42,7 @@ public class UserController {
     @RequestMapping("/userhomepage")
     public String userPage(Map<String, Object> model) {
         model.put("username", authenticationService.getActiveUser().getUsername());
+        model.put("quizNames", quizService.getAllQuizNames());
         return "userPage";
     }
 
@@ -74,15 +75,5 @@ public class UserController {
         return "duplicateUser";
     }
 
-    @RequestMapping("/preQuiz")
-    public String startQuiz(Map<String, Object> model) {
 
-        return "preQuizPage";
-    }
-
-    @RequestMapping("/quizDescriptionPage")
-    public String aboutQuiz(Map<String, Object> model) {
-
-        return "quizDescription";
-    }
 }

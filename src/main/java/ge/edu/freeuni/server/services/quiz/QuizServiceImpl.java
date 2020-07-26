@@ -1,8 +1,12 @@
 package ge.edu.freeuni.server.services.quiz;
 
-import ge.edu.freeuni.api.helper.QuizHelperImpl;
+import ge.edu.freeuni.api.helper.QuizHelper;
+import ge.edu.freeuni.api.helper.UserHelperImpl;
 import ge.edu.freeuni.api.model.quiz.Quiz;
-import ge.edu.freeuni.server.repository.quiz.QuizRepository;
+import ge.edu.freeuni.api.model.user.User;
+import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
+import ge.edu.freeuni.server.repository.user.UserRepository;
+import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +16,20 @@ import java.util.List;
 public class QuizServiceImpl implements QuizService {
 
     @Autowired
-    private QuizRepository quizRepository;
+    private QuizRepositoryImpl quizRepository;
 
     @Autowired
-    private QuizHelperImpl quizHelper;
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationServiceImpl authenticationService;
 
 
     @Override
     public boolean addQuiz(Quiz quiz) {
-        return quizRepository.addQuiz(quizHelper.quizToEntity(quiz));
+        return quizRepository.addQuiz(QuizHelper.quizToEntity(authenticationService,
+                userRepository,
+                quiz));
     }
 
     @Override
@@ -29,8 +38,13 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public int getCreator(String quizName) {
-        return quizRepository.getCreatorId(quizName);
+    public User getCreator(String quizName) {
+        return UserHelperImpl.entityToUser(userRepository.getUserById(quizRepository.getQuizByName(quizName).getCreatorId()));
+    }
+
+    @Override
+    public Quiz getQuiz(String quizName) {
+        return QuizHelper.entityToQuiz(quizRepository.getQuizByName(quizName));
     }
 
 }

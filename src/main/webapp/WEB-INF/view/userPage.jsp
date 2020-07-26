@@ -35,7 +35,8 @@
             <%
                 List<String> quizNames = (List<String>) request.getAttribute("quizNames");
                 for (String quizName : quizNames) {
-                    out.print(String.format("<a href=\"/%s\">%s</a><br>", quizName, quizName));
+                    out.print(String.format("<a href=\"/quizDescriptionPage/%s\">%s</a><br>", quizName, quizName));
+
                 }
             %>
 

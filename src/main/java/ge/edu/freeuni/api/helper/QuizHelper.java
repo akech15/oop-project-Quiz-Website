@@ -8,26 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class QuizHelperImpl{
-
-    @Autowired
-    private AuthenticationServiceImpl authenticationService;
-
-    @Autowired
-    private UserRepository userRepository;
+public final class QuizHelper {
 
     public static Quiz entityToQuiz(QuizEntity quizEntity) {
         return Quiz.builder().
                 name(quizEntity.getName()).
                 description(quizEntity.getDescription()).
+                creationDate(quizEntity.getCreationDate()).
                 build();
     }
 
-    public QuizEntity quizToEntity(Quiz quiz) {
+    public static QuizEntity quizToEntity(AuthenticationServiceImpl authenticationService,
+                                          UserRepository userRepository,
+                                          Quiz quiz) {
         long creatorId = userRepository.getIdByUsername(authenticationService.getActiveUser().getUsername());
         return QuizEntity.builder().
                 creatorId(creatorId).
                 name(quiz.getName()).
+                creationDate(quiz.getCreationDate()).
                 description(quiz.getDescription()).build();
     }
 }

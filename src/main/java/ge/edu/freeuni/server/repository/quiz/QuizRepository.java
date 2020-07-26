@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface QuizRepository {
 
-    QuizEntity getQuizById(long id);
+    QuizEntity getQuizByName(String name);
 
     List<String> getAllQuizNames();
 

@@ -1,10 +1,13 @@
 package ge.edu.freeuni.server.repository.user;
 
+import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +16,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    private RowMapper<UserEntity> userRawMapper = (ResultSet result, int numRow) ->
+    {
+        UserEntity entity1 = new UserEntity();
+        entity1.setId(result.getLong("id"));
+        entity1.setUsername(result.getString("username"));
+        entity1.setPassword(result.getString("password"));
+        return entity1;
+    };
 
     @Override
     public boolean addUserToDB(UserEntity userEntity) {
@@ -47,5 +59,11 @@ public class UserRepositoryImpl implements UserRepository {
     public long getIdByUsername(String username) {
         String query = "SELECT id FROM user WHERE username = " + username + ";";
         return jdbcTemplate.queryForObject(query, Long.class);
+    }
+
+    @Override
+    public UserEntity getUserById(long id) {
+        String query = String.format("select * from user where id = %d", id);
+        return jdbcTemplate.queryForObject(query, userRawMapper);
     }
 }
