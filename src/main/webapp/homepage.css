@@ -2,11 +2,11 @@
     box-sizing: border-box;
 }
 .bgimg {
-     background-image: url(images/userPage.jpg);
-     min-height: 100%;
-     background-position: center;
-     background-size: cover;
- }
+    background-image: url(images/userPage.jpg);
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
 
 .row:after {
     clear: both;
