@@ -73,4 +73,15 @@ public class UserController {
         return "duplicateUser";
     }
 
+    @RequestMapping("/preQuiz")
+    public String startQuiz(Map<String, Object> model) {
+
+        return "preQuizPage";
+    }
+
+    @RequestMapping("/quizDescriptionPage")
+    public String aboutQuiz(Map<String, Object> model) {
+
+        return "quizDescription";
+    }
 }

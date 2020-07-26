@@ -30,6 +30,8 @@
     <p id = "welcome">Welcome ${username}, here is your quizes</p>
 </div>
 
+<div class="bgimg w3-display-container w3-text-white">
+
 
 <div class="row">
     <div class="column" >
@@ -60,6 +62,7 @@
     </div>
 </div>
 
+</div>
 <ul id="searchUL">
 
 </ul>

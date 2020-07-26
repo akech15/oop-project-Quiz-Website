@@ -1,0 +1,7 @@
+body {
+    background-image: url(images/quizBackground.jpg);
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+    font-family: cursive;
+}

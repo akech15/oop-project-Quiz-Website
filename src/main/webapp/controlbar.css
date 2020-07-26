@@ -1,11 +1,11 @@
 input[type=text] {
-    background-color: yellow;
+    background-color: #DDA0DD;
     box-sizing: border-box;
     padding: 12px 20px 12px 40px;
     border-radius: 4px;
     font-size: 16px;
     background-position: 10px 10px;
-    border: 2px solid #ccc;
+    border: 2px solid #D8BFD8;
     transition: width 0.4s ease-in-out;
     width: 130px;
     background-repeat: no-repeat;
@@ -49,7 +49,7 @@ body {
 
 .topnav {
     overflow: hidden;
-    background-color: #FFC0CB;
+    background-color: #800080;
     font-weight: bold;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
@@ -65,16 +65,16 @@ body {
 }
 
 .topnav a:hover {
-    background-color: pink;
+    background-color: #D8BFD8;
     color: black;
-    border: 2px solid purple;
+    border: 2px solid #D8BFD8;
     border-radius: 20px;
 }
 
 .topnav a.active {
     background-color: purple;
     color: white;
-    border: 2px solid pink;
+    border: 2px solid #D8BFD8;
     border-radius: 20px;
 }
 
@@ -84,7 +84,7 @@ body {
     margin-top: 8px;
     margin-right: 16px;
     font-size: 17px;
-    border: 2px solid pink;
+    border: 2px solid #D8BFD8;
     border-radius: 10px;
 }
 
