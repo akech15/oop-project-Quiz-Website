@@ -40,6 +40,10 @@ public class FriendsRepositoryImpl implements FriendsRepository {
         }
     }
 
+    @Override
+    public boolean approveRequest() {
+        return false;
+    }
 
 
 }

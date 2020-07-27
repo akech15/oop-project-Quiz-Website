@@ -1,7 +1,5 @@
 package ge.edu.freeuni.api;
 
-
-import com.sun.org.apache.xerces.internal.impl.xs.util.StringListImpl;
 import ge.edu.freeuni.api.helper.QuestionHelper;
 import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.question.QuestionCategoryType;
@@ -15,10 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 
 @Controller
@@ -41,19 +37,19 @@ public class QuestionController {
     }
 
     @RequestMapping("/addQuestion/questionResponse")
-    public String addQuestionResponse(Map<String, Object> model){
+    public String addQuestionResponse(Map<String, Object> model) {
         addQuestionResponseAndFillInTheBlank(model);
         return "getType";
     }
 
     @RequestMapping("/addQuestion/fillInTheBlank")
-    public String addFillInTheBlank(Map<String, Object> model){
+    public String addFillInTheBlank(Map<String, Object> model) {
         addQuestionResponseAndFillInTheBlank(model);
         return "getType";
     }
 
     @RequestMapping("/addQuestion/multipleChoice")
-    public String addMultipleChoice(Map<String, Object> model){
+    public String addMultipleChoice(Map<String, Object> model) {
         String question = (String) model.get("question");
 
         String answer1 = (String) model.get("answer #1");
@@ -62,7 +58,7 @@ public class QuestionController {
         String answer4 = (String) model.get("answer #4");
 
         String category = (String) model.get("category");
-        long correctAnswerIndex = (Long)model.get("correct answer category");
+        long correctAnswerIndex = (Long) model.get("correct answer category");
 
         questionService.addQuestion(
                 new Question(
@@ -70,7 +66,7 @@ public class QuestionController {
                         question,
                         QuestionType.MULTIPLE_CHOICE,
                         correctAnswerIndex,
-                        new StringListImpl(Arrays.asList(answer1, answer2, answer3, answer4)),
+                        new ArrayList<>(Arrays.asList(answer1, answer2, answer3, answer4)),
                         Enum.valueOf(QuestionCategoryType.class, category),
                         null
                 )
@@ -80,11 +76,11 @@ public class QuestionController {
     }
 
     @RequestMapping("/addQuestion/pictureResponse")
-    public String addPictureResponse(Map<String, Object> model){
+    public String addPictureResponse(Map<String, Object> model) {
         String question = (String) model.get("question");
         String answer = (String) model.get("answer");
         String category = (String) model.get("category");
-        String pictureURL = (String)model.get("picture url");
+        String pictureURL = (String) model.get("picture url");
 
         questionService.addQuestion(
                 new Question(
@@ -102,7 +98,7 @@ public class QuestionController {
     }
 
     @RequestMapping("/addQuestion/finish")
-    public String finishQuizMaking(Map<String, Object> model){
+    public String finishQuizMaking(Map<String, Object> model) {
         model.put("username", authenticationService.getActiveUser().getUsername());
         model.put("quizNames", quizService.getAllQuizNames());
         return "userPage";
@@ -115,13 +111,13 @@ public class QuestionController {
 
         questionService.addQuestion(
                 new Question(
-                    quizService.getActiveQuiz(),
-                    question,
-                    QuestionType.QUESTION_RESPONSE,
-                    -1,
-                    StringUtils.StringToList(answer, ','),
-                    Enum.valueOf(QuestionCategoryType.class, category),
-                    null
+                        quizService.getActiveQuiz(),
+                        question,
+                        QuestionType.QUESTION_RESPONSE,
+                        -1,
+                        StringUtils.StringToList(answer, ','),
+                        Enum.valueOf(QuestionCategoryType.class, category),
+                        null
                 )
         );
     }
