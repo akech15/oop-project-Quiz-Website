@@ -4,7 +4,6 @@ import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

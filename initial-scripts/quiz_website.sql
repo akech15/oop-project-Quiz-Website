@@ -21,8 +21,8 @@ CREATE TABLE user
 
 create table friends
 (
-    user_id   int         NOT NULL,
-    friend_id int         NOT NULL,
+    sender_id   int         NOT NULL,
+    receiver_id int         NOT NULL,
     status    varchar(10) NOT NULL,
     FOREIGN KEY (user_id) references user (id),
     foreign key (friend_id) references user (id)
@@ -47,7 +47,8 @@ CREATE TABLE question
     question       VARCHAR(200) NOT NULL,
     type           varchar(50)  not null,
     correct_answer varchar(200) not null,
-    max_score      int          not null,
+    correct_answer_index      int          not null,
+    picture_url varchar (100),
     PRIMARY KEY (id),
     FOREIGN KEY (quiz_id) references quiz (id)
 );

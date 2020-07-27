@@ -1,25 +1,23 @@
 package ge.edu.freeuni.api.model.question;
 
+import ge.edu.freeuni.api.model.quiz.Quiz;
+import lombok.*;
+
 import java.util.List;
 
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Question {
 
-    private long quizId;
+    private Quiz quiz;
     private String question;
     private QuestionType type;
-    private long maxScore;
+    private long correctAnswerIndex;
     private List<String> answers;
     private QuestionCategoryType category;
-
-    public static void main(String[] args) {
-        QuestionType sad = QuestionType.valueOf("A");
-        System.out.println(sad.name());
-    }
-
-
-
-
-
-
+    private String pictureURL;
 
 }

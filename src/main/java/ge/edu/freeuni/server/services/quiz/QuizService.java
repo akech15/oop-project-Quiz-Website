@@ -15,4 +15,8 @@ public interface QuizService {
     User getCreator(String quizName);
 
     Quiz getQuiz(String quizName);
+
+    Quiz getActiveQuiz();
+
+    void QuitQuiz();
 }

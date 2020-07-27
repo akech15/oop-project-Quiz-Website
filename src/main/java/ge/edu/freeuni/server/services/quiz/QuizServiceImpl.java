@@ -15,6 +15,8 @@ import java.util.List;
 @Service
 public class QuizServiceImpl implements QuizService {
 
+    private Quiz activeQuiz = null;
+
     @Autowired
     private QuizRepositoryImpl quizRepository;
 
@@ -24,9 +26,13 @@ public class QuizServiceImpl implements QuizService {
     @Autowired
     private AuthenticationServiceImpl authenticationService;
 
+    private void setActiveQuiz(Quiz quiz){
+        activeQuiz = quiz;
+    }
 
     @Override
     public boolean addQuiz(Quiz quiz) {
+        setActiveQuiz(quiz);
         return quizRepository.addQuiz(QuizHelper.quizToEntity(authenticationService,
                 userRepository,
                 quiz));
@@ -45,6 +51,16 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public Quiz getQuiz(String quizName) {
         return QuizHelper.entityToQuiz(quizRepository.getQuizByName(quizName));
+    }
+
+    @Override
+    public Quiz getActiveQuiz() {
+        return activeQuiz;
+    }
+
+    @Override
+    public void QuitQuiz() {
+        activeQuiz = null;
     }
 
 }

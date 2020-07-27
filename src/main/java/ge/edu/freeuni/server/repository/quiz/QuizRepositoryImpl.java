@@ -35,6 +35,11 @@ public class QuizRepositoryImpl implements QuizRepository {
         return jdbcTemplate.queryForObject(query, quizRawMapper);
     }
 
+    public QuizEntity getQuizById(long id){
+        String query = String.format("select * from quiz where id = \'%d\';", id);
+        return jdbcTemplate.queryForObject(query, quizRawMapper);
+    }
+
     @Override
     public List<String> getAllQuizNames() {
         List<String> result = new ArrayList<>();
@@ -48,15 +53,20 @@ public class QuizRepositoryImpl implements QuizRepository {
         Date date = quizEntity.getCreationDate();
         java.sql.Date dateDB = getDbDate(date);
         String query = String.format(
-                "INSERT INTO quiz (name, creator_id, description, creation_date )" +
+                "INSERT INTO quiz (name, creator_id, description, creation_date)" +
                         " values (\'%s\', \'%s\', \'%s\', \'%s\');",
                 quizEntity.getName(),
                 quizEntity.getCreatorId(),
                 quizEntity.getDescription(),
                 dateDB);
-        System.out.println(query);
-        jdbcTemplate.execute(query);
-        return true;
+
+        try {
+            jdbcTemplate.execute(query);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     @Override
