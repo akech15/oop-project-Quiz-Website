@@ -1,14 +1,14 @@
 body,h1,h5 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
 
-.bgimg {
-    background-image: url(images/startPage.jpg);
+.bgimg{
+    background-image: url(images/quizBanner.jpg);
     min-height: 100%;
     background-position: center;
     background-size: cover;
 }
 
-#usernameBox {
+#quizName{
     border-radius: 25px;
     border: 2px solid #609;
     padding: 20px;
@@ -16,16 +16,13 @@ body, html {height: 100%}
     height: 15px;
 }
 
-#passwordBox {
+#description{
     border-radius: 25px;
     border: 2px solid #609;
     padding: 20px;
-    width: 200px;
-    height: 15px;
 }
 
-
-#loginButton {
+#submitButton{
     box-shadow:inset 0px 0px 15px 3px #23395e;
     background:linear-gradient(to bottom, #2e466e 5%, #415989 100%);
     background-color:#2e466e;

@@ -14,7 +14,7 @@
     <%
         Quiz quiz = (Quiz) request.getAttribute("quiz");
         User creator = (User) request.getAttribute("creator");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); // your template here
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date = formatter.format(quiz.getCreationDate());
     %>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">

@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,38 +33,32 @@
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search People">
 
     </form>
-    <p id = "welcome">Welcome ${username}, here is your quizzes</p>
 </div>
 
 <div class="bgimg w3-display-container w3-text-white">
-
-
     <div class="row">
         <div class="column" >
-            <h2>list of available quizes</h2>
-            <p>quiz 1...</p>
-            <p>quiz 2...</p>
-            <p>quiz 3...</p>
-            <p>quiz 4...</p>
-            <p>quiz 5...</p>
-            <p>quiz 6...</p>
-            <p>quiz 7...</p>
-            <p>quiz 8...</p>
-            <p>quiz 9...</p>
-            <p>quiz 10...</p>
+            <h2>list of available quizzes</h2>
+            <%
+                List<String> quizNames = (List<String>) request.getAttribute("quizNames");
+                for (String quizName : quizNames) {
+                    out.print(String.format("<a href=\"/quizDescriptionPage/%s\">%s</a><br>", quizName, quizName));
+                }
+            %>
+
             <%--        change count and view more logic--%>
-            <a href="/friendrequestpage">view more</a>
+            <a href="/login">view more</a>
         </div>
         <div class="column">
             <h2>list of taken quizes</h2>
             <p>quiz1</p>
             <%--        change count and view more logic--%>
-            <a href="/friendrequestpage">view more</a>
+            <a href="/login">view more</a>
         </div>
         <div class="column" >
             <h2>my quizzes</h2>
             <%--        change count and view more logic--%>
-            <a href="/friendrequestpage">create new quiz</a>
+            <a href="/createQuizPage">create new quiz</a>
         </div>
     </div>
 
@@ -87,16 +82,14 @@
         background-color: #800080;
         color:white;
     }
-
-
 </style>
+
 <script>
     window.onclick = function(event) {
         if (event.target == document.getElementById("friendRequests")) {
             document.getElementById("friendRequests").style.display = "none";
         }
     }
-
 </script>
 
 <ul id="searchUL">

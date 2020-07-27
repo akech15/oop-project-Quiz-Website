@@ -25,7 +25,7 @@ public class QuizController {
     @Autowired
     private UserServiceImpl userService;
 
-    @RequestMapping("createNewQuiz")
+    @RequestMapping("/createNewQuiz")
     public String createQuiz(Map<String, Object> model) {
         return "createQuiz";
     }

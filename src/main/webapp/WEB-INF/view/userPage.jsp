@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
 
     <div class="row">
         <div class="column">
-            <h2>list of available quizes</h2>
+            <h2>list of available quizzes</h2>
             <%
                 List<String> quizNames = (List<String>) request.getAttribute("quizNames");
                 for (String quizName : quizNames) {
@@ -51,7 +52,7 @@
         <div class="column">
             <h2>my quizzes</h2>
             <%--        change count and view more logic--%>
-            <a href="/friendrequestpage">create new quiz</a>
+            <a href="/createQuizPage">create new quiz</a>
         </div>
     </div>
 

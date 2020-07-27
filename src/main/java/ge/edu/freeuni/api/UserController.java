@@ -59,11 +59,12 @@ public class UserController {
 
     @RequestMapping("/friendrequestpage")
     public String friendRequestPage(Map<String, Object> model) {
+        model.put("quizNames", quizService.getAllQuizNames());
         return "friendRequests";
     }
 
 
-    @PostMapping("/createAccount")
+    @RequestMapping("/createAccount")
     public String createAccount(@RequestParam String username, @RequestParam String password,
                                 Map<String, Object> model) throws SQLException {
         model.put("username", username);
@@ -75,5 +76,8 @@ public class UserController {
         return "duplicateUser";
     }
 
-
+    @RequestMapping("/viewUser")
+    public String viewUser(Map<String, Object> model){
+        return "viewUserPage";
+    }
 }

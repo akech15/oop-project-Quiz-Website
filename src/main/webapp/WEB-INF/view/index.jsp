@@ -37,8 +37,8 @@
         </div>
         <div class="login-item">
             <form action="${pageContext.request.contextPath}/login" method="post">
-                Username: <input type="text" name="username" placeholder="Enter User Name" id = "usernameBox"/><br>
-                Password: <input type="password" name="password" placeholder="Enter Password" id = "passwordBox"/><br><br>
+                Username: <input type="text" name="username" required placeholder="Enter User Name" id = "usernameBox"/><br>
+                Password: <input type="password" name="password" required placeholder="Enter Password" id = "passwordBox"/><br><br>
                 <input class="btn" type="submit" value="Login" id="loginButton">
             </form>
             <p class="hplink"><a  href="/createAccount.jsp">Create New Account</a></p>
