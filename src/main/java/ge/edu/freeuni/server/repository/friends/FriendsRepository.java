@@ -9,6 +9,10 @@ public interface FriendsRepository {
 
     boolean sendRequest(UserEntity sender, UserEntity receiver);
 
-    boolean approveRequest();
+    boolean approveRequest(UserEntity sender, UserEntity receiver);
+
+    boolean removeRequest(UserEntity sender, UserEntity receiver);
+
+    boolean removeFriend(UserEntity sender, UserEntity receiver);
 
 }

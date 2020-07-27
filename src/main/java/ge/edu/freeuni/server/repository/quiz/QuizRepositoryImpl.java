@@ -1,6 +1,7 @@
 package ge.edu.freeuni.server.repository.quiz;
 
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
+import ge.edu.freeuni.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -51,7 +52,7 @@ public class QuizRepositoryImpl implements QuizRepository {
     @Override
     public boolean addQuiz(QuizEntity quizEntity) {
         Date date = quizEntity.getCreationDate();
-        java.sql.Date dateDB = getDbDate(date);
+        java.sql.Date dateDB = DateUtils.getDbDate(date);
         String query = String.format(
                 "INSERT INTO quiz (name, creator_id, description, creation_date)" +
                         " values (\'%s\', \'%s\', \'%s\', \'%s\');",
@@ -75,15 +76,4 @@ public class QuizRepositoryImpl implements QuizRepository {
         return jdbcTemplate.queryForObject(query, Integer.class);
     }
 
-
-    private java.sql.Date getDbDate(Date date) {
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); // your template here
-            String d = formatter.format(date);
-            java.util.Date dateStr = formatter.parse(d);
-            return new java.sql.Date(dateStr.getTime());
-        } catch (Exception ex) {
-            throw new IllegalStateException();
-        }
-    }
 }

@@ -4,7 +4,9 @@ import ge.edu.freeuni.api.model.friends.FriendshipStatusType;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class FriendsRepositoryImpl implements FriendsRepository {
 
     @Autowired
@@ -41,9 +43,59 @@ public class FriendsRepositoryImpl implements FriendsRepository {
     }
 
     @Override
-    public boolean approveRequest() {
-        return false;
+    public boolean approveRequest(UserEntity sender, UserEntity receiver) {
+
+        String query  = String.format(
+                "UPDATE friends SET status = \'%s\' WHERE sender_id = \'%d\' AND receiver_id = \'%d\';",
+                String.valueOf(FriendshipStatusType.APPROVED),
+                receiver.getId(),
+                sender.getId()
+        );
+
+        try {
+            jdbcTemplate.update(query);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
+    @Override
+    public boolean removeRequest(UserEntity sender, UserEntity receiver) {
+        String query = String.format(
+                "DELETE FROM friends WHERE sender_id = \'%d\' AND receiver_id = \'%d\';",
+                sender.getId(),
+                receiver.getId()
+        );
+
+        try{
+            jdbcTemplate.update(query);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean removeFriend(UserEntity sender, UserEntity receiver) {
+
+        String query = String.format(
+                "DELETE FROM friends WHERE (sender_id = \'%d\' AND receiver_id = \'%d\') OR " +
+                        "(sender_id = \'%d\' AND receiver_id = \'%d\');",
+                sender.getId(),
+                receiver.getId(),
+                receiver.getId(),
+                sender.getId()
+        );
+
+        try{
+            jdbcTemplate.update(query);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 }
