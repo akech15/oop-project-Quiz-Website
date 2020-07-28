@@ -10,4 +10,6 @@ public interface PassedQuizService {
 
     PassedQuiz getPassedQuizById(long id);
 
+    long getPassedQuizScore(PassedQuiz passedQuiz);
+
 }

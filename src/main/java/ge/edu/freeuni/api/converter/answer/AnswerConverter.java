@@ -1,5 +1,7 @@
-package ge.edu.freeuni.api.helper;
+package ge.edu.freeuni.api.converter.answer;
 
+import ge.edu.freeuni.api.converter.passedQuiz.PassedQuizConverter;
+import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.answer.Answer;
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
 import ge.edu.freeuni.server.repository.passedQuiz.PassedQuizRepositoryImpl;
@@ -10,15 +12,15 @@ import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class AnswerHelper {
+public final class AnswerConverter {
 
     public static Answer AnswerEntityToAnswer(AnswerEntity from, QuestionRepositoryImpl questionRepository,
                                               QuizRepositoryImpl quizRepository, PassedQuizRepositoryImpl passed,
                                               UserRepositoryImpl user) {
         return Answer.builder().
                 id(from.getId()).
-                question(QuestionHelper.entityToQuestion(quizRepository, questionRepository.getQuestionById(from.getQuestionId()))).
-                passedQuiz(PassedQuizHelper.entityToPassedQuiz(user, quizRepository, passed.getPassedQuizById(from.getPassedQuizId()))).
+                question(QuestionConverter.entityToQuestion(quizRepository, questionRepository.getQuestionById(from.getQuestionId()))).
+                passedQuiz(PassedQuizConverter.entityToPassedQuiz(user, quizRepository, passed.getPassedQuizById(from.getPassedQuizId()))).
                 userAnswer(from.getUserAnswer()).
                 build();
     }
@@ -27,7 +29,7 @@ public final class AnswerHelper {
         return AnswerEntity.builder().
                 id(answer.getId()).
                 passedQuizId(answer.getPassedQuiz().getId()).
-                questionId(QuestionHelper.questionToEntity(quiz, answer.getQuestion()).getId()).
+                questionId(QuestionConverter.questionToEntity(quiz, answer.getQuestion()).getId()).
                 userAnswer(answer.getUserAnswer()).
                 build();
 
@@ -41,7 +43,7 @@ public final class AnswerHelper {
         List<Answer> res = new ArrayList<>();
         for (AnswerEntity answerEntity:
              list) {
-            res.add(AnswerHelper.AnswerEntityToAnswer(answerEntity, questionRepository, quizRepository, passed, user));
+            res.add(AnswerConverter.AnswerEntityToAnswer(answerEntity, questionRepository, quizRepository, passed, user));
         }
         return res;
     }

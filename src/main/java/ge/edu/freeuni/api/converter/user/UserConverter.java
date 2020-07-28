@@ -1,11 +1,11 @@
-package ge.edu.freeuni.api.helper;
+package ge.edu.freeuni.api.converter.user;
 
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserHelperImpl {
+public class UserConverter {
 
     public static User entityToUser(UserEntity userEntity) {
         return User.builder().

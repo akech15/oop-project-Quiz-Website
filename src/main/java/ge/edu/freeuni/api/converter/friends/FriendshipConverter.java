@@ -1,17 +1,18 @@
-package ge.edu.freeuni.api.helper;
+package ge.edu.freeuni.api.converter.friends;
 
+import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.friends.FriendshipStatusType;
 import ge.edu.freeuni.api.model.friends.Friendship;
 import ge.edu.freeuni.server.model.friends.FriendshipEntity;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 
-public final class FriendsHelper {
+public final class FriendshipConverter {
 
     public static Friendship entityToFriends(UserRepositoryImpl userRepository,
                                              FriendshipEntity friendsEntity){
         return Friendship.builder().
-                sender(UserHelperImpl.entityToUser(userRepository.getUserById(friendsEntity.getSenderId()))).
-                receiver(UserHelperImpl.entityToUser(userRepository.getUserById(friendsEntity.getReceiverId()))).
+                sender(UserConverter.entityToUser(userRepository.getUserById(friendsEntity.getSenderId()))).
+                receiver(UserConverter.entityToUser(userRepository.getUserById(friendsEntity.getReceiverId()))).
                 status(Enum.valueOf(FriendshipStatusType.class, friendsEntity.getStatus())).build();
     }
 

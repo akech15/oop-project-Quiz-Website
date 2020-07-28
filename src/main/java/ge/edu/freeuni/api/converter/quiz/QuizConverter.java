@@ -1,4 +1,4 @@
-package ge.edu.freeuni.api.helper;
+package ge.edu.freeuni.api.converter.quiz;
 
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
@@ -7,7 +7,7 @@ import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class QuizHelper {
+public final class QuizConverter {
 
     public static Quiz entityToQuiz(QuizEntity quizEntity) {
         return Quiz.builder().

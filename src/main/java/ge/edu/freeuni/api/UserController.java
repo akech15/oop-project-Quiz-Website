@@ -1,4 +1,4 @@
-package ge.edu.freeuni.api.controller;
+package ge.edu.freeuni.api;
 
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;

@@ -1,4 +1,9 @@
 package ge.edu.freeuni.server.services.answer;
 
-public class AnswerService {
+import ge.edu.freeuni.api.model.answer.Answer;
+
+public interface AnswerService {
+
+    boolean isAnswerCorrect(Answer answer);
+
 }

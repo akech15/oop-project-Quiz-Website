@@ -1,4 +1,4 @@
-package ge.edu.freeuni.api.controller;
+package ge.edu.freeuni.api;
 
 import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.question.Question;

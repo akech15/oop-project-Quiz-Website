@@ -26,7 +26,7 @@ public final class StringUtils {
 		return result;
 	}
 
-	public static List<String> StringToList(String str, char delimiter){
+	public static List<String> stringToList(String str, char delimiter){
 		List<String> result = new ArrayList<>();
 		StringTokenizer tokenizer = new StringTokenizer(str, String.valueOf(delimiter));
 		while (tokenizer.hasMoreTokens()){

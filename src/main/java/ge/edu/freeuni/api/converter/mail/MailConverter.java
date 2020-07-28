@@ -1,17 +1,18 @@
-package ge.edu.freeuni.api.helper;
+package ge.edu.freeuni.api.converter.mail;
 
+import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.mail.Mail;
 import ge.edu.freeuni.server.model.mail.MailEntity;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 
-public final class MailHelper {
+public final class MailConverter {
 
     public static Mail entityToMail(MailEntity from, UserRepositoryImpl userRepository) {
         return Mail.builder().
                 id(from.getId()).
                 context(from.getContext()).
-                sender(UserHelperImpl.entityToUser(userRepository.getUserById(from.getSenderId()))).
-                receiver(UserHelperImpl.entityToUser(userRepository.getUserById(from.getReceiverId()))).
+                sender(UserConverter.entityToUser(userRepository.getUserById(from.getSenderId()))).
+                receiver(UserConverter.entityToUser(userRepository.getUserById(from.getReceiverId()))).
                 build();
     }
 

@@ -1,7 +1,7 @@
 package ge.edu.freeuni.server.services.quiz;
 
-import ge.edu.freeuni.api.helper.QuizHelper;
-import ge.edu.freeuni.api.helper.UserHelperImpl;
+import ge.edu.freeuni.api.converter.quiz.QuizConverter;
+import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
@@ -33,7 +33,7 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public boolean addQuiz(Quiz quiz) {
         setActiveQuiz(quiz);
-        return quizRepository.addQuiz(QuizHelper.quizToEntity(authenticationService,
+        return quizRepository.addQuiz(QuizConverter.quizToEntity(authenticationService,
                 userRepository,
                 quiz));
     }
@@ -45,12 +45,12 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public User getCreator(String quizName) {
-        return UserHelperImpl.entityToUser(userRepository.getUserById(quizRepository.getQuizByName(quizName).getCreatorId()));
+        return UserConverter.entityToUser(userRepository.getUserById(quizRepository.getQuizByName(quizName).getCreatorId()));
     }
 
     @Override
     public Quiz getQuiz(String quizName) {
-        return QuizHelper.entityToQuiz(quizRepository.getQuizByName(quizName));
+        return QuizConverter.entityToQuiz(quizRepository.getQuizByName(quizName));
     }
 
     @Override
