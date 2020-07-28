@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QuizService {
 
-    boolean addQuiz(Quiz quiz) throws ParseException;
+    boolean addQuiz(Quiz quiz);
 
     List<String> getAllQuizNames();
 

@@ -2,7 +2,7 @@ package ge.edu.freeuni.server.services.user;
 
 import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.user.User;
-import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
+import ge.edu.freeuni.server.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepositoryImpl userRepository;
+    UserRepository userRepository;
 
 
     @Override

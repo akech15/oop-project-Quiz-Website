@@ -1,13 +1,10 @@
 package ge.edu.freeuni.server.services.quiz;
 
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
-import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.quiz.Quiz;
-import ge.edu.freeuni.api.model.user.User;
-import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
+import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
-import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
-import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +16,13 @@ public class QuizServiceImpl implements QuizService {
     private Quiz activeQuiz = null;
 
     @Autowired
-    private QuizRepositoryImpl quizRepository;
+    private QuizRepository quizRepository;
 
     @Autowired
-    private UserRepositoryImpl userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private AuthenticationServiceImpl authenticationService;
+    private AuthenticationService authenticationService;
 
     private void setActiveQuiz(Quiz quiz){
         activeQuiz = quiz;

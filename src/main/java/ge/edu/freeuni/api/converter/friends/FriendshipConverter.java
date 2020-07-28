@@ -19,8 +19,8 @@ public final class FriendshipConverter {
     public static FriendshipEntity friendsToEntity(UserRepositoryImpl userRepository,
                                                    Friendship friends){
         return FriendshipEntity.builder().
-                senderId(userRepository.getIdByUsername(friends.getSender().getUsername())).
-                receiverId(userRepository.getIdByUsername(friends.getReceiver().getUsername())).
+                senderId(friends.getSender().getId()).
+                receiverId(friends.getReceiver().getId()).
                 status(String.valueOf(friends.getStatus())).build();
     }
 

@@ -4,13 +4,15 @@ import ge.edu.freeuni.api.converter.quiz.QuizConverter;
 import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
+import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
+import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 
 public final class PassedQuizConverter {
 
-    public static PassedQuiz entityToPassedQuiz(UserRepositoryImpl userRepository,
-                                                QuizRepositoryImpl quizRepository,
+    public static PassedQuiz entityToPassedQuiz(UserRepository userRepository,
+                                                QuizRepository quizRepository,
                                                 PassedQuizEntity passedQuizEntity) {
         return PassedQuiz.builder().
                 id(passedQuizEntity.getId()).
@@ -23,17 +25,17 @@ public final class PassedQuizConverter {
                 duration(passedQuizEntity.getDuration()).build();
     }
 
-    public static PassedQuizEntity passedQuizToEntity(UserRepositoryImpl userRepository,
-                                                      QuizRepositoryImpl quizRepository,
+    public static PassedQuizEntity passedQuizToEntity(QuizRepository quizRepository,
                                                       PassedQuiz passedQuiz) {
-        return PassedQuizEntity.builder().
-                id(passedQuiz.getId()).
-                userId(userRepository.getIdByUsername(passedQuiz.getUser().getUsername())).
-                quizId(quizRepository.getQuizById(passedQuiz.getQuiz().getId()).getId()).
-                score(passedQuiz.getScore()).
-                startDate(passedQuiz.getStartDate()).
-                endDate(passedQuiz.getEndDate()).
-                duration(passedQuiz.getDuration()).build();
+        return PassedQuizEntity.builder()
+                .id(passedQuiz.getId())
+                .userId(passedQuiz.getUser().getId())
+                .quizId(quizRepository.getQuizById(passedQuiz.getQuiz().getId()).getId())
+                .score(passedQuiz.getScore())
+                .startDate(passedQuiz.getStartDate())
+                .endDate(passedQuiz.getEndDate())
+                .duration(passedQuiz.getDuration())
+                .build();
     }
 
 }

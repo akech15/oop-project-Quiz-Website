@@ -25,12 +25,12 @@ public final class MailConverter {
                 build();
     }
 
-    public static MailEntity mailToEntity(Mail from, UserRepositoryImpl userRepository) {
+    public static MailEntity mailToEntity(Mail mail, UserRepositoryImpl userRepository) {
         return MailEntity.builder().
-                id(from.getId()).
-                context(from.getContext()).
-                senderId(userRepository.getIdByUsername(from.getSender().getUsername())).
-                receiverId(userRepository.getIdByUsername(from.getReceiver().getUsername())).
+                id(mail.getId()).
+                context(mail.getContext()).
+                senderId(mail.getSender().getId()).
+                receiverId(mail.getReceiver().getId()).
                 build();
     }
 

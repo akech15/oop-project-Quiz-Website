@@ -1,12 +1,9 @@
 package ge.edu.freeuni.api.converter.challenge;
 
-import ge.edu.freeuni.api.converter.mail.MailConverter;
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
 import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.challenge.Challenge;
-import ge.edu.freeuni.api.model.mail.Mail;
 import ge.edu.freeuni.server.model.challenge.ChallengeEntity;
-import ge.edu.freeuni.server.model.mail.MailEntity;
 import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 
@@ -28,14 +25,14 @@ public final class ChallengeConverter {
                 build();
     }
 
-    public static ChallengeEntity challengeToEntity(Challenge from,
+    public static ChallengeEntity challengeToEntity(Challenge challenge,
                                                     UserRepositoryImpl userRepository) {
         return ChallengeEntity.builder().
-                id(from.getId()).
-                senderScore(from.getSenderScore()).
-                quizId(from.getQuiz().getId()).
-                receiverId(userRepository.getIdByUsername(from.getReceiver().getUsername())).
-                senderId(userRepository.getIdByUsername(from.getSender().getUsername())).
+                id(challenge.getId()).
+                senderScore(challenge.getSenderScore()).
+                quizId(challenge.getQuiz().getId()).
+                receiverId(challenge.getReceiver().getId()).
+                senderId(challenge.getSender().getId()).
                 build();
     }
 

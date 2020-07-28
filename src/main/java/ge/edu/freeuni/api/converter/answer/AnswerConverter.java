@@ -4,9 +4,13 @@ import ge.edu.freeuni.api.converter.passedQuiz.PassedQuizConverter;
 import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.answer.Answer;
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
+import ge.edu.freeuni.server.repository.passedQuiz.PassedQuizRepository;
 import ge.edu.freeuni.server.repository.passedQuiz.PassedQuizRepositoryImpl;
+import ge.edu.freeuni.server.repository.question.QuestionRepository;
 import ge.edu.freeuni.server.repository.question.QuestionRepositoryImpl;
+import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
+import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 
 import java.util.ArrayList;
@@ -14,20 +18,20 @@ import java.util.List;
 
 public final class AnswerConverter {
 
-    public static Answer AnswerEntityToAnswer(AnswerEntity from, QuestionRepositoryImpl questionRepository,
-                                              QuizRepositoryImpl quizRepository, PassedQuizRepositoryImpl passed,
-                                              UserRepositoryImpl user) {
+    public static Answer AnswerEntityToAnswer(AnswerEntity from, QuestionRepository questionRepository,
+                                              QuizRepository quizRepository, PassedQuizRepository passed,
+                                              UserRepository userRepository) {
         return Answer.builder().
                 id(from.getId()).
-                question(QuestionConverter.entityToQuestion(user,
+                question(QuestionConverter.entityToQuestion(userRepository,
                         quizRepository, questionRepository.getQuestionById(from.getQuestionId()))).
-                passedQuiz(PassedQuizConverter.entityToPassedQuiz(user, quizRepository,
+                passedQuiz(PassedQuizConverter.entityToPassedQuiz(userRepository, quizRepository,
                                                     passed.getPassedQuizById(from.getPassedQuizId()))).
                 userAnswer(from.getUserAnswer()).
                 build();
     }
 
-    public static AnswerEntity AnswerToEntity(Answer answer, QuizRepositoryImpl quiz) {
+    public static AnswerEntity AnswerToEntity(Answer answer, QuizRepository quiz) {
         return AnswerEntity.builder().
                 id(answer.getId()).
                 passedQuizId(answer.getPassedQuiz().getId()).
@@ -37,11 +41,11 @@ public final class AnswerConverter {
 
     }
 
-    public static List<Answer> entityToAnswerList(QuestionRepositoryImpl questionRepository,
-                                    QuizRepositoryImpl quizRepository,
-                                    PassedQuizRepositoryImpl passed,
-                                    UserRepositoryImpl user,
-                                    List<AnswerEntity> list){
+    public static List<Answer> entityToAnswerList(QuestionRepository questionRepository,
+                                                  QuizRepository quizRepository,
+                                                  PassedQuizRepository passed,
+                                                  UserRepository user,
+                                                  List<AnswerEntity> list){
         List<Answer> res = new ArrayList<>();
         for (AnswerEntity answerEntity:
              list) {

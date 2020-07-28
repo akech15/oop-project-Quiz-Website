@@ -6,5 +6,7 @@ public interface QuestionService {
 
     boolean addQuestion(Question question);
 
+    Question getQuestionById(long id);
+
 
 }

@@ -4,53 +4,51 @@ import ge.edu.freeuni.api.converter.answer.AnswerConverter;
 import ge.edu.freeuni.api.converter.passedQuiz.PassedQuizConverter;
 import ge.edu.freeuni.api.model.answer.Answer;
 import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
-import ge.edu.freeuni.server.repository.answer.AnswerRepositoryImpl;
-import ge.edu.freeuni.server.repository.passedQuiz.PassedQuizRepositoryImpl;
-import ge.edu.freeuni.server.repository.question.QuestionRepositoryImpl;
-import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
-import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
-import ge.edu.freeuni.server.services.answer.AnswerServiceImpl;
+import ge.edu.freeuni.server.model.answer.AnswerEntity;
+import ge.edu.freeuni.server.repository.passedQuiz.PassedQuizRepository;
+import ge.edu.freeuni.server.repository.question.QuestionRepository;
+import ge.edu.freeuni.server.repository.quiz.QuizRepository;
+import ge.edu.freeuni.server.repository.user.UserRepository;
+import ge.edu.freeuni.server.services.answer.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PassedQuizServiceImpl implements PassedQuizService {
 
     private PassedQuiz currentPassedQuiz;
 
     @Autowired
-    private PassedQuizRepositoryImpl passedQuizRepository;
+    private PassedQuizRepository passedQuizRepository;
 
     @Autowired
-    private UserRepositoryImpl userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private QuizRepositoryImpl quizRepository;
+    private QuizRepository quizRepository;
 
     @Autowired
-    private AnswerRepositoryImpl answerRepository;
+    private QuestionRepository questionRepository;
 
     @Autowired
-    private QuestionRepositoryImpl questionRepository;
-
-    @Autowired
-    private AnswerServiceImpl answerService;
+    private AnswerService answerService;
 
 
     @Override
     public void startQuiz(PassedQuiz quiz) {
         currentPassedQuiz = quiz;
-        passedQuizRepository.startQuiz(PassedQuizConverter.passedQuizToEntity(userRepository, quizRepository, quiz));
+        passedQuizRepository.startQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, quiz));
     }
 
     @Override
     public PassedQuiz finishQuiz() {
         long quizId = currentPassedQuiz.getId();
-        passedQuizRepository.finishQuiz(PassedQuizConverter.passedQuizToEntity(userRepository, quizRepository, currentPassedQuiz));
+        passedQuizRepository.finishQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, currentPassedQuiz));
         currentPassedQuiz = null;
         return getPassedQuizById(quizId);
     }
-
 
 
     @Override
@@ -66,18 +64,20 @@ public class PassedQuizServiceImpl implements PassedQuizService {
     @Override
     public long getPassedQuizScore(PassedQuiz passedQuiz) {
 
-        List<Answer> passedQuizAnswers =
-                AnswerConverter.entityToAnswerList(questionRepository, quizRepository,
-                        passedQuizRepository, userRepository,
-                        passedQuizRepository.
-                                            getAnswersByPassedQuiz(PassedQuizConverter.
-                                            passedQuizToEntity(userRepository, quizRepository, passedQuiz)));
+        List<AnswerEntity> answersByPassedQuiz = passedQuizRepository.getAnswersByPassedQuiz(PassedQuizConverter.
+                passedQuizToEntity(quizRepository, passedQuiz));
+        List<Answer> passedQuizAnswers = AnswerConverter.entityToAnswerList(
+                questionRepository,
+                quizRepository,
+                passedQuizRepository,
+                userRepository,
+                answersByPassedQuiz);
 
         long score = 0;
 
-        for (Answer answer:
-        passedQuizAnswers) {
-            if(answerService.isAnswerCorrect(answer)){
+        for (Answer answer :
+                passedQuizAnswers) {
+            if (answerService.isAnswerCorrect(answer)) {
                 score++;
             }
         }

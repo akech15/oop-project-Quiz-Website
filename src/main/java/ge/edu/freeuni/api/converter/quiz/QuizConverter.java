@@ -11,9 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public final class QuizConverter {
 
-    public static Quiz entityToQuiz(UserRepositoryImpl userRepository,
+    public static Quiz entityToQuiz(UserRepository userRepository,
                                     QuizEntity quizEntity) {
         return Quiz.builder().
+                id(quizEntity.getId()).
                 name(quizEntity.getName()).
                 creator(UserConverter.entityToUser(userRepository.getUserById(quizEntity.getCreatorId()))).
                 description(quizEntity.getDescription()).
@@ -24,6 +25,7 @@ public final class QuizConverter {
     public static QuizEntity quizToEntity(Quiz quiz) {
 
         return QuizEntity.builder().
+                id(quiz.getId()).
                 creatorId(quiz.getCreator().getId()).
                 name(quiz.getName()).
                 creationDate(quiz.getCreationDate()).

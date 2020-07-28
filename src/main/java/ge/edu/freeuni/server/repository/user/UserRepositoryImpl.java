@@ -55,11 +55,6 @@ public class UserRepositoryImpl implements UserRepository {
         return users.size() == 1;
     }
 
-    @Override
-    public long getIdByUsername(String username) {
-        String query = "SELECT id FROM user WHERE username = " + username + ";";
-        return jdbcTemplate.queryForObject(query, Long.class);
-    }
 
     @Override
     public UserEntity getUserById(long id) {
