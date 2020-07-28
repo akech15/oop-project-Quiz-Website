@@ -13,6 +13,7 @@ import ge.edu.freeuni.server.services.answer.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,14 +38,17 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
 
     @Override
-    public void startQuiz(PassedQuiz quiz) {
-        currentPassedQuiz = quiz;
-        passedQuizRepository.startQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, quiz));
+    public boolean startQuiz(PassedQuiz passedQuiz) {
+        currentPassedQuiz = passedQuiz; //TODO !!!!!!!!!!!!!!!!!!! bazidanaa wamosagebi tavisi ID - it
+        return passedQuizRepository.startQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, passedQuiz));
     }
 
     @Override
     public PassedQuiz finishQuiz() {
         long quizId = currentPassedQuiz.getId();
+        currentPassedQuiz.setScore(this.getPassedQuizScore(currentPassedQuiz));
+        currentPassedQuiz.setEndDate(new Date());
+        currentPassedQuiz.setDuration(new Date()); // TODO !!!!!!!!!!!!!!!!!!!!!!!!! gasasworebelia
         passedQuizRepository.finishQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, currentPassedQuiz));
         currentPassedQuiz = null;
         return getPassedQuizById(quizId);

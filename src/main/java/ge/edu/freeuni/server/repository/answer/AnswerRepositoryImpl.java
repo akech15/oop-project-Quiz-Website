@@ -40,8 +40,8 @@ public class AnswerRepositoryImpl implements AnswerRepository {
 
     @Override
     public boolean addAnswer(AnswerEntity answer) {
-        String query = String.format("insert into answer (question_id, user_answer, passed_quiz_id) values(" +
-                        "\'%d\', \'%s\', \'%d\'",
+        String query = String.format("insert into answer (question_id, user_answer, passed_quiz_id) values (" +
+                        "\'%d\', \'%s\', \'%d\');",
                 answer.getQuestionId(),
                 answer.getUserAnswer(),
                 answer.getPassedQuizId()

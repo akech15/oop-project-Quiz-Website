@@ -4,7 +4,7 @@ import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 
 public interface PassedQuizService {
 
-    void startQuiz(PassedQuiz quiz);
+    boolean startQuiz(PassedQuiz quiz);
 
     PassedQuiz finishQuiz();
 
