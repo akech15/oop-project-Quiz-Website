@@ -31,16 +31,15 @@ public class QuizController {
 
     @RequestMapping("/preQuiz")
     public String startQuiz(Map<String, Object> model) {
-
         return "preQuizPage";
     }
 
-    @RequestMapping("/quizDescriptionPage/{quizName}")
-    public String aboutQuiz(@PathVariable String quizName, Map<String, Object> model) {
-        Quiz quiz = quizService.getQuiz(quizName);
-        User creator = quizService.getCreator(quizName);
+    @RequestMapping("/quizDescriptionPage/{quizId}")
+    public String aboutQuiz(@PathVariable long quizId, Map<String, Object> model) {
+        // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!! quizId is nacvlad quizName ewera,
+        // TODO jsp -dan id unda gamovatanot
+        Quiz quiz = quizService.getQuizById(quizId);
         model.put("quiz", quiz);
-        model.put("creator", creator);
         return "quizDescription";
     }
 

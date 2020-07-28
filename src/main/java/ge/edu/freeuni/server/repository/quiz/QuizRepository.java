@@ -8,12 +8,9 @@ public interface QuizRepository {
 
     QuizEntity getQuizById(long id);
 
-    QuizEntity getQuizByName(String name);
-
     List<String> getAllQuizNames();
 
     boolean addQuiz(QuizEntity quizEntity);
 
-    int getCreatorId (String quizName);
 
 }

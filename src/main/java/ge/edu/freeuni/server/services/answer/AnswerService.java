@@ -6,4 +6,6 @@ public interface AnswerService {
 
     boolean isAnswerCorrect(Answer answer);
 
+    boolean addAnswer(Answer answer);
+
 }

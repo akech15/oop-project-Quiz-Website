@@ -12,11 +12,9 @@ public interface QuizService {
 
     List<String> getAllQuizNames();
 
-    User getCreator(String quizName);
-
-    Quiz getQuiz(String quizName);
+    Quiz getQuizById(long id);
 
     Quiz getActiveQuiz();
 
-    void QuitQuiz();
+    void finishMakingQuiz();
 }

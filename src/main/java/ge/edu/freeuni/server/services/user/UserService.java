@@ -13,14 +13,6 @@ public interface UserService {
      */
     boolean addUser(User user) ;
 
-    /**
-     *
-     * @param user
-     * @param friend
-     */
-    void addFriend(User user, User friend);
+    User getUserById(long id);
 
-    void removeFriend(User user, User friend);
-
-    void acceptRequest(User user, User friend);
 }

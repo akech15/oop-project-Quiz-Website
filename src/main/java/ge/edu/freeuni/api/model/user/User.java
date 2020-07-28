@@ -8,5 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class User {
-    private String username, password;
+
+    private long id;
+    private String username;
+    private String password;
 }

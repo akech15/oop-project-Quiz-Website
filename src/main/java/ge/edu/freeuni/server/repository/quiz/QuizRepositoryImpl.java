@@ -30,11 +30,6 @@ public class QuizRepositoryImpl implements QuizRepository {
         return entity1;
     };
 
-    @Override
-    public QuizEntity getQuizByName(String name) {
-        String query = String.format("select * from quiz where name = \'%s\';", name);
-        return jdbcTemplate.queryForObject(query, quizRawMapper);
-    }
 
     public QuizEntity getQuizById(long id){
         String query = String.format("select * from quiz where id = \'%d\';", id);
@@ -65,15 +60,11 @@ public class QuizRepositoryImpl implements QuizRepository {
             jdbcTemplate.execute(query);
             return true;
         }catch (Exception e){
+            e.printStackTrace();
             return false;
         }
 
     }
 
-    @Override
-    public int getCreatorId(String quizName) {
-        String query = "select creator_id from quiz where name=" + quizName;
-        return jdbcTemplate.queryForObject(query, Integer.class);
-    }
 
 }

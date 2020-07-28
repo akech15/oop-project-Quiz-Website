@@ -19,8 +19,10 @@ public final class AnswerConverter {
                                               UserRepositoryImpl user) {
         return Answer.builder().
                 id(from.getId()).
-                question(QuestionConverter.entityToQuestion(quizRepository, questionRepository.getQuestionById(from.getQuestionId()))).
-                passedQuiz(PassedQuizConverter.entityToPassedQuiz(user, quizRepository, passed.getPassedQuizById(from.getPassedQuizId()))).
+                question(QuestionConverter.entityToQuestion(user,
+                        quizRepository, questionRepository.getQuestionById(from.getQuestionId()))).
+                passedQuiz(PassedQuizConverter.entityToPassedQuiz(user, quizRepository,
+                                                    passed.getPassedQuizById(from.getPassedQuizId()))).
                 userAnswer(from.getUserAnswer()).
                 build();
     }

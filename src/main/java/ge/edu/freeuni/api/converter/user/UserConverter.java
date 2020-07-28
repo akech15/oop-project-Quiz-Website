@@ -10,12 +10,14 @@ public class UserConverter {
     public static User entityToUser(UserEntity userEntity) {
         return User.builder().
                 username(userEntity.getUsername()).
-                password(userEntity.getPassword()).build();
+                password(userEntity.getPassword()).
+                id(userEntity.getId()).build();
     }
 
     public static UserEntity userToEntity(User user) {
         return UserEntity.builder().
                 username(user.getUsername()).
+                id(user.getId()).
                 password(user.getPassword()).build();
     }
 

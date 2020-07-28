@@ -19,4 +19,9 @@ public class AnswerServiceImpl implements AnswerService {
         return answerRepository.isAnswerCorrect(AnswerConverter.AnswerToEntity(answer, quizRepository));
     }
 
+    @Override
+    public boolean addAnswer(Answer answer) {
+        return answerRepository.addAnswer(AnswerConverter.AnswerToEntity(answer, quizRepository));
+    }
+
 }

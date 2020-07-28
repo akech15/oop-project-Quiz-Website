@@ -15,7 +15,8 @@ public final class PassedQuizConverter {
         return PassedQuiz.builder().
                 id(passedQuizEntity.getId()).
                 user(UserConverter.entityToUser(userRepository.getUserById(passedQuizEntity.getUserId()))).
-                quiz(QuizConverter.entityToQuiz(quizRepository.getQuizById(passedQuizEntity.getQuizId()))).
+                quiz(QuizConverter.entityToQuiz(userRepository,
+                        quizRepository.getQuizById(passedQuizEntity.getQuizId()))).
                 score(passedQuizEntity.getScore()).
                 startDate(passedQuizEntity.getStartDate()).
                 endDate(passedQuizEntity.getEndDate()).
@@ -28,7 +29,7 @@ public final class PassedQuizConverter {
         return PassedQuizEntity.builder().
                 id(passedQuiz.getId()).
                 userId(userRepository.getIdByUsername(passedQuiz.getUser().getUsername())).
-                quizId(quizRepository.getQuizByName(passedQuiz.getQuiz().getName()).getId()).
+                quizId(quizRepository.getQuizById(passedQuiz.getQuiz().getId()).getId()).
                 score(passedQuiz.getScore()).
                 startDate(passedQuiz.getStartDate()).
                 endDate(passedQuiz.getEndDate()).

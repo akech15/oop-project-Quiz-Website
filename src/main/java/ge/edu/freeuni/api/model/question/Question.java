@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Question {
 
+    private long id;
     private Quiz quiz;
     private String question;
     private QuestionType type;

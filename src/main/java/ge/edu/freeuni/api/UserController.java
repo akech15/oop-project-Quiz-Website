@@ -31,7 +31,9 @@ public class UserController {
                         Map<String, Object> model) throws SQLException {
         model.put("username", username);
         model.put("quizNames", quizService.getAllQuizNames());
-        User user = new User(username, password);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
         boolean validUser = authenticationService.logIn(user);
         if (validUser) {
             return "userPage";
@@ -68,7 +70,9 @@ public class UserController {
     public String createAccount(@RequestParam String username, @RequestParam String password,
                                 Map<String, Object> model) throws SQLException {
         model.put("username", username);
-        User toAdd = new User(username, password);
+        User toAdd = new User();
+        toAdd.setUsername(username);
+        toAdd.setPassword(password);
         boolean addUser = userService.addUser(toAdd);
         if (addUser) {
             return "index";

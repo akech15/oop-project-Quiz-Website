@@ -19,17 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addFriend(User user, User friend) {
-
-    }
-
-    @Override
-    public void removeFriend(User user, User friend) {
-
-    }
-
-    @Override
-    public void acceptRequest(User user, User friend) {
-
+    public User getUserById(long id) {
+        return UserConverter.entityToUser(userRepository.getUserById(id));
     }
 }

@@ -62,6 +62,7 @@ public class QuestionController {
 
         questionService.addQuestion(
                 new Question(
+                        -1,
                         quizService.getActiveQuiz(),
                         question,
                         QuestionType.MULTIPLE_CHOICE,
@@ -84,6 +85,7 @@ public class QuestionController {
 
         questionService.addQuestion(
                 new Question(
+                        -1,
                         quizService.getActiveQuiz(),
                         question,
                         QuestionType.PICTURE_RESPONSE,
@@ -111,6 +113,7 @@ public class QuestionController {
 
         questionService.addQuestion(
                 new Question(
+                        -1,
                         quizService.getActiveQuiz(),
                         question,
                         QuestionType.QUESTION_RESPONSE,
