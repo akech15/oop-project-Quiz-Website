@@ -1,6 +1,6 @@
-package ge.edu.freeuni.api;
+package ge.edu.freeuni.api.controller;
 
-import ge.edu.freeuni.api.helper.QuestionHelper;
+import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
@@ -33,7 +33,7 @@ public class QuestionController {
     public String getQuestionType(@PathVariable String type,
                                   Map<String, Object> model) {
 
-        return QuestionHelper.getJspFromType(type);
+        return QuestionConverter.getJspFromType(type);
     }
 
     @RequestMapping("/addQuestion/questionResponse")
@@ -88,7 +88,7 @@ public class QuestionController {
                         question,
                         QuestionType.PICTURE_RESPONSE,
                         -1,
-                        StringUtils.StringToList(answer, ','),
+                        StringUtils.stringToList(answer, ','),
                         Enum.valueOf(QuestionCategoryType.class, category),
                         pictureURL
                 )
@@ -115,7 +115,7 @@ public class QuestionController {
                         question,
                         QuestionType.QUESTION_RESPONSE,
                         -1,
-                        StringUtils.StringToList(answer, ','),
+                        StringUtils.stringToList(answer, ','),
                         Enum.valueOf(QuestionCategoryType.class, category),
                         null
                 )

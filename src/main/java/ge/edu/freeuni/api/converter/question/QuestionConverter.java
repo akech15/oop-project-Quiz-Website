@@ -17,7 +17,7 @@ public final class QuestionHelper {
                 quiz(QuizHelper.entityToQuiz(quizRepository.getQuizById(entity.getQuizId()))).
                 type(Enum.valueOf(QuestionType.class, entity.getType())).
                 category(Enum.valueOf(QuestionCategoryType.class, entity.getCategory())).
-                answers(StringUtils.StringToList(entity.getAnswers(), ',')).
+                answers(StringUtils.stringToList(entity.getAnswers(), ',')).
                 pictureURL(entity.getPictureURL()).build();
     }
 
