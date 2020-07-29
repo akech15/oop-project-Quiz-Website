@@ -15,14 +15,18 @@
 
 
     <div class="w3-display-topright w3-container w3-xlarge">
-        <p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
-        <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>
+        <p>
+            <button class="w3-button w3-black"><a href="/userhomepage">Home Page</a></button>
+        </p>
+        <p>
+            <button class="w3-button w3-black"><a href="/">Log Out</a></button>
+        </p>
     </div>
 
     <h1>Make Questions</h1>~
     <form class="select">
         <label>Choose question type:</label>
-        <select id = "questionType" name = "questionType">
+        <select id="questionType" name="questionType">
             <option>Select</option>
             <option>Multiple Choice</option>
             <option>True/False</option>
@@ -34,17 +38,24 @@
         </select>
 
         <div class="select_arrow">
-        </div><br>
+        </div>
+        <br>
 
         <div>
             <form action="${pageContext.request.contextPath}/multipleChoiceSubmitted" method="post">
-                <div id="holder"> </div>
-<%--                <label>Enter question:</label>--%>
-<%--                <h2>--- ${choiceCount} ---</h2>--%>
-<%--                <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>--%>
-<%--                <label for = "choiceCount">Enter number of choices: </label>--%>
-<%--                <input type="text" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>--%>
-<%--                <input type = "submit" id = "submitButton">--%>
+                <div id="holder"></div>
+                <label>Enter question:</label>
+                <h2>--- ${choiceCount} ---</h2>
+                <%
+                    int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
+                    for (int i = 0; i < choice; i++){
+                        out.print("<input type=\"text\" name=\"choiceCount\" required placeholder=\"3-7\" id=\"choiceCount\" min=\"3\" max=\"7\"/>");
+                    }
+                %>
+                <textarea id="questionBox" name="question" required placeholder="Ask anything" cols=60></textarea><br>
+                <label for="choiceCount">Enter number of choices: </label>
+                <input type="text" name="choiceCount" required placeholder="3-7" id="choiceCount" min="3" max="7"/>
+                <input type="submit" id="submitButton">
             </form>
         </div>
     </form>
@@ -54,25 +65,25 @@
     let parent = document.getElementById('holder');
     let elem = document.createElement("INPUT");
     elem.setAttribute("type", "text");
-    for(let i = 0; i < 5; i++){
+    for (let i = 0; i < 5; i++) {
         document.body.appendChild(x);
     }
 
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("questionType")){
-            if(document.getElementById("questionType").value == "Multiple Choice") {
+    window.onclick = function (event) {
+        if (event.target == document.getElementById("questionType")) {
+            if (document.getElementById("questionType").value == "Multiple Choice") {
                 window.location.href = '/multipleChoice';
-            } else if(document.getElementById("questionType").value == "True/False") {
+            } else if (document.getElementById("questionType").value == "True/False") {
                 window.location.href = '/trueFalse';
-            } else if(document.getElementById("questionType").value == "Fill In Blank") {
+            } else if (document.getElementById("questionType").value == "Fill In Blank") {
                 window.location.href = '/fillBlank';
-            } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
+            } else if (document.getElementById("questionType").value == "Fill In Multiple Blanks") {
                 window.location.href = '/fillMultipleBLank';
-            } else if(document.getElementById("questionType").value == "Multiple Answers") {
+            } else if (document.getElementById("questionType").value == "Multiple Answers") {
                 window.location.href = '/multipleAnswers';
-            } else if(document.getElementById("questionType").value == "Image Answers") {
+            } else if (document.getElementById("questionType").value == "Image Answers") {
                 window.location.href = '/imageAnswers';
-            } else if(document.getElementById("questionType").value == "Matching") {
+            } else if (document.getElementById("questionType").value == "Matching") {
                 window.location.href = '/matching';
             }
         }
@@ -84,7 +95,6 @@
         //     document.getElementById("topQuizzes").style.display = "none";
         // }
     }
-
 
 
 </script>
