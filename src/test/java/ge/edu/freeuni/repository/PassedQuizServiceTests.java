@@ -71,7 +71,7 @@ public class PassedQuizServiceTests {
     }
 
     @Test
-    public void startQuiz() {
+    public void startQuizTest() {
 
         User toAddUser = new User();
         toAddUser.setUsername("admin");
@@ -114,7 +114,7 @@ public class PassedQuizServiceTests {
     }
 
     @Test
-    public void finishQuiz() {
+    public void finishQuizTest() {
         User toAddUser = new User();
         toAddUser.setUsername("admin");
         toAddUser.setPassword("admin");
@@ -169,7 +169,7 @@ public class PassedQuizServiceTests {
     }
 
     @Test
-    public void getPassedQuizById() {
+    public void getPassedQuizByIdTest() {
         User toAddUser = new User();
         toAddUser.setUsername("admin");
         toAddUser.setPassword("admin");
@@ -215,7 +215,7 @@ public class PassedQuizServiceTests {
     }
 
     @Test
-    public void getPassedQuizScore() {
+    public void getPassedQuizScoreTest() {
         User toAddUser = new User();
         toAddUser.setUsername("admin");
         toAddUser.setPassword("admin");

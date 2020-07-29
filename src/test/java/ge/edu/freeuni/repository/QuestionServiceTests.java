@@ -58,7 +58,7 @@ public class QuestionServiceTests {
     }
 
     @Test
-    public void addQuestion(){
+    public void addQuestionTest(){
 
         User toAddUser = new User();
         toAddUser.setUsername("admin");
@@ -93,7 +93,7 @@ public class QuestionServiceTests {
     }
 
     @Test
-    public void getQuestionById(){
+    public void getQuestionByIdTest(){
 
         User toAddUser = new User();
         toAddUser.setUsername("admin");

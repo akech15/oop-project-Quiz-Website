@@ -48,7 +48,7 @@ public class AuthenticationServiceTests {
     }
 
     @Test
-    public void logIn(){
+    public void logInTest(){
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -61,7 +61,7 @@ public class AuthenticationServiceTests {
     }
 
     @Test
-    public void getActiveUser(){
+    public void getActiveUserTest(){
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -76,7 +76,7 @@ public class AuthenticationServiceTests {
     }
 
     @Test
-    public void logOut() {
+    public void logOutTest() {
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -94,7 +94,7 @@ public class AuthenticationServiceTests {
     }
 
     @Test
-    public void isUserValid(){
+    public void isUserValidTest(){
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");

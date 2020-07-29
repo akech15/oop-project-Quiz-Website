@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sound.midi.Receiver;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -49,7 +48,7 @@ public class MailServiceTests {
 
 
     @Test
-    public void testGetMail() {
+    public void GetMailTest() {
         User user1 = new User();
         user1.setUsername("admin");
         user1.setPassword("admin");
@@ -71,13 +70,15 @@ public class MailServiceTests {
 
         mailService.sendMail(mail);
         Assertions.assertEquals("bla", mailService.searchMailsByReceiver(receiver).get(0).getReceiver().getUsername());
-        Assertions.assertEquals("hello", mailService.searchMailsByReceiver(receiver).get(0).getContext());
+        Assertions.assertEquals("admin", mailService.searchMailsByReceiver(receiver).get(0).getSender().getUsername());
         Assertions.assertEquals("admin", mailService.searchMailsBySender(sender).get(0).getSender().getUsername());
+        Assertions.assertEquals("bla", mailService.searchMailsBySender(sender).get(0).getReceiver().getUsername());
+        Assertions.assertEquals("hello", mailService.searchMailsByReceiver(receiver).get(0).getContext());
 
     }
 
     @Test
-    void removeMail() {
+    void removeMailTest() {
         User user1 = new User();
         user1.setUsername("admin");
         user1.setPassword("admin");

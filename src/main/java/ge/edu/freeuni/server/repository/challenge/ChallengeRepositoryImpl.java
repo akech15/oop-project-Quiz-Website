@@ -60,38 +60,41 @@ public class ChallengeRepositoryImpl implements ChallengeRepository {
     @Override
     public List<ChallengeEntity> searchChallengesByReceiver(UserEntity receiver) {
         String query = String.format(
-                "SELECT * FROM challenge WHERE receiver_id = \'%d\'",
+                "SELECT id FROM challenges WHERE receiver_id = \'%d\'",
                 receiver.getId()
         );
 
-        List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
+        List<Long> ids = new ArrayList<>();
+        ids.addAll(jdbcTemplate.queryForList(query, Long.class));
 
-        List<ChallengeEntity> mails = new ArrayList<>();
+        List<ChallengeEntity> challenges = new ArrayList<>();
 
         for (long id :
                 ids) {
-            mails.add(this.getChallengeById(id));
+            challenges.add(this.getChallengeById(id));
         }
 
-        return mails;
+        return challenges;
     }
 
     @Override
     public List<ChallengeEntity> searchChallengesBySender(UserEntity sender) {
         String query = String.format(
-                "SELECT * FROM challenge WHERE sender_id = \'%d\'",
+                "SELECT id FROM challenges WHERE sender_id = \'%d\'",
                 sender.getId()
         );
 
-        List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
+        List<Long> ids = new ArrayList<>();
+        ids.addAll(jdbcTemplate.queryForList(query, Long.class));
 
-        List<ChallengeEntity> mails = new ArrayList<>();
+
+        List<ChallengeEntity> challenges = new ArrayList<>();
 
         for (long id :
                 ids) {
-            mails.add(this.getChallengeById(id));
+            challenges.add(this.getChallengeById(id));
         }
 
-        return mails;
+        return challenges;
     }
 }

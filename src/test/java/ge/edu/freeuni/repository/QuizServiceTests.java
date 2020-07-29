@@ -55,7 +55,7 @@ public class QuizServiceTests {
 
 
     @Test
-    public void startMakingQuiz() {
+    public void addQuiz() {
 
         User toAdd = new User();
         toAdd.setUsername("admin");

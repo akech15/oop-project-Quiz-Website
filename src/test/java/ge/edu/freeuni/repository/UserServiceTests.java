@@ -44,7 +44,7 @@ public class UserServiceTests {
 
 
     @Test
-    public void addUser() {
+    public void addUserTest() {
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -52,7 +52,7 @@ public class UserServiceTests {
     }
 
     @Test
-    public void getUserById() {
+    public void getUserByIdTest() {
         {
             User toAdd = new User();
             toAdd.setUsername("admin");

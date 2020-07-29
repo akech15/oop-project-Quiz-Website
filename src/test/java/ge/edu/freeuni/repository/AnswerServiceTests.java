@@ -71,7 +71,7 @@ public class AnswerServiceTests {
     }
 
     @Test
-    public void addAnswer() {
+    public void addAnswerTest() {
         User toAddUser = new User();
         toAddUser.setUsername("admin");
         toAddUser.setPassword("admin");
@@ -123,7 +123,7 @@ public class AnswerServiceTests {
     }
 
     @Test
-    public void isAnswerCorrect() {
+    public void isAnswerCorrectTest() {
         User toAddUser = new User();
         toAddUser.setUsername("admin");
         toAddUser.setPassword("admin");
