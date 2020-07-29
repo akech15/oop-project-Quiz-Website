@@ -30,6 +30,7 @@
                 <option>Multiple Answers</option>
                 <option>Image Answers</option>
                 <option>Matching</option>
+                <option>Question/Response</option>
             </select>
 
             <div class="select_arrow">
@@ -56,6 +57,8 @@
                 window.location.href = '/imageAnswers';
             } else if(document.getElementById("questionType").value == "Matching") {
                 window.location.href = '/matching';
+            } else if(document.getElementById("questionType").value == "Question/Response") {
+                window.location.href = '/questionResponse';
             }
         }
         // else if(event.target == document.getElementById("about")){

@@ -22,8 +22,8 @@
         <h1>Make Questions</h1>~
         <form class="select">
             <label>Choose question type:</label>
+
             <select id = "questionType" name = "questionType">
-                <option>Select</option>
                 <option>Multiple Choice</option>
                 <option>True/False</option>
                 <option>Fill In Blank</option>
@@ -31,27 +31,36 @@
                 <option>Multiple Answers</option>
                 <option>Image Answers</option>
                 <option>Matching</option>
+                <option>Question/Response</option>
             </select>
 
             <div class="select_arrow">
             </div><br>
         </form>
+
         <form action="${pageContext.request.contextPath}/multipleChoiceSubmitted" method="post">
             <label>Enter question:</label>
             <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
             <label for = "choiceCount">Enter number of choices: </label>
             <input type="number" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>
-            <input class="btn" type="submit" value="Submit" id="submitButton">
+            <input type="submit" value = "Add question" id="submitButton">
         </form>
+
+        <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
+            <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
+        </form>
+
+        <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
+            <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
+        </form>
+
     </div>
 </div>
 
 <script>
     window.onclick = function(event) {
         if (event.target == document.getElementById("questionType")){
-            if(document.getElementById("questionType").value == "Multiple Choice") {
-                window.location.href = '/multipleChoice';
-            } else if(document.getElementById("questionType").value == "True/False") {
+            if(document.getElementById("questionType").value == "True/False") {
                 window.location.href = '/trueFalse';
             } else if(document.getElementById("questionType").value == "Fill In Blank") {
                 window.location.href = '/fillBlank';
@@ -63,6 +72,8 @@
                 window.location.href = '/imageAnswers';
             } else if(document.getElementById("questionType").value == "Matching") {
                 window.location.href = '/matching';
+            } else if(document.getElementById("questionType").value == "Question/Response") {
+                window.location.href = '/questionResponse';
             }
         }
         // else if(event.target == document.getElementById("about")){

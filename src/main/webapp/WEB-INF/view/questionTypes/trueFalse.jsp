@@ -30,21 +30,28 @@
             <option>Multiple Answers</option>
             <option>Image Answers</option>
             <option>Matching</option>
+            <option>Question/Response</option>
         </select>
 
         <div class="select_arrow">
         </div><br>
+    </form>
+    <form action="${pageContext.request.contextPath}/multipleChoice" method="post">
+        <label>Enter question:</label>
+        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
+        <label>Tick correct answer:</label><br>
+        True <input type="checkbox" id="trueCheckBox">
+        False <input type="checkbox" id="falseCheckBox"><br>
+        <input type="submit" value = "Add question" id="submitButton">
+    </form>
 
-        <div>
-            <form action="${pageContext.request.contextPath}/multipleChoice" method="post">
-                <label>Enter question:</label>
-                <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
-                <label>Tick correct answer:</label><br>
-                True <input type="checkbox" id="trueCheckBox">
-                False <input type="checkbox" id="falseCheckBox">
+    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
+        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
+    </form>
 
-            </form>
-        </div>
+    <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
+        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
+    </form>
 </div>
 
 <script>
@@ -63,8 +70,6 @@
             }else if (event.target == document.getElementById("questionType")){
                 if(document.getElementById("questionType").value == "Multiple Choice") {
                     window.location.href = '/multipleChoice';
-                } else if(document.getElementById("questionType").value == "True/False") {
-                    window.location.href = '/trueFalse';
                 } else if(document.getElementById("questionType").value == "Fill In Blank") {
                     window.location.href = '/fillBlank';
                 } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
@@ -75,6 +80,8 @@
                     window.location.href = '/imageAnswers';
                 } else if(document.getElementById("questionType").value == "Matching") {
                     window.location.href = '/matching';
+                } else if(document.getElementById("questionType").value == "Question/Response") {
+                    window.location.href = '/questionResponse';
                 }
             }
         }

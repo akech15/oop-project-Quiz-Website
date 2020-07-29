@@ -30,22 +30,29 @@
             <option>Multiple Answers</option>
             <option>Image Answers</option>
             <option>Matching</option>
+            <option>Question/Response</option>
         </select>
 
         <div class="select_arrow">
         </div><br>
 
-        <div>
-            <form action="${pageContext.request.contextPath}/multipleChoice" method="post">
-                <label>Enter first part of the question:</label>
-                <textarea id="firstPart" name = "firstPart" required placeholder = "Enter text" cols = 60></textarea><br>
-                <label>Enter second part of the question:</label>
-                <textarea id="secondPart" name = "secondPart" required placeholder = "Enter text" cols = 60></textarea><br>
-                <label>Enter omitted part of the question:</label>
-                <textarea id="blank" name = "blank" required placeholder = "Enter what should be blank" cols = 60></textarea><br>
+        <form action="${pageContext.request.contextPath}/multipleChoice" method="post">
+            <label>Enter first part of the question:</label>
+            <textarea id="firstPart" name = "firstPart" required placeholder = "Enter text" cols = 60></textarea><br>
+            <label>Enter second part of the question:</label>
+            <textarea id="secondPart" name = "secondPart" required placeholder = "Enter text" cols = 60></textarea><br>
+            <label>Enter omitted part of the question:</label>
+            <textarea id="blank" name = "blank" required placeholder = "Enter what should be blank" cols = 60></textarea><br>
+            <input type="submit" value = "Add question" id="submitButton">
+        </form>
 
-            </form>
-        </div>
+        <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
+            <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
+        </form>
+
+        <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
+            <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
+        </form>
 </div>
 
 <script>
@@ -56,8 +63,6 @@
                 window.location.href = '/multipleChoice';
             } else if(document.getElementById("questionType").value == "True/False") {
                 window.location.href = '/trueFalse';
-            } else if(document.getElementById("questionType").value == "Fill In Blank") {
-                window.location.href = '/fillBlank';
             } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
                 window.location.href = '/fillMultipleBLank';
             } else if(document.getElementById("questionType").value == "Multiple Answers") {
@@ -66,6 +71,8 @@
                 window.location.href = '/imageAnswers';
             } else if(document.getElementById("questionType").value == "Matching") {
                 window.location.href = '/matching';
+            } else if(document.getElementById("questionType").value == "Question/Response") {
+                window.location.href = '/questionResponse';
             }
         }
         // else if(event.target == document.getElementById("about")){

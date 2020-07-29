@@ -85,6 +85,21 @@ public class QuizController {
         return "questionTypes/multipleAnswersSubmitted";
     }
 
+    @RequestMapping("/questionResponse")
+    public String questionResponse(Map<String, Object> model){
+
+        return "questionTypes/questionResponse";
+    }
+
+
+    @RequestMapping("/questionResponseSubmitted")
+    public String questionResponseSubmitted(@RequestParam String choiceCount, Map<String, Object> model){
+        model.put("choiceCount", choiceCount);
+
+        return "questionTypes/questionResponseSubmitted";
+    }
+
+
     @RequestMapping("/matching")
     public String matching(Map<String, Object> model) {
         return "questionTypes/matching";

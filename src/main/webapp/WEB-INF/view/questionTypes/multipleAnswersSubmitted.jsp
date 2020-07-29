@@ -24,44 +24,41 @@
     <form class="select">
         <label>Choose question type:</label>
         <select id = "questionType" name = "questionType">
-            <option>Select</option>
+            <option>Multiple Answers</option>
             <option>Multiple Choice</option>
             <option>True/False</option>
             <option>Fill In Blank</option>
             <option>Fill In Multiple Blanks</option>
-            <option>Multiple Answers</option>
             <option>Image Answers</option>
             <option>Matching</option>
+            <option>Question/Response</option>
         </select>
 
         <div class="select_arrow">
         </div><br>
+    </form>
+    <label>Enter choices and tick correct answer(s) </label><br>
+    <%
+        int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
+        char ch = 'a';
+        int id = 1;
+        for (int i = 0; i < choice; i++, ch++){
+            out.print("<label>Enter choice " + ch + ":  </label>");
+            out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
+            out.print("      ");
+            out.print("<input type=\"checkbox\" id=\"trueCheckBox" + id +"\">");
+            out.print("<br>");
+        }
+    %>
+    <input type="submit" value = "Add question" id="submitButton">
+    </form>
 
-        <div>
-            <form action="${pageContext.request.contextPath}/multipleAnswersSubmitted" method="post">
-                <%
-                    int choices = Integer.parseInt((String) request.getAttribute("choiceCount"));
-                    char ch = 'a';
-                    out.print("<h2> Enter choices </h2>");
-                    for (int i = 0; i < choices; i++, ch++){
-                        out.print("<label>Enter choice " + ch + ":  </label>");
-                        out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
-                        out.print("<br>");
-                    }
-                    out.print("<br>");
-                    out.print("<br>");
-                    out.print("<h2> Correct Answers </h2>");
-                    int answers = Integer.parseInt((String) request.getAttribute("answerCount"));
+    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
+        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
+    </form>
 
-                    for(int i = 0; i < answers; i++){
-                        out.print("<label>Enter correct answer:  </label>");
-                        out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"correctAnswer\"/>");
-                        out.print("<br>");
-                    }
-                %>
-                <input type="submit" id="submitButton">
-            </form>
-        </div>
+    <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
+        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
     </form>
 </div>
 
@@ -76,12 +73,12 @@
                 window.location.href = '/fillBlank';
             } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
                 window.location.href = '/fillMultipleBLank';
-            } else if(document.getElementById("questionType").value == "Multiple Answers") {
-                window.location.href = '/multipleAnswers';
             } else if(document.getElementById("questionType").value == "Image Answers") {
                 window.location.href = '/imageAnswers';
             } else if(document.getElementById("questionType").value == "Matching") {
                 window.location.href = '/matching';
+            } else if(document.getElementById("questionType").value == "Question/Response") {
+                window.location.href = '/questionResponse';
             }
         }
         // else if(event.target == document.getElementById("about")){

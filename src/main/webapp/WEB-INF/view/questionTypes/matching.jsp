@@ -23,14 +23,14 @@
     <form class="select">
         <label>Choose question type:</label>
         <select id = "questionType" name = "questionType">
-            <option>Select</option>
+            <option>Matching</option>
             <option>Multiple Choice</option>
             <option>True/False</option>
             <option>Fill In Blank</option>
             <option>Fill In Multiple Blanks</option>
             <option>Multiple Answers</option>
             <option>Image Answers</option>
-            <option>Matching</option>
+            <option>Question/Response</option>
         </select>
 
         <div class="select_arrow">
@@ -41,6 +41,14 @@
             <input type="number" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>
             <input type = "submit" id = "submitButton">
         </div>
+    </form>
+
+    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
+        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
+    </form>
+
+    <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
+        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
     </form>
 </div>
 
@@ -59,8 +67,8 @@
                 window.location.href = '/multipleAnswers';
             } else if(document.getElementById("questionType").value == "Image Answers") {
                 window.location.href = '/imageAnswers';
-            } else if(document.getElementById("questionType").value == "Matching") {
-                window.location.href = '/matching';
+            } else if(document.getElementById("questionType").value == "Question/Response") {
+                window.location.href = '/questionResponse';
             }
         }
         // else if(event.target == document.getElementById("about")){

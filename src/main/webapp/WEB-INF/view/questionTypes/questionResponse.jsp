@@ -16,19 +16,15 @@
 
 
     <div class="w3-display-topright w3-container w3-xlarge">
-        <p>
-            <button class="w3-button w3-black"><a href="/userhomepage">Home Page</a></button>
-        </p>
-        <p>
-            <button class="w3-button w3-black"><a href="/">Log Out</a></button>
-        </p>
+        <p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
+        <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>
     </div>
 
     <h1>Make Questions</h1>~
     <form class="select">
         <label>Choose question type:</label>
-        <select id="questionType" name="questionType">
-            <option>Select</option>
+        <select id = "questionType" name = "questionType">
+            <option>Question/Response</option>
             <option>Multiple Choice</option>
             <option>True/False</option>
             <option>Fill In Blank</option>
@@ -36,29 +32,16 @@
             <option>Multiple Answers</option>
             <option>Image Answers</option>
             <option>Matching</option>
-            <option>Question/Response</option>
         </select>
 
         <div class="select_arrow">
-        </div>
-        <br>
-        <br>
+        </div><br>
     </form>
-
-    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
-        <label>Enter choices and tick correct answer </label><br>
-        <%
-            int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
-            char ch = 'a';
-            int id = 1;
-            for (int i = 0; i < choice; i++, ch++){
-                out.print("<label>Enter choice " + ch + ":  </label>");
-                out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
-                out.print("      ");
-                out.print("<input type=\"checkbox\" id=\"trueCheckBox" + id +"\">");
-                out.print("<br>");
-            }
-        %>
+    <form action="${pageContext.request.contextPath}/questionResponseSubmitted" method="post">
+        <label>Enter question:</label>
+        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
+        <label for = "choiceCount">Enter number of possible answers: </label>
+        <input type="number" name="choiceCount" required placeholder="1-5" id = "choiceCount" min = "1" max = "5"/>
         <input type="submit" value = "Add question" id="submitButton">
     </form>
 
@@ -72,23 +55,22 @@
 </div>
 
 <script>
-
-    window.onclick = function (event) {
-        if (event.target == document.getElementById("questionType")) {
-            if (document.getElementById("questionType").value == "True/False") {
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("questionType")){
+            if(document.getElementById("questionType").value == "Multiple Choice") {
+                window.location.href = '/multipleChoice';
+            } else if(document.getElementById("questionType").value == "True/False") {
                 window.location.href = '/trueFalse';
-            } else if (document.getElementById("questionType").value == "Fill In Blank") {
+            } else if(document.getElementById("questionType").value == "Fill In Blank") {
                 window.location.href = '/fillBlank';
-            } else if (document.getElementById("questionType").value == "Fill In Multiple Blanks") {
+            } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
                 window.location.href = '/fillMultipleBLank';
-            } else if (document.getElementById("questionType").value == "Multiple Answers") {
+            } else if(document.getElementById("questionType").value == "Multiple Answers") {
                 window.location.href = '/multipleAnswers';
-            } else if (document.getElementById("questionType").value == "Image Answers") {
+            } else if(document.getElementById("questionType").value == "Image Answers") {
                 window.location.href = '/imageAnswers';
-            } else if (document.getElementById("questionType").value == "Matching") {
+            } else if(document.getElementById("questionType").value == "Matching") {
                 window.location.href = '/matching';
-            } else if(document.getElementById("questionResponse").value == "Question/Response") {
-                window.location.href = '/questionResponse';
             }
         }
         // else if(event.target == document.getElementById("about")){
@@ -99,6 +81,7 @@
         //     document.getElementById("topQuizzes").style.display = "none";
         // }
     }
+
 
 
 </script>
