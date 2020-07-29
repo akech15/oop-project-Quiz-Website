@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -61,5 +62,22 @@ public class UserServiceTests {
         }
 
         Assertions.assertEquals("admin", userService.getUserById(1).getUsername());
+    }
+
+    @Test
+    public void getUsersByUsernameFragment(){
+        User toAdd = new User();
+        toAdd.setUsername("admin");
+        toAdd.setPassword("admin");
+
+        User toAdd1 = new User();
+        toAdd1.setUsername("admin1");
+        toAdd1.setPassword("admin1");
+
+        userService.addUser(toAdd);
+        userService.addUser(toAdd1);
+
+        Assertions.assertEquals(2, userService.getUsersByUsernameFragment("ad").size());
+        Assertions.assertEquals(0, userService.getUsersByUsernameFragment("us").size());
     }
 }

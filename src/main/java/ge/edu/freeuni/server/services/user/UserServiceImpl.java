@@ -6,6 +6,8 @@ import ge.edu.freeuni.server.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class UserServiceImpl implements UserService {
 
@@ -21,5 +23,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(long id) {
         return UserConverter.entityToUser(userRepository.getUserById(id));
+    }
+
+    @Override
+    public List<User> getUsersByUsernameFragment(String usernameFragment) {
+        return UserConverter.entityToFriendshipList(userRepository.getUsersByUsernameFragment(usernameFragment));
     }
 }

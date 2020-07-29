@@ -60,4 +60,23 @@ public class UserRepositoryImpl implements UserRepository {
         String query = String.format("select * from user where id = %d", id);
         return jdbcTemplate.queryForObject(query, userRawMapper);
     }
+
+    @Override
+    public List<UserEntity> getUsersByUsernameFragment(String usernameFragment) {
+
+        String query = "SELECT id FROM user WHERE username LIKE '%" + usernameFragment + "%';";
+
+        List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
+
+        List<UserEntity> usersList = new ArrayList<>();
+
+        for (long id:
+             ids) {
+            usersList.add(this.getUserById(id));
+        }
+
+        return usersList;
+
+    }
+
 }
