@@ -12,4 +12,5 @@ public interface UserService {
 
     List<User> getUsersByUsernameFragment(String usernameFragment);
 
+    User getUserByUsername(String username);
 }

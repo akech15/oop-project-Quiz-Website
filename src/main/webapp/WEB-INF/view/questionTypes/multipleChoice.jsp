@@ -39,8 +39,6 @@
         </form>
 
         <form action="${pageContext.request.contextPath}/multipleChoiceSubmitted" method="post">
-            <label>Enter question:</label>
-            <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
             <label for = "choiceCount">Enter number of choices: </label>
             <input type="number" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>
             <input type="submit" value = "Add question" id="submitButton">

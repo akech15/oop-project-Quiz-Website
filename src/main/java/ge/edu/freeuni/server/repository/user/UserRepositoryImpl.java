@@ -76,7 +76,13 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
         return usersList;
+    }
 
+    @Override
+    public UserEntity getUsersByUsername(String username) {
+        String query = "SELECT * FROM user WHERE username = '" + username + "';";
+
+        return jdbcTemplate.queryForObject(query, userRawMapper);
     }
 
 }

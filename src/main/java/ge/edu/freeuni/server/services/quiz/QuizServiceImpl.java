@@ -2,6 +2,7 @@ package ge.edu.freeuni.server.services.quiz;
 
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
 import ge.edu.freeuni.api.model.quiz.Quiz;
+import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
@@ -9,6 +10,7 @@ import ge.edu.freeuni.server.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -40,12 +42,15 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public boolean startMakingQuiz(Quiz quiz) {
 
+        quiz.setCreationDate(new Date());
+        User activeUser = authenticationService.getActiveUser();
         quiz.setCreator(authenticationService.getActiveUser());
 
         boolean addQuiz = quizRepository.addQuiz(QuizConverter.quizToEntity(quiz));
 
+        System.out.println("3LI MORCHA");
         setActiveQuiz(this.getQuizByIdentifiers(quiz));
-
+        System.out.println("MORCHA STARTI %%%%%%%%%%");
         return addQuiz;
     }
 

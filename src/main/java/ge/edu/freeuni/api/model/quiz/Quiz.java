@@ -18,4 +18,8 @@ public class Quiz {
     private String description;
     private Date creationDate;
 
+    public Quiz(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

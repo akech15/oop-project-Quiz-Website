@@ -1,6 +1,9 @@
 package ge.edu.freeuni.api;
 
+import ge.edu.freeuni.api.model.quiz.Quiz;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
+import ge.edu.freeuni.server.services.quiz.QuizService;
 import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
 import ge.edu.freeuni.server.services.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +18,10 @@ import java.util.Map;
 public class QuizController {
 
     @Autowired
-    private QuizServiceImpl quizService;
+    private QuizService quizService;
 
     @Autowired
-    private AuthenticationServiceImpl authenticationService;
+    private AuthenticationService authenticationService;
 
     @Autowired
     private UserServiceImpl userService;
@@ -42,6 +45,14 @@ public class QuizController {
     @RequestMapping("/makeQuestions")
     public String makeQuestions(Map<String, Object> model) {
 
+        return "makeQuestions";
+    }
+
+    @RequestMapping("/startQuizMaking")
+    public String startQuizMaking(@RequestParam String quizName, @RequestParam String description,
+                                  Map<String, Object> model) {
+        String name = quizName;
+        quizService.startMakingQuiz(new Quiz(name, description));
         return "makeQuestions";
     }
 
@@ -104,4 +115,11 @@ public class QuizController {
     public String matching(Map<String, Object> model) {
         return "questionTypes/matching";
     }
+
+    @RequestMapping("/finishQuiz")
+    public String finishQuiz(Map<String, Object> model){
+        quizService.finishMakingQuiz();
+        return "finishedQuiz";
+    }
+
 }

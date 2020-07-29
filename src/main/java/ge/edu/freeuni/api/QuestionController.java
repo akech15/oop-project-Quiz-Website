@@ -11,10 +11,13 @@ import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -123,6 +126,30 @@ public class QuestionController {
                         null
                 )
         );
+    }
+
+
+    @RequestMapping("/addMultipleChoice")
+    public String addMultipleChoiceQuestion(@RequestParam String question, @RequestParam Map<String, String> params, Map<String, Object> model){
+
+        List<String> answers = new ArrayList<>();
+
+        for(int i = 0; i < params.size() - 1; i++){
+            int toAppend = i + 1;
+            String toGet = "choice"+toAppend;
+            String toAdd = params.get(toGet);
+            answers.add(toAdd);
+        }
+
+        String correctAnswer = params.get("correctAnswer");
+        Question addedQuestion = new Question();
+        addedQuestion.setQuestion(question);
+        addedQuestion.setAnswers(answers);
+        addedQuestion.setType(QuestionType.MULTIPLE_CHOICE);
+        addedQuestion.setCorrectAnswerIndex(correctAnswer.charAt(0) - 'a');
+        questionService.addQuestion(addedQuestion);
+
+        return "makeQuestions";
     }
 
 }

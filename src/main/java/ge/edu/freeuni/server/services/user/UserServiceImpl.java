@@ -2,6 +2,7 @@ package ge.edu.freeuni.server.services.user;
 
 import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.user.User;
+import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,5 +29,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersByUsernameFragment(String usernameFragment) {
         return UserConverter.entityToFriendshipList(userRepository.getUsersByUsernameFragment(usernameFragment));
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        UserEntity userEntity = userRepository.getUsersByUsername(username);
+        return UserConverter.entityToUser(userEntity);
     }
 }

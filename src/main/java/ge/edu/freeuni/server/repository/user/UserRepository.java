@@ -13,4 +13,6 @@ public interface UserRepository {
     UserEntity getUserById(long id);
 
     List<UserEntity> getUsersByUsernameFragment(String usernameFragment);
+
+    UserEntity getUsersByUsername(String username);
 }

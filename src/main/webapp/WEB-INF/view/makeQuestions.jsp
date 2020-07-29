@@ -12,7 +12,6 @@
 
 <div class="bgimg w3-display-container w3-text-white">
 
-
         <div class="w3-display-topright w3-container w3-xlarge">
         <p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
         <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>

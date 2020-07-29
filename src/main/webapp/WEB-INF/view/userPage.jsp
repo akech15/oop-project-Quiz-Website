@@ -52,7 +52,7 @@
         <div class="column">
             <h2>my quizzes</h2>
             <%--        change count and view more logic--%>
-            <a href="/createQuizPage">create new quiz</a>
+            <a href="/createNewQuiz">create new quiz</a>
         </div>
     </div>
 

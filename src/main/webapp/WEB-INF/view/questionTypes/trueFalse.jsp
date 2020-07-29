@@ -61,7 +61,6 @@
             if (event.target == document.getElementById("trueCheckBox")){
                 if(document.getElementById("falseCheckBox").checked = true){
                     uncheckFalse();
-
                 }
             } else if (event.target == document.getElementById("falseCheckBox")){
                 if(document.getElementById("trueCheckBox").checked = true){

@@ -43,7 +43,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 questionEntity.getAnswers(),
                 questionEntity.getCorrectAnswerIndex(),
                 questionEntity.getPictureURL());
-
+        System.out.println("aqamde movedi dzmao");
+        System.out.println(query);
         try {
             jdbcTemplate.execute(query);
             return true;

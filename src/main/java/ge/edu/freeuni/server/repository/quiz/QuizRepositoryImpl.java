@@ -81,7 +81,7 @@ public class QuizRepositoryImpl implements QuizRepository {
                 quizEntity.getCreatorId(),
                 creationDateDB
         );
-
+        System.out.println(query);
         return jdbcTemplate.queryForObject(query, quizRawMapper);
 
     }

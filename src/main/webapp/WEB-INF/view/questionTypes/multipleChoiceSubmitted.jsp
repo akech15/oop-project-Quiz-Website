@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,20 +47,32 @@
         <br>
     </form>
 
-    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
-        <label>Enter choices and tick correct answer </label><br>
+    <form action="${pageContext.request.contextPath}/addMultipleChoice" method="post">
+
+        <label>Enter question:</label>
+        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
         <%
             int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
+            List<Character> chars = new ArrayList<>();
             char ch = 'a';
             int id = 1;
-            for (int i = 0; i < choice; i++, ch++){
+            for (int i = 0; i < choice; i++, ch++, id++){
                 out.print("<label>Enter choice " + ch + ":  </label>");
-                out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
-                out.print("      ");
-                out.print("<input type=\"checkbox\" id=\"trueCheckBox" + id +"\">");
+                out.print("<input type=\"text\" name=\"choice" + id + "\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
                 out.print("<br>");
+                chars.add(ch);
             }
+
+            String toShow = "<label>Enter if correct answer is either ";
+            for(int i = 0; i < chars.size() - 1; i++){
+                toShow += chars.get(i) +  ", ";
+            }
+            toShow += "or " + chars.get(chars.size() - 1);
+            toShow += "</label>";
+            out.print(toShow);
         %>
+
+        <input type="text" name="correctAnswer" required placeholder="Enter correct answer" id = "correctAnswer"/>
         <input type="submit" value = "Add question" id="submitButton">
     </form>
 
@@ -66,7 +80,7 @@
         <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
     </form>
 
-    <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
+    <form action="${pageContext.request.contextPath}/finishQuiz" method="post">
         <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
     </form>
 </div>
