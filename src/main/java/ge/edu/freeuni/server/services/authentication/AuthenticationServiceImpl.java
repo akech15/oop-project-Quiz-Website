@@ -14,6 +14,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private User activeUser;
 
+    @Override
+    public boolean isUserValid(User user) {
+        return userRepository.isUserValid(UserConverter.userToEntity(user));
+    }
+
     public User getActiveUser() {
         return activeUser;
     }
@@ -28,7 +33,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public boolean logIn(User user){
-        boolean isValid = userRepository.isUserValid(UserConverter.userToEntity(user));
+        boolean isValid = isUserValid(user);
         if(isValid) setActiveUser(user);
         return isValid;
     }
