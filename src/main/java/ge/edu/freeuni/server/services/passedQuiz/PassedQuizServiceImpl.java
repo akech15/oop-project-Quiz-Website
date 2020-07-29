@@ -38,6 +38,11 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
 
     @Override
+    public PassedQuiz getActivePassedQuiz() {
+        return currentPassedQuiz;
+    }
+
+    @Override
     public boolean startQuiz(PassedQuiz passedQuiz) {
         boolean startQuiz = passedQuizRepository
                             .startQuiz(PassedQuizConverter

@@ -46,8 +46,15 @@ public class AnswerRepositoryImpl implements AnswerRepository {
                 answer.getUserAnswer(),
                 answer.getPassedQuizId()
         );
-        jdbcTemplate.execute(query);
-        return false;
+
+        try {
+            jdbcTemplate.execute(query);
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override

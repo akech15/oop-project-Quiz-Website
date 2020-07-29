@@ -4,6 +4,8 @@ import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 
 public interface PassedQuizService {
 
+    PassedQuiz getActivePassedQuiz();
+
     boolean startQuiz(PassedQuiz quiz);
 
     PassedQuiz finishQuiz();
