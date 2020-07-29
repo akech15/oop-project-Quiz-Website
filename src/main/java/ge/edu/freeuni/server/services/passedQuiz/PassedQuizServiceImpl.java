@@ -58,11 +58,16 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
     @Override
     public PassedQuiz finishQuiz() {
-        long quizId = currentPassedQuiz.getId();
-        currentPassedQuiz.setScore(this.getPassedQuizScore(currentPassedQuiz));
+
         currentPassedQuiz.setEndDate(new Date());
-        currentPassedQuiz.setDuration(new Date()); // TODO !!!!!!!!!!!!!!!!!!!!!!!!! gasasworebelia
+        currentPassedQuiz.setScore(this.getPassedQuizScore(currentPassedQuiz));
+
+        long duration = currentPassedQuiz.getEndDate().getTime() - currentPassedQuiz.getStartDate().getTime();
+
+        currentPassedQuiz.setDuration(new Date(duration));
+
         passedQuizRepository.finishQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, currentPassedQuiz));
+        long quizId = currentPassedQuiz.getId();
         currentPassedQuiz = null;
         return getPassedQuizById(quizId);
     }
