@@ -103,10 +103,13 @@ public class FriendsRepositoryImpl implements FriendsRepository {
     }
 
     @Override
-    public List<UserEntity> getAllFriendRequest(UserEntity user) {
+    public List<UserEntity> getAllFriendRequest(long userId) {
         List<UserEntity> result = new ArrayList<>();
-        String query = String.format("select sender_id from friends where receiver_id = \'%d\' and status = \'%s\'",
-                user.getId(), FriendshipStatusType.PENDING);
+        String query = String.format(
+                "select sender_id from friends where receiver_id = \'%d\' and status = \'%s\'",
+                userId,
+                FriendshipStatusType.PENDING
+        );
         List<Long> friendId = new ArrayList<>();
         friendId.addAll(jdbcTemplate.queryForList(query, Long.class));
         for (Long id : friendId) {

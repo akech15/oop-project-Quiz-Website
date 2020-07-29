@@ -17,7 +17,7 @@ public interface FriendsRepository {
 
     boolean removeFriend(UserEntity sender, UserEntity receiver);
 
-    List<UserEntity> getAllFriendRequest(UserEntity user);
+    List<UserEntity> getAllFriendRequest(long userId);
 
 
 }
