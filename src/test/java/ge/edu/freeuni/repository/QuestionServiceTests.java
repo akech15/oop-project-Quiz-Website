@@ -18,7 +18,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 @SpringBootTest
 public class QuestionServiceTests {
@@ -58,7 +61,7 @@ public class QuestionServiceTests {
     }
 
     @Test
-    public void addQuestionTest(){
+    public void addQuestionTest() {
 
         User toAddUser = new User();
         toAddUser.setUsername("admin");
@@ -93,7 +96,7 @@ public class QuestionServiceTests {
     }
 
     @Test
-    public void getQuestionByIdTest(){
+    public void getQuestionByIdTest() {
 
         User toAddUser = new User();
         toAddUser.setUsername("admin");
@@ -131,7 +134,7 @@ public class QuestionServiceTests {
     }
 
     @Test
-    public void getAllQuestionsByQuiz(){
+    public void getAllQuestionsByQuiz() {
         User toAddUser = new User();
         toAddUser.setUsername("admin");
         toAddUser.setPassword("admin");

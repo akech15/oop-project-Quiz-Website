@@ -4,9 +4,9 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class FriendshipEntity {
 
     private long senderId;

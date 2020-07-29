@@ -9,4 +9,5 @@ public interface UserRepository {
     boolean isUserValid(UserEntity userEntity);
 
     UserEntity getUserById(long id);
+
 }

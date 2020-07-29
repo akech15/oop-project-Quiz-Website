@@ -13,5 +13,4 @@ public interface QuestionService {
 
     List<Question> getAllQuestionsByQuiz(Quiz quiz);
 
-
 }

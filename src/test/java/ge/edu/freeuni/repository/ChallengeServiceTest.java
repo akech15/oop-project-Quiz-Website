@@ -21,7 +21,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 @SpringBootTest
-public class ChallengeTest {
+public class ChallengeServiceTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

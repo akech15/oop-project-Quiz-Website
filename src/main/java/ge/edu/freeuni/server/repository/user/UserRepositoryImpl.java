@@ -1,6 +1,5 @@
 package ge.edu.freeuni.server.repository.user;
 
-import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

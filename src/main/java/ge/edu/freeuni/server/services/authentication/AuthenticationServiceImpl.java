@@ -27,14 +27,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         this.activeUser = activeUser;
     }
 
-    private void cancelActiveUser(){
+    private void cancelActiveUser() {
         this.activeUser = null;
     }
 
     @Override
-    public boolean logIn(User user){
+    public boolean logIn(User user) {
         boolean isValid = isUserValid(user);
-        if(isValid) setActiveUser(user);
+        if (isValid) setActiveUser(user);
         return isValid;
     }
 

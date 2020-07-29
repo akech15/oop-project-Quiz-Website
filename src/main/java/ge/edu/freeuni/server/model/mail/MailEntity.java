@@ -4,9 +4,9 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MailEntity {
 
     private long id;

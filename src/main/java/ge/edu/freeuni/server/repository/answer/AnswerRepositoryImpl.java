@@ -50,7 +50,7 @@ public class AnswerRepositoryImpl implements AnswerRepository {
         try {
             jdbcTemplate.execute(query);
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

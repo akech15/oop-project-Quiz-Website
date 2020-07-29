@@ -6,9 +6,9 @@ import java.util.Date;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PassedQuizEntity {
 
     private long id;
@@ -20,3 +20,5 @@ public class PassedQuizEntity {
     private Date duration;
 
 }
+
+

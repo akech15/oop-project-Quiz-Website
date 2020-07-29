@@ -9,4 +9,5 @@ public interface AnswerService {
     boolean addAnswer(Answer answer);
 
     Answer getAnswerById(int id);
+
 }

@@ -39,18 +39,18 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getQuestionById(long id) {
         return QuestionConverter.entityToQuestion(
-                                                    userRepository,
-                                                    quizRepository,
-                                                    questionRepository.getQuestionById(id)
+                userRepository,
+                quizRepository,
+                questionRepository.getQuestionById(id)
         );
     }
 
     @Override
     public List<Question> getAllQuestionsByQuiz(Quiz quiz) {
         return QuestionConverter.entityToQuestionList(userRepository,
-                                                      quizRepository,
-                                                      questionRepository
-                                                      .getAllQuestionsByQuizId(quiz.getId())
+                quizRepository,
+                questionRepository
+                        .getAllQuestionsByQuizId(quiz.getId())
         );
     }
 

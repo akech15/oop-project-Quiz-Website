@@ -109,8 +109,8 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
 
         List<AnswerEntity> answers = new ArrayList<>();
 
-        for (long answerId:
-             answerIds) {
+        for (long answerId :
+                answerIds) {
             answers.add(answerRepository.getAnswerById(answerId));
         }
 

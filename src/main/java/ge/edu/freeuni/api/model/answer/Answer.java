@@ -2,7 +2,6 @@ package ge.edu.freeuni.api.model.answer;
 
 import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 import ge.edu.freeuni.api.model.question.Question;
-import ge.edu.freeuni.api.model.quiz.Quiz;
 import lombok.*;
 
 @Setter

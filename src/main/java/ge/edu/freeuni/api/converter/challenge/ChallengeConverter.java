@@ -16,35 +16,35 @@ public final class ChallengeConverter {
                                               QuizRepositoryImpl quizRepository,
                                               UserRepositoryImpl userRepository) {
         return Challenge.builder().
-                id(from.getId()).
-                senderScore(from.getSenderScore()).
-                quiz(QuizConverter.entityToQuiz(userRepository,
-                        quizRepository.getQuizById(from.getQuizId()))).
-                receiver(UserConverter.entityToUser(userRepository.getUserById(from.getReceiverId()))).
-                sender(UserConverter.entityToUser(userRepository.getUserById(from.getSenderId()))).
-                build();
+                id(from.getId())
+                .senderScore(from.getSenderScore())
+                .quiz(QuizConverter.entityToQuiz(userRepository,
+                        quizRepository.getQuizById(from.getQuizId())))
+                .receiver(UserConverter.entityToUser(userRepository.getUserById(from.getReceiverId())))
+                .sender(UserConverter.entityToUser(userRepository.getUserById(from.getSenderId())))
+                .build();
     }
 
     public static ChallengeEntity challengeToEntity(Challenge challenge,
                                                     UserRepositoryImpl userRepository) {
-        return ChallengeEntity.builder().
-                id(challenge.getId()).
-                senderScore(challenge.getSenderScore()).
-                quizId(challenge.getQuiz().getId()).
-                receiverId(challenge.getReceiver().getId()).
-                senderId(challenge.getSender().getId()).
-                build();
+        return ChallengeEntity.builder()
+                .id(challenge.getId())
+                .senderScore(challenge.getSenderScore())
+                .quizId(challenge.getQuiz().getId())
+                .receiverId(challenge.getReceiver().getId())
+                .senderId(challenge.getSender().getId())
+                .build();
     }
 
     public static List<Challenge> entityToChallengeList(UserRepositoryImpl userRepository,
-                                              QuizRepositoryImpl quizRepository,
-                                              List<ChallengeEntity> list){
+                                                        QuizRepositoryImpl quizRepository,
+                                                        List<ChallengeEntity> list) {
 
         List<Challenge> res = new ArrayList<>();
-        for (ChallengeEntity challengeEntity:
+        for (ChallengeEntity challengeEntity :
                 list) {
             res.add(ChallengeConverter.
-                    entityToChallenge(challengeEntity, quizRepository,userRepository));
+                    entityToChallenge(challengeEntity, quizRepository, userRepository));
         }
         return res;
 

@@ -46,12 +46,12 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Answer getAnswerById(int id) {
         return AnswerConverter.AnswerEntityToAnswer(answerRepository
-                                                    .getAnswerById(id),
-                                                    questionRepository,
-                                                    quizRepository,
-                                                    passedQuizRepository,
-                                                    userRepository
-                );
+                        .getAnswerById(id),
+                questionRepository,
+                quizRepository,
+                passedQuizRepository,
+                userRepository
+        );
     }
 
 }

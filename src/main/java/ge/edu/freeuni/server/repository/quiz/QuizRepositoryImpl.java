@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ public class QuizRepositoryImpl implements QuizRepository {
     };
 
 
-    public QuizEntity getQuizById(long id){
+    public QuizEntity getQuizById(long id) {
         String query = String.format("select * from quiz where id = \'%d\';", id);
         return jdbcTemplate.queryForObject(query, quizRawMapper);
     }
@@ -59,7 +58,7 @@ public class QuizRepositoryImpl implements QuizRepository {
         try {
             jdbcTemplate.execute(query);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

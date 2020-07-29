@@ -34,7 +34,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     public boolean addQuestion(QuestionEntity questionEntity) {
         String query = String.format("INSERT INTO question (quiz_id, category, question, type, " +
                         "correct_answer, correct_answer_index, picture_url)" +
-                "values (\'%d\', \'%s\', \'%s\', \'%s\', \'%s\', \'%d\', \'%s\');",
+                        "values (\'%d\', \'%s\', \'%s\', \'%s\', \'%s\', \'%d\', \'%s\');",
 
                 questionEntity.getQuizId(),
                 questionEntity.getCategory(),
@@ -47,7 +47,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         try {
             jdbcTemplate.execute(query);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
@@ -69,8 +69,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
 
         List<QuestionEntity> res = new ArrayList<>();
-        for (long id:
-             ids) {
+        for (long id :
+                ids) {
             res.add(this.getQuestionById(id));
         }
 

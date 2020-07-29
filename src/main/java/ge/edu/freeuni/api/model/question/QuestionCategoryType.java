@@ -1,6 +1,7 @@
 package ge.edu.freeuni.api.model.question;
 
 public enum QuestionCategoryType {
+
     GEOGRAPHY,
     HISTORY,
     MATH,
@@ -8,4 +9,5 @@ public enum QuestionCategoryType {
     PHYSICS,
     EROTIC,
     OTHER
+
 }

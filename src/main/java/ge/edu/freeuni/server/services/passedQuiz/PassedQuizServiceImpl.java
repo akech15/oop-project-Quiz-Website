@@ -45,11 +45,11 @@ public class PassedQuizServiceImpl implements PassedQuizService {
     @Override
     public boolean startQuiz(PassedQuiz passedQuiz) {
         boolean startQuiz = passedQuizRepository
-                            .startQuiz(PassedQuizConverter
-                                        .passedQuizToEntity(quizRepository,
-                                                            passedQuiz
-                                        )
-                            );
+                .startQuiz(PassedQuizConverter
+                        .passedQuizToEntity(quizRepository,
+                                passedQuiz
+                        )
+                );
 
         currentPassedQuiz = this.getPassedQuizByIdentifiers(passedQuiz);
 
@@ -105,16 +105,16 @@ public class PassedQuizServiceImpl implements PassedQuizService {
     @Override
     public PassedQuiz getPassedQuizByIdentifiers(PassedQuiz passedQuiz) {
         return PassedQuizConverter
-               .entityToPassedQuiz( userRepository,
-                                    quizRepository,
-                                    passedQuizRepository
-                                    .getPassedQuizByIdentifiers(
-                                                                PassedQuizConverter
-                                                                .passedQuizToEntity(quizRepository,
-                                                                                    passedQuiz
-                                                                )
-                                    )
-               );
+                .entityToPassedQuiz(userRepository,
+                        quizRepository,
+                        passedQuizRepository
+                                .getPassedQuizByIdentifiers(
+                                        PassedQuizConverter
+                                                .passedQuizToEntity(quizRepository,
+                                                        passedQuiz
+                                                )
+                                )
+                );
     }
 
 }

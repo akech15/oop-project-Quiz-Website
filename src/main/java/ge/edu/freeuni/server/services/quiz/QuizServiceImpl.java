@@ -28,7 +28,7 @@ public class QuizServiceImpl implements QuizService {
     @Autowired
     private AuthenticationService authenticationService;
 
-    private void setActiveQuiz(Quiz quiz){
+    private void setActiveQuiz(Quiz quiz) {
         activeQuiz = quiz;
     }
 

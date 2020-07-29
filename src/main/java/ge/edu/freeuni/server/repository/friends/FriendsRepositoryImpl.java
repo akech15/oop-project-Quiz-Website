@@ -53,8 +53,8 @@ public class FriendsRepositoryImpl implements FriendsRepository {
         String query = String.format(
                 "UPDATE friends SET status = \'%s\' WHERE sender_id = \'%d\' AND receiver_id = \'%d\';",
                 String.valueOf(FriendshipStatusType.APPROVED),
-                receiver.getId(),
-                sender.getId()
+                sender.getId(),
+                receiver.getId()
         );
 
         try {

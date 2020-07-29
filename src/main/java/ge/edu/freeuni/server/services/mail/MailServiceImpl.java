@@ -34,8 +34,8 @@ public class MailServiceImpl implements MailService {
     public List<Mail> searchMailsByReceiver(User receiver) {
         return MailConverter.
                 entityToMailList(userRepository, mailRepository.
-                                searchMailsByReceiver(UserConverter.
-                                                      userToEntity(receiver)));
+                        searchMailsByReceiver(UserConverter.
+                                userToEntity(receiver)));
     }
 
     @Override

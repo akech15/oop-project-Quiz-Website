@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.client.AsyncRestTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,7 +47,7 @@ public class AuthenticationServiceTests {
     }
 
     @Test
-    public void logInTest(){
+    public void logInTest() {
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -57,11 +56,11 @@ public class AuthenticationServiceTests {
         User user = userService.getUserById(1);
 
         Assertions.assertTrue(authenticationService.logIn(user));
-        Assertions.assertFalse(authenticationService.logIn(new User(-1,"user", "user")));
+        Assertions.assertFalse(authenticationService.logIn(new User(-1, "user", "user")));
     }
 
     @Test
-    public void getActiveUserTest(){
+    public void getActiveUserTest() {
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -94,7 +93,7 @@ public class AuthenticationServiceTests {
     }
 
     @Test
-    public void isUserValidTest(){
+    public void isUserValidTest() {
         User toAdd = new User();
         toAdd.setUsername("admin");
         toAdd.setPassword("admin");
@@ -103,7 +102,7 @@ public class AuthenticationServiceTests {
         User user = userService.getUserById(1);
 
         Assertions.assertTrue(authenticationService.isUserValid(user));
-        Assertions.assertFalse(authenticationService.isUserValid(new User(-1,"user", "user")));
+        Assertions.assertFalse(authenticationService.isUserValid(new User(-1, "user", "user")));
     }
 
 }

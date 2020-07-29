@@ -11,4 +11,5 @@ public interface QuestionRepository {
     QuestionEntity getQuestionById(long id);
 
     List<QuestionEntity> getAllQuestionsByQuizId(long id);
+
 }
