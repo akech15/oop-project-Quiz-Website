@@ -2,8 +2,9 @@ package ge.edu.freeuni.repository;
 
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
-import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
-import ge.edu.freeuni.server.services.user.UserServiceImpl;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
+import ge.edu.freeuni.server.services.quiz.QuizService;
+import ge.edu.freeuni.server.services.user.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,13 +23,16 @@ import java.util.StringTokenizer;
 public class QuizServiceTests {
 
     @Autowired
-    private QuizServiceImpl quizService;
+    private QuizService quizService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @BeforeEach
     public void clearDB() {
@@ -60,6 +64,8 @@ public class QuizServiceTests {
 
         User user = userService.getUserById(1);
 
+        authenticationService.logIn(user);
+
         Quiz quiz = new Quiz();
         quiz.setName("starting quiz");
         quiz.setDescription("description");
@@ -78,6 +84,8 @@ public class QuizServiceTests {
         userService.addUser(toAdd);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz quiz = new Quiz();
         quiz.setName("quiz");
@@ -116,6 +124,8 @@ public class QuizServiceTests {
 
         User user = userService.getUserById(1);
 
+        authenticationService.logIn(user);
+
         Quiz quiz = new Quiz();
         quiz.setName("quiz");
         quiz.setDescription("its quiz");
@@ -143,6 +153,8 @@ public class QuizServiceTests {
 
         User user = userService.getUserById(1);
 
+        authenticationService.logIn(user);
+
         Quiz quiz = new Quiz();
         quiz.setName("quiz");
         quiz.setDescription("its quiz");
@@ -169,6 +181,8 @@ public class QuizServiceTests {
         userService.addUser(toAdd);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz quiz = new Quiz();
         quiz.setName("quiz");

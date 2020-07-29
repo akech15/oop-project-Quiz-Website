@@ -6,13 +6,11 @@ import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
-    UserRepositoryImpl userRepository;
+    private UserRepositoryImpl userRepository;
 
     private User activeUser;
 
@@ -28,12 +26,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         this.activeUser = null;
     }
 
-    @Autowired
-    private UserConverter userHelper;
-
     @Override
-    public boolean logIn(User user) throws SQLException {
-        boolean isValid = userRepository.isUserValid(userHelper.userToEntity(user));
+    public boolean logIn(User user){
+        boolean isValid = userRepository.isUserValid(UserConverter.userToEntity(user));
         if(isValid) setActiveUser(user);
         return isValid;
     }

@@ -66,5 +66,26 @@ public class QuizRepositoryImpl implements QuizRepository {
 
     }
 
+    @Override
+    public QuizEntity getQuizByIdentifiers(QuizEntity quizEntity) {
+
+        Date creationDate = quizEntity.getCreationDate();
+        java.sql.Date creationDateDB = DateUtils.getDbDate(creationDate);
+
+        String query = String.format(
+                "select * from quiz where name = \'%s\' AND " +
+                        "description = \'%s\' AND " +
+                        "creator_id = \'%d\' AND " +
+                        "creation_date = \'%s\';",
+                quizEntity.getName(),
+                quizEntity.getDescription(),
+                quizEntity.getCreatorId(),
+                creationDateDB
+        );
+
+        return jdbcTemplate.queryForObject(query, quizRawMapper);
+
+    }
+
 
 }

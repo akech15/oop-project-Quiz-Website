@@ -16,4 +16,5 @@ public interface PassedQuizRepository {
 
     List<AnswerEntity> getAnswersByPassedQuiz(PassedQuizEntity passedQuizEntity);
 
+    PassedQuizEntity getPassedQuizByIdentifiers(PassedQuizEntity passedQuizEntity);
 }

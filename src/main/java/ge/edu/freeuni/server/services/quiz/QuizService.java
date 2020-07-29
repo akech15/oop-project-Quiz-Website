@@ -6,15 +6,17 @@ import ge.edu.freeuni.api.model.user.User;
 import java.text.ParseException;
 import java.util.List;
 
-public interface QuizService {
+public abstract class QuizService {
 
-    boolean addQuiz(Quiz quiz);
+    public abstract Quiz getQuizByIdentifiers(Quiz quiz);
 
-    List<String> getAllQuizNames();
+    public abstract boolean addQuiz(Quiz quiz);
 
-    Quiz getQuizById(long id);
+    public abstract List<String> getAllQuizNames();
 
-    Quiz getActiveQuiz();
+    public abstract Quiz getQuizById(long id);
 
-    void finishMakingQuiz();
+    public abstract Quiz getActiveQuiz();
+
+    public abstract void finishMakingQuiz();
 }

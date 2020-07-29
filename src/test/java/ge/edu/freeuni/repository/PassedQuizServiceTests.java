@@ -8,17 +8,24 @@ import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.services.answer.AnswerService;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
 import ge.edu.freeuni.server.services.user.UserService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 @SpringBootTest
 public class PassedQuizServiceTests {
@@ -38,6 +45,31 @@ public class PassedQuizServiceTests {
     @Autowired
     private AnswerService answerService;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @BeforeEach
+    public void clearDB() {
+        StringBuilder query = new StringBuilder();
+        try {
+            Scanner myReader = new Scanner(new File("src/testScript.sql"));
+            while (myReader.hasNextLine()) {
+                query.append(myReader.nextLine());
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        StringTokenizer tokenizer = new StringTokenizer(query.toString(), ";");
+
+        while (tokenizer.hasMoreTokens()) {
+            jdbcTemplate.execute(tokenizer.nextToken() + ";");
+        }
+    }
+
     @Test
     public void startQuiz() {
 
@@ -48,6 +80,8 @@ public class PassedQuizServiceTests {
         userService.addUser(toAddUser);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz toAddQuiz = new Quiz();
         toAddQuiz.setName("starting quiz");
@@ -88,6 +122,8 @@ public class PassedQuizServiceTests {
         userService.addUser(toAddUser);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz toAddQuiz = new Quiz();
         toAddQuiz.setName("starting quiz");
@@ -142,6 +178,8 @@ public class PassedQuizServiceTests {
 
         User user = userService.getUserById(1);
 
+        authenticationService.logIn(user);
+
         Quiz toAddQuiz = new Quiz();
         toAddQuiz.setName("starting quiz");
         toAddQuiz.setDescription("description");
@@ -172,8 +210,8 @@ public class PassedQuizServiceTests {
 
         PassedQuiz passedQuiz = passedQuizService.getPassedQuizById(1);
 
-        Assertions.assertEquals("admin",passedQuiz.getUser().getUsername());
-        Assertions.assertEquals("starting quiz",passedQuiz.getQuiz().getName());
+        Assertions.assertEquals("admin", passedQuiz.getUser().getUsername());
+        Assertions.assertEquals("starting quiz", passedQuiz.getQuiz().getName());
     }
 
     @Test
@@ -185,6 +223,8 @@ public class PassedQuizServiceTests {
         userService.addUser(toAddUser);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz toAddQuiz = new Quiz();
         toAddQuiz.setName("starting quiz");

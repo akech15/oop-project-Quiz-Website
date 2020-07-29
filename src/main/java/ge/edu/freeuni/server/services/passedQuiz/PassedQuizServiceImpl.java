@@ -39,8 +39,16 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
     @Override
     public boolean startQuiz(PassedQuiz passedQuiz) {
-        currentPassedQuiz = passedQuiz; //TODO !!!!!!!!!!!!!!!!!!! bazidanaa wamosagebi tavisi ID - it
-        return passedQuizRepository.startQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, passedQuiz));
+        boolean startQuiz = passedQuizRepository
+                            .startQuiz(PassedQuizConverter
+                                        .passedQuizToEntity(quizRepository,
+                                                            passedQuiz
+                                        )
+                            );
+
+        currentPassedQuiz = this.getPassedQuizByIdentifiers(passedQuiz);
+
+        return startQuiz;
     }
 
     @Override
@@ -87,6 +95,21 @@ public class PassedQuizServiceImpl implements PassedQuizService {
         }
 
         return score;
+    }
+
+    @Override
+    public PassedQuiz getPassedQuizByIdentifiers(PassedQuiz passedQuiz) {
+        return PassedQuizConverter
+               .entityToPassedQuiz( userRepository,
+                                    quizRepository,
+                                    passedQuizRepository
+                                    .getPassedQuizByIdentifiers(
+                                                                PassedQuizConverter
+                                                                .passedQuizToEntity(quizRepository,
+                                                                                    passedQuiz
+                                                                )
+                                    )
+               );
     }
 
 }

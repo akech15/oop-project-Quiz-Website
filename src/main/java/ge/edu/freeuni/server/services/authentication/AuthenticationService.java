@@ -8,12 +8,10 @@ import java.sql.SQLException;
 
 
 public interface AuthenticationService {
-    /**
-     *
-     * @return true if log-in was successful
-     *         false otherwise
-     */
-    boolean logIn(User user) throws SQLException;
+
+    public User getActiveUser();
+
+    boolean logIn(User user);
 
     void logOut(User user);
 }

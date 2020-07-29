@@ -5,6 +5,7 @@ import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
 import ge.edu.freeuni.server.services.user.UserService;
@@ -33,6 +34,9 @@ public class QuestionServiceTests {
 
     @Autowired
     private QuizService quizService;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @BeforeEach
     public void clearDB() {
@@ -63,6 +67,8 @@ public class QuestionServiceTests {
         userService.addUser(toAddUser);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz toAddQuiz = new Quiz();
         toAddQuiz.setName("starting quiz");
@@ -96,6 +102,8 @@ public class QuestionServiceTests {
         userService.addUser(toAddUser);
 
         User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
 
         Quiz toAddQuiz = new Quiz();
         toAddQuiz.setName("starting quiz");

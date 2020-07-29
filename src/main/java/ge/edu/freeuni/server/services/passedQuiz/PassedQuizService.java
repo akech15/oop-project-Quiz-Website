@@ -12,4 +12,6 @@ public interface PassedQuizService {
 
     long getPassedQuizScore(PassedQuiz passedQuiz);
 
+    PassedQuiz getPassedQuizByIdentifiers(PassedQuiz passedQuiz);
+
 }

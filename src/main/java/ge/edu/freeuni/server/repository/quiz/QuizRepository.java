@@ -13,4 +13,5 @@ public interface QuizRepository {
     boolean addQuiz(QuizEntity quizEntity);
 
 
+    QuizEntity getQuizByIdentifiers(QuizEntity quizToEntity);
 }

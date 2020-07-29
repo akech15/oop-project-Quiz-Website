@@ -117,4 +117,21 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
         return answers;
     }
 
+    @Override
+    public PassedQuizEntity getPassedQuizByIdentifiers(PassedQuizEntity passedQuizEntity) {
+
+        Date startDate = passedQuizEntity.getStartDate();
+        java.sql.Date startDateDB = DateUtils.getDbDate(startDate);
+
+        String query = String.format(
+                "SELECT * FROM passed_quiz WHERE user_id = \'%d\' AND quiz_id = \'%d\' AND start_date = \'%s\';",
+                passedQuizEntity.getUserId(),
+                passedQuizEntity.getQuizId(),
+                startDateDB
+        );
+
+        return jdbcTemplate.queryForObject(query, passedQuizRawMapper);
+
+    }
+
 }

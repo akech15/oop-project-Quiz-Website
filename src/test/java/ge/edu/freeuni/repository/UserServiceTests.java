@@ -1,7 +1,7 @@
 package ge.edu.freeuni.repository;
 
 import ge.edu.freeuni.api.model.user.User;
-import ge.edu.freeuni.server.services.user.UserServiceImpl;
+import ge.edu.freeuni.server.services.user.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 public class UserServiceTests {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
