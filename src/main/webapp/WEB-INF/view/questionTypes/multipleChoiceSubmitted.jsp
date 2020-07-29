@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/createQuiz.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/makeQuestions.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/multipleChoice.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/multipleChoiceSubmitted.css"/>
     <title>Make Questions</title>
 
 </head>
@@ -40,21 +41,22 @@
         <div class="select_arrow">
         </div>
         <br>
+        <br>
 
         <div>
             <form action="${pageContext.request.contextPath}/multipleChoiceSubmitted" method="post">
-                <div id="holder"></div>
-                <label>Enter question:</label>
-                <h2>--- ${choiceCount} ---</h2>
+
                 <%
                     int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
-                    for (int i = 0; i < choice; i++){
-                        out.print("<input type=\"text\" name=\"choiceCount\" required placeholder=\"3-7\" id=\"choiceCount\" min=\"3\" max=\"7\"/>");
+                    char ch = 'a';
+                    for (int i = 0; i < choice; i++, ch++){
+                        out.print("<label>Enter choice " + ch + ":  </label>");
+                        out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
+                        out.print("<br>");
                     }
+
                 %>
-                <textarea id="questionBox" name="question" required placeholder="Ask anything" cols=60></textarea><br>
-                <label for="choiceCount">Enter number of choices: </label>
-                <input type="text" name="choiceCount" required placeholder="3-7" id="choiceCount" min="3" max="7"/>
+                <input type = "text" name = "correctAnswer" required placeholder="Enter Correct Answer" id = "correctAnswer"/>
                 <input type="submit" id="submitButton">
             </form>
         </div>
@@ -62,12 +64,6 @@
 </div>
 
 <script>
-    let parent = document.getElementById('holder');
-    let elem = document.createElement("INPUT");
-    elem.setAttribute("type", "text");
-    for (let i = 0; i < 5; i++) {
-        document.body.appendChild(x);
-    }
 
     window.onclick = function (event) {
         if (event.target == document.getElementById("questionType")) {

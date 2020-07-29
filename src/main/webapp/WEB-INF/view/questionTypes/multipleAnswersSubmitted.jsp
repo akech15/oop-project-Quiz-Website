@@ -36,15 +36,32 @@
 
         <div class="select_arrow">
         </div><br>
-    </form>
-    <form action="${pageContext.request.contextPath}/multipleAnswersSubmitted" method="post">
-        <label>Enter question:</label>
-        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
-        <label for = "choiceCount">Enter number of choices: </label>
-        <input type="number" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/><br>
-        <label for = "choiceCount">Enter number of correct answers: </label>
-        <input type="number" name="answerCount" required placeholder="3-7" id = "answerCount" min = "3" max = "7"/>
-        <input type = "submit" id = "submitButton">
+
+        <div>
+            <form action="${pageContext.request.contextPath}/multipleAnswersSubmitted" method="post">
+                <%
+                    int choices = Integer.parseInt((String) request.getAttribute("choiceCount"));
+                    char ch = 'a';
+                    out.print("<h2> Enter choices </h2>");
+                    for (int i = 0; i < choices; i++, ch++){
+                        out.print("<label>Enter choice " + ch + ":  </label>");
+                        out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
+                        out.print("<br>");
+                    }
+                    out.print("<br>");
+                    out.print("<br>");
+                    out.print("<h2> Correct Answers </h2>");
+                    int answers = Integer.parseInt((String) request.getAttribute("answerCount"));
+
+                    for(int i = 0; i < answers; i++){
+                        out.print("<label>Enter correct answer:  </label>");
+                        out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"correctAnswer\"/>");
+                        out.print("<br>");
+                    }
+                %>
+                <input type="submit" id="submitButton">
+            </form>
+        </div>
     </form>
 </div>
 
