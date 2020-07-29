@@ -54,18 +54,6 @@ CREATE TABLE question
     PRIMARY KEY (id),
     FOREIGN KEY (quiz_id) references quiz (id)
 );
-
-CREATE TABLE answer
-(
-    id             int NOT NULL AUTO_INCREMENT,
-    question_id    int NOT NULL,
-    user_answer    VARCHAR(1000),
-    passed_quiz_id int not null,
-    PRIMARY KEY (id),
-    FOREIGN KEY (question_id) references question (id),
-    foreign key (passed_quiz_id) references passed_quiz (id)
-);
-
 CREATE TABLE passed_quiz
 (
     id         int not null AUTO_INCREMENT,
@@ -80,6 +68,19 @@ CREATE TABLE passed_quiz
     FOREIGN KEY (user_id) references user (id)
 );
 
+CREATE TABLE answer
+(
+    id             int NOT NULL AUTO_INCREMENT,
+    question_id    int NOT NULL,
+    user_answer    VARCHAR(1000),
+    passed_quiz_id int not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY (question_id) references question (id),
+    foreign key (passed_quiz_id) references passed_quiz (id)
+);
+
+
+
 CREATE TABLE mail
 (
     id          int         NOT NULL AUTO_INCREMENT,
@@ -90,6 +91,7 @@ CREATE TABLE mail
     foreign key (receiver_id) references user (id),
     PRIMARY KEY (id)
 );
+
 
 create table challenges
 (
