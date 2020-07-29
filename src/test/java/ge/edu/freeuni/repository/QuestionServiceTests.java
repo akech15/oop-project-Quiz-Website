@@ -76,7 +76,7 @@ public class QuestionServiceTests {
         toAddQuiz.setCreationDate(new Date());
         toAddQuiz.setCreator(user);
 
-        quizService.addQuiz(toAddQuiz);
+        quizService.startMakingQuiz(toAddQuiz);
 
         Quiz quiz = quizService.getQuizById(1);
 
@@ -111,7 +111,7 @@ public class QuestionServiceTests {
         toAddQuiz.setCreationDate(new Date());
         toAddQuiz.setCreator(user);
 
-        quizService.addQuiz(toAddQuiz);
+        quizService.startMakingQuiz(toAddQuiz);
 
         Quiz quiz = quizService.getQuizById(1);
 
@@ -128,6 +128,60 @@ public class QuestionServiceTests {
         Question question1 = questionService.getQuestionById(1);
 
         Assertions.assertEquals("who is the president of USA?", question1.getQuestion());
+    }
+
+    @Test
+    public void getAllQuestionsByQuiz(){
+        User toAddUser = new User();
+        toAddUser.setUsername("admin");
+        toAddUser.setPassword("admin");
+
+        userService.addUser(toAddUser);
+
+        User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
+
+        Quiz toAddQuiz = new Quiz();
+        toAddQuiz.setName("starting quiz");
+        toAddQuiz.setDescription("description");
+        toAddQuiz.setCreationDate(new Date());
+        toAddQuiz.setCreator(user);
+
+        quizService.startMakingQuiz(toAddQuiz);
+
+        Quiz quiz = quizService.getQuizById(1);
+
+        Question question = new Question();
+        question.setCorrectAnswerIndex(-1);
+        question.setQuestion("who is the president of USA?");
+        question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question.setQuiz(quiz);
+        question.setType(QuestionType.QUESTION_RESPONSE);
+        question.setCategory(QuestionCategoryType.EROTIC);
+
+        Question question1 = new Question();
+        question1.setCorrectAnswerIndex(-1);
+        question1.setQuestion("who is the president of USA?");
+        question1.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question1.setQuiz(quiz);
+        question1.setType(QuestionType.QUESTION_RESPONSE);
+        question1.setCategory(QuestionCategoryType.EROTIC);
+
+        Question question2 = new Question();
+        question2.setCorrectAnswerIndex(-1);
+        question2.setQuestion("who is the president of USA?");
+        question2.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question2.setQuiz(quiz);
+        question2.setType(QuestionType.QUESTION_RESPONSE);
+        question2.setCategory(QuestionCategoryType.EROTIC);
+
+        questionService.addQuestion(question);
+        questionService.addQuestion(question1);
+        questionService.addQuestion(question2);
+
+        Assertions.assertEquals(3, questionService.getAllQuestionsByQuiz(quiz).size());
+
     }
 
 }

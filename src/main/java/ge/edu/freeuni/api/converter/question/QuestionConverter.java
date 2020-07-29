@@ -1,15 +1,22 @@
 package ge.edu.freeuni.api.converter.question;
 
+import ge.edu.freeuni.api.converter.mail.MailConverter;
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
+import ge.edu.freeuni.api.model.mail.Mail;
 import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
+import ge.edu.freeuni.server.model.mail.MailEntity;
 import ge.edu.freeuni.server.model.question.QuestionEntity;
+import ge.edu.freeuni.server.repository.question.QuestionRepository;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.quiz.QuizRepositoryImpl;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 import ge.edu.freeuni.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class QuestionConverter {
 
@@ -52,6 +59,21 @@ public final class QuestionConverter {
             default:
                 return "pictureResponse";
         }
+    }
+
+    public static List<Question> entityToQuestionList(UserRepository userRepository,
+                                              QuizRepository quizRepository,
+                                              List<QuestionEntity> list){
+
+        List<Question> res = new ArrayList<>();
+
+        for (QuestionEntity questionEntity:
+                list) {
+            res.add(QuestionConverter.entityToQuestion(userRepository, quizRepository, questionEntity));
+        }
+
+        return res;
+
     }
 
 }

@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class QuestionRepositoryImpl implements QuestionRepository {
@@ -55,6 +57,24 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     public QuestionEntity getQuestionById(long id) {
         String query = String.format("select * from question where id = \'%d\';", id);
         return jdbcTemplate.queryForObject(query, questionRawMapper);
+    }
+
+    @Override
+    public List<QuestionEntity> getAllQuestionsByQuizId(long quizId) {
+        String query = String.format(
+                "SELECT id FROM question WHERE quiz_id = \'%d\';",
+                quizId
+        );
+
+        List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
+
+        List<QuestionEntity> res = new ArrayList<>();
+        for (long id:
+             ids) {
+            res.add(this.getQuestionById(id));
+        }
+
+        return res;
     }
 
 }

@@ -55,7 +55,7 @@ public class QuizServiceTests {
 
 
     @Test
-    public void addQuiz() {
+    public void startMakingQuiz() {
 
         User toAdd = new User();
         toAdd.setUsername("admin");
@@ -71,7 +71,7 @@ public class QuizServiceTests {
         quiz.setDescription("description");
         quiz.setCreationDate(new Date());
         quiz.setCreator(user);
-        Assertions.assertTrue(quizService.addQuiz(quiz));
+        Assertions.assertTrue(quizService.startMakingQuiz(quiz));
 
     }
 
@@ -92,21 +92,21 @@ public class QuizServiceTests {
         quiz.setDescription("its quiz");
         quiz.setCreationDate(new Date());
         quiz.setCreator(user);
-        quizService.addQuiz(quiz);
+        quizService.startMakingQuiz(quiz);
 
         Quiz quiz1 = new Quiz();
         quiz1.setName("quiz1");
         quiz1.setDescription("its quiz1");
         quiz1.setCreationDate(new Date());
         quiz1.setCreator(user);
-        quizService.addQuiz(quiz1);
+        quizService.startMakingQuiz(quiz1);
 
         Quiz quiz2 = new Quiz();
         quiz2.setCreator(user);
         quiz2.setName("quiz2");
         quiz2.setDescription("its quiz2");
         quiz2.setCreationDate(new Date());
-        quizService.addQuiz(quiz2);
+        quizService.startMakingQuiz(quiz2);
 
         List<String> list = quizService.getAllQuizNames();
 
@@ -131,14 +131,14 @@ public class QuizServiceTests {
         quiz.setDescription("its quiz");
         quiz.setCreationDate(new Date());
         quiz.setCreator(user);
-        quizService.addQuiz(quiz);
+        quizService.startMakingQuiz(quiz);
 
         Quiz quiz1 = new Quiz();
         quiz1.setName("quiz1");
         quiz1.setDescription("its quiz1");
         quiz1.setCreationDate(new Date());
         quiz1.setCreator(user);
-        quizService.addQuiz(quiz1);
+        quizService.startMakingQuiz(quiz1);
 
         Assertions.assertEquals("quiz1", quizService.getQuizById(2).getName());
     }
@@ -160,14 +160,14 @@ public class QuizServiceTests {
         quiz.setDescription("its quiz");
         quiz.setCreationDate(new Date());
         quiz.setCreator(user);
-        quizService.addQuiz(quiz);
+        quizService.startMakingQuiz(quiz);
 
         Quiz quiz1 = new Quiz();
         quiz1.setName("quiz1");
         quiz1.setDescription("its quiz1");
         quiz1.setCreationDate(new Date());
         quiz1.setCreator(user);
-        quizService.addQuiz(quiz1);
+        quizService.startMakingQuiz(quiz1);
 
         Assertions.assertEquals("quiz1", quizService.getActiveQuiz().getName());
 
@@ -189,14 +189,14 @@ public class QuizServiceTests {
         quiz.setDescription("its quiz");
         quiz.setCreationDate(new Date());
         quiz.setCreator(user);
-        quizService.addQuiz(quiz);
+        quizService.startMakingQuiz(quiz);
 
         Quiz quiz1 = new Quiz();
         quiz1.setName("quiz1");
         quiz1.setDescription("its quiz1");
         quiz1.setCreationDate(new Date());
         quiz1.setCreator(user);
-        quizService.addQuiz(quiz1);
+        quizService.startMakingQuiz(quiz1);
 
         quizService.finishMakingQuiz();
 

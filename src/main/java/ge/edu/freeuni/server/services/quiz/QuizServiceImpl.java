@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class QuizServiceImpl extends QuizService {
+public class QuizServiceImpl implements QuizService {
 
     private Quiz activeQuiz = null;
 
@@ -38,7 +38,7 @@ public class QuizServiceImpl extends QuizService {
     }
 
     @Override
-    public boolean addQuiz(Quiz quiz) {
+    public boolean startMakingQuiz(Quiz quiz) {
 
         quiz.setCreator(authenticationService.getActiveUser());
 

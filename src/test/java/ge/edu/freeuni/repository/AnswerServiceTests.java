@@ -88,7 +88,7 @@ public class AnswerServiceTests {
         toAddQuiz.setCreationDate(new Date());
         toAddQuiz.setCreator(user);
 
-        quizService.addQuiz(toAddQuiz);
+        quizService.startMakingQuiz(toAddQuiz);
 
         Quiz quiz = quizService.getQuizById(1);
 
@@ -140,7 +140,7 @@ public class AnswerServiceTests {
         toAddQuiz.setCreationDate(new Date());
         toAddQuiz.setCreator(user);
 
-        quizService.addQuiz(toAddQuiz);
+        quizService.startMakingQuiz(toAddQuiz);
 
         Quiz quiz = quizService.getQuizById(1);
 
