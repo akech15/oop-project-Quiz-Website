@@ -7,9 +7,11 @@ import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.repository.mail.MailRepositoryImpl;
 import ge.edu.freeuni.server.repository.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MailServiceImpl implements MailService {
 
     @Autowired

@@ -54,18 +54,19 @@ public class MailRepositoryImpl implements MailRepository {
 
     @Override
     public void removeMail(MailEntity mail) {
-        String query = String.format("REMOVE FROM mail WHERE id = \'%d\'", mail.getId());
+        String query = String.format("delete FROM mail WHERE id = \'%d\'", mail.getId());
         jdbcTemplate.update(query);
     }
 
     @Override
     public List<MailEntity> searchMailsByReceiver(UserEntity receiver) {
         String query = String.format(
-                "SELECT * FROM mail WHERE receiver_id = \'%d\'",
+                "SELECT id FROM mail WHERE receiver_id = \'%d\'",
                 receiver.getId()
         );
 
-        List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
+        List<Long> ids = new ArrayList<>();
+        ids.addAll(jdbcTemplate.queryForList(query, Long.class));
 
         List<MailEntity> mails = new ArrayList<>();
 
@@ -80,16 +81,17 @@ public class MailRepositoryImpl implements MailRepository {
     @Override
     public List<MailEntity> searchMailsBySender(UserEntity sender) {
         String query = String.format(
-                "SELECT * FROM mail WHERE sender_id = \'%d\'",
+                "SELECT id FROM mail WHERE sender_id = \'%d\'",
                 sender.getId()
         );
 
-        List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
+        List<Long> MailIds = new ArrayList<>();
+        MailIds.addAll(jdbcTemplate.queryForList(query, Long.class));
 
         List<MailEntity> mails = new ArrayList<>();
 
         for (long id :
-                ids) {
+                MailIds) {
             mails.add(this.getMailById(id));
         }
 
