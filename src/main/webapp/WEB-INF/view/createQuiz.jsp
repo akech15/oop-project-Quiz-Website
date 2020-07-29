@@ -32,7 +32,7 @@
             <h1>Create Quiz</h1>
         </div>
         <div class="login-item">
-            <form action="${pageContext.request.contextPath}/login" method="post">
+            <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
                 <label for = "quizName">Quiz Name:</label>
                 <input type = "text" id = "quizName" name = "quizName" required placeholder="Enter Quiz Name"><br>
 

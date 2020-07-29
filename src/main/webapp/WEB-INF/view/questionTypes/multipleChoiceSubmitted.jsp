@@ -38,18 +38,26 @@
 
         <div>
             <form action="${pageContext.request.contextPath}/multipleChoiceSubmitted" method="post">
-                <label>Enter question:</label>
-                <h2>--- ${choiceCount} ---</h2>
-                <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
-                <label for = "choiceCount">Enter number of choices: </label>
-                <input type="text" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>
-                <input type = "submit" id = "submitButton">
+                <div id="holder"> </div>
+<%--                <label>Enter question:</label>--%>
+<%--                <h2>--- ${choiceCount} ---</h2>--%>
+<%--                <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>--%>
+<%--                <label for = "choiceCount">Enter number of choices: </label>--%>
+<%--                <input type="text" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>--%>
+<%--                <input type = "submit" id = "submitButton">--%>
             </form>
         </div>
     </form>
 </div>
 
 <script>
+    let parent = document.getElementById('holder');
+    let elem = document.createElement("INPUT");
+    elem.setAttribute("type", "text");
+    for(let i = 0; i < 5; i++){
+        document.body.appendChild(x);
+    }
+
     window.onclick = function(event) {
         if (event.target == document.getElementById("questionType")){
             if(document.getElementById("questionType").value == "Multiple Choice") {

@@ -40,7 +40,7 @@
             <label>Enter question:</label>
             <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
             <label for = "choiceCount">Enter number of choices: </label>
-            <input type="text" name="choiceCount"  placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>
+            <input type="number" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/>
             <input class="btn" type="submit" value="Submit" id="submitButton">
         </form>
     </div>

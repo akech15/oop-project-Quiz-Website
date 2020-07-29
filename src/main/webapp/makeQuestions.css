@@ -22,7 +22,7 @@
 }    .select select {
          font-family: 'Arial';
          display: inline-block;
-         width: 100%;
+         width: 200px;
          cursor: pointer;
          padding: 11px 11px;
          outline: 0;
@@ -49,7 +49,7 @@
 .select_arrow {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 1350px;
     width: 0px;
     height: 0px;
     border: solid #8e8a8a;
