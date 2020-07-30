@@ -17,5 +17,5 @@ public class QuestionEntity {
     private String type;
     private String answers;
     private String pictureURL;
-
+    private String correctAnswer;
 }

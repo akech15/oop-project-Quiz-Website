@@ -35,8 +35,8 @@
 
         <div class="select_arrow">
         </div><br>
-
-        <form action="${pageContext.request.contextPath}/multipleChoice" method="post">
+    </form>
+        <form action="${pageContext.request.contextPath}/addFillInBlankQuestion" method="post">
             <label>Enter first part of the question:</label>
             <textarea id="firstPart" name = "firstPart" required placeholder = "Enter text" cols = 60></textarea><br>
             <label>Enter second part of the question:</label>

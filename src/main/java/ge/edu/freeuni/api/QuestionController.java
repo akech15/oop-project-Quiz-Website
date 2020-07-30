@@ -39,68 +39,68 @@ public class QuestionController {
         return QuestionConverter.getJspFromType(type);
     }
 
-    @RequestMapping("/addQuestion/questionResponse")
-    public String addQuestionResponse(Map<String, Object> model) {
-        addQuestionResponseAndFillInTheBlank(model);
-        return "getType";
-    }
+//    @RequestMapping("/addQuestion/questionResponse")
+//    public String addQuestionResponse(Map<String, Object> model) {
+//        addQuestionResponseAndFillInTheBlank(model);
+//        return "getType";
+//    }
+//
+//    @RequestMapping("/addQuestion/fillInTheBlank")
+//    public String addFillInTheBlank(Map<String, Object> model) {
+//        addQuestionResponseAndFillInTheBlank(model);
+//        return "getType";
+//    }
 
-    @RequestMapping("/addQuestion/fillInTheBlank")
-    public String addFillInTheBlank(Map<String, Object> model) {
-        addQuestionResponseAndFillInTheBlank(model);
-        return "getType";
-    }
-
-    @RequestMapping("/addQuestion/multipleChoice")
-    public String addMultipleChoice(Map<String, Object> model) {
-        String question = (String) model.get("question");
-
-        String answer1 = (String) model.get("answer #1");
-        String answer2 = (String) model.get("answer #2");
-        String answer3 = (String) model.get("answer #3");
-        String answer4 = (String) model.get("answer #4");
-
-        String category = (String) model.get("category");
-        long correctAnswerIndex = (Long) model.get("correct answer category");
-
-        questionService.addQuestion(
-                new Question(
-                        -1,
-                        quizService.getActiveQuiz(),
-                        question,
-                        QuestionType.MULTIPLE_CHOICE,
-                        correctAnswerIndex,
-                        new ArrayList<>(Arrays.asList(answer1, answer2, answer3, answer4)),
-                        Enum.valueOf(QuestionCategoryType.class, category),
-                        null
-                )
-        );
-
-        return "getType";
-    }
-
-    @RequestMapping("/addQuestion/pictureResponse")
-    public String addPictureResponse(Map<String, Object> model) {
-        String question = (String) model.get("question");
-        String answer = (String) model.get("answer");
-        String category = (String) model.get("category");
-        String pictureURL = (String) model.get("picture url");
-
-        questionService.addQuestion(
-                new Question(
-                        -1,
-                        quizService.getActiveQuiz(),
-                        question,
-                        QuestionType.PICTURE_RESPONSE,
-                        -1,
-                        StringUtils.stringToList(answer, ','),
-                        Enum.valueOf(QuestionCategoryType.class, category),
-                        pictureURL
-                )
-        );
-
-        return "getType";
-    }
+//    @RequestMapping("/addQuestion/multipleChoice")
+//    public String addMultipleChoice(Map<String, Object> model) {
+//        String question = (String) model.get("question");
+//
+//        String answer1 = (String) model.get("answer #1");
+//        String answer2 = (String) model.get("answer #2");
+//        String answer3 = (String) model.get("answer #3");
+//        String answer4 = (String) model.get("answer #4");
+//
+//        String category = (String) model.get("category");
+//        long correctAnswerIndex = (Long) model.get("correct answer category");
+//
+//        questionService.addQuestion(
+//                new Question(
+//                        -1,
+//                        quizService.getActiveQuiz(),
+//                        question,
+//                        QuestionType.MULTIPLE_CHOICE,
+//                        correctAnswerIndex,
+//                        new ArrayList<>(Arrays.asList(answer1, answer2, answer3, answer4)),
+//                        Enum.valueOf(QuestionCategoryType.class, category),
+//                        null
+//                )
+//        );
+//
+//        return "getType";
+//    }
+//
+//    @RequestMapping("/addQuestion/pictureResponse")
+//    public String addPictureResponse(Map<String, Object> model) {
+//        String question = (String) model.get("question");
+//        String answer = (String) model.get("answer");
+//        String category = (String) model.get("category");
+//        String pictureURL = (String) model.get("picture url");
+//
+//        questionService.addQuestion(
+//                new Question(
+//                        -1,
+//                        quizService.getActiveQuiz(),
+//                        question,
+//                        QuestionType.PICTURE_RESPONSE,
+//                        -1,
+//                        StringUtils.stringToList(answer, ','),
+//                        Enum.valueOf(QuestionCategoryType.class, category),
+//                        pictureURL
+//                )
+//        );
+//
+//        return "getType";
+//    }
 
     @RequestMapping("/addQuestion/finish")
     public String finishQuizMaking(Map<String, Object> model) {
@@ -108,25 +108,25 @@ public class QuestionController {
         model.put("quizNames", quizService.getAllQuizNames());
         return "userPage";
     }
-
-    private void addQuestionResponseAndFillInTheBlank(Map<String, Object> model) {
-        String question = (String) model.get("question");
-        String answer = (String) model.get("answer");
-        String category = (String) model.get("category");
-
-        questionService.addQuestion(
-                new Question(
-                        -1,
-                        quizService.getActiveQuiz(),
-                        question,
-                        QuestionType.QUESTION_RESPONSE,
-                        -1,
-                        StringUtils.stringToList(answer, ','),
-                        Enum.valueOf(QuestionCategoryType.class, category),
-                        null
-                )
-        );
-    }
+//
+//    private void addQuestionResponseAndFillInTheBlank(Map<String, Object> model) {
+//        String question = (String) model.get("question");
+//        String answer = (String) model.get("answer");
+//        String category = (String) model.get("category");
+//
+//        questionService.addQuestion(
+//                new Question(
+//                        -1,
+//                        quizService.getActiveQuiz(),
+//                        question,
+//                        QuestionType.QUESTION_RESPONSE,
+//                        -1,
+//                        StringUtils.stringToList(answer, ','),
+//                        Enum.valueOf(QuestionCategoryType.class, category),
+//                        null
+//                )
+//        );
+//    }
 
 
     @RequestMapping("/addMultipleChoice")
@@ -146,8 +146,27 @@ public class QuestionController {
         addedQuestion.setQuestion(question);
         addedQuestion.setAnswers(answers);
         addedQuestion.setType(QuestionType.MULTIPLE_CHOICE);
+        addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(correctAnswer.charAt(0) - 'a');
         questionService.addQuestion(addedQuestion);
+        return "makeQuestions";
+    }
+
+    @RequestMapping("/addFillInBlankQuestion")
+    public String addFillInBlankQuestion(@RequestParam String firstPart, @RequestParam String secondPart,
+                                         @RequestParam String blank,
+                                         Map<String, Object> model){
+
+        String question = firstPart + "_" + secondPart;
+        String correctAnswer = blank;
+
+        Question toAdd = new Question();
+        toAdd.setQuestion(question);
+        toAdd.setType(QuestionType.FILL_IN_THE_BLANK);
+        toAdd.setCorrectAnswer(correctAnswer);
+        toAdd.setCorrectAnswerIndex(-1);
+        toAdd.setAnswers(new ArrayList<>());
+        questionService.addQuestion(toAdd);
 
         return "makeQuestions";
     }

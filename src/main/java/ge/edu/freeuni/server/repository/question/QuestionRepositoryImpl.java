@@ -33,14 +33,15 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public boolean addQuestion(QuestionEntity questionEntity) {
         String query = String.format("INSERT INTO question (quiz_id, category, question, type, " +
-                        "correct_answer, correct_answer_index, picture_url)" +
-                        "values (\'%d\', \'%s\', \'%s\', \'%s\', \'%s\', \'%d\', \'%s\');",
+                        "choices, correct_answer, correct_answer_index, picture_url)" +
+                        "values (\'%d\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%d\', \'%s\');",
 
                 questionEntity.getQuizId(),
                 questionEntity.getCategory(),
                 questionEntity.getQuestion(),
                 questionEntity.getType(),
                 questionEntity.getAnswers(),
+                questionEntity.getCorrectAnswer(),
                 questionEntity.getCorrectAnswerIndex(),
                 questionEntity.getPictureURL());
         System.out.println("aqamde movedi dzmao");

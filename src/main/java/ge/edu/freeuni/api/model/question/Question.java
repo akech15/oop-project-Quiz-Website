@@ -20,5 +20,14 @@ public class Question {
     private List<String> answers;
     private QuestionCategoryType category;
     private String pictureURL;
+    private String correctAnswer;
 
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
 }

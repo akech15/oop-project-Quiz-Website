@@ -38,6 +38,7 @@ public final class QuestionConverter {
                 .quizId(question.getQuiz().getId())
                 .type(String.valueOf(question.getType()))
                 .category(String.valueOf(question.getCategory()))
+                .correctAnswer(question.getCorrectAnswer())
                 .answers(StringUtils.listToString(question.getAnswers(), ','))
                 .pictureURL(question.getPictureURL())
                 .build();
