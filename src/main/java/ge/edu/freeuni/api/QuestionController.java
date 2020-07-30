@@ -279,4 +279,19 @@ public class QuestionController {
         }
         return "playQuiz/playFillInBlank";
     }
+
+    @RequestMapping("/playMultipleAnswers/{quiz_id}/{index}")
+    public String playMultipleAnswers(@PathVariable Long quiz_id, @PathVariable Integer index,
+                                  Map<String, Object> model){
+        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
+
+        Integer indx = index;
+        if (index < questions.size()) {
+            Question question = questions.get(index);
+            model.put("question", question);
+            indx += 1;
+            model.put("index", indx);
+        }
+        return "playQuiz/playMultipleAnswers";
+    }
 }

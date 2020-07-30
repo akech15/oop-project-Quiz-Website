@@ -10,7 +10,7 @@
        <%
            Long quiz_id = (Long) request.getAttribute("quiz_id");
            Integer index = (Integer)request.getAttribute("index");
-           out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/playFillInBlank/%d/%d\">HELL YEAH</a></button></p>", quiz_id, index));
+           out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/playMultipleAnswers/%d/%d\">HELL YEAH</a></button></p>", quiz_id, index));
        %>
    </div>
 
