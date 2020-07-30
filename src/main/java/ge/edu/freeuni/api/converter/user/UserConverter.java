@@ -2,7 +2,6 @@ package ge.edu.freeuni.api.converter.user;
 
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.user.UserEntity;
-import jdk.internal.net.http.common.Pair;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,14 +42,14 @@ public class UserConverter {
 
     }
 
-	public static List<Pair<User,Long>> entityToUserPairList(List<Pair<UserEntity, Long>> topRatedUsersByQuizId) {
-	    List<Pair<User, Long> > res = new ArrayList<>();
-
-        for (Pair<UserEntity, Long> pair:
-             topRatedUsersByQuizId) {
-            res.add(new Pair<>(UserConverter.entityToUser(pair.first), pair.second));
-        }
-
-        return res;
-    }
+//	public static List<Pair<User,Long>> entityToUserPairList(List<Pair<UserEntity, Long>> topRatedUsersByQuizId) {
+//	    List<Pair<User, Long> > res = new ArrayList<>();
+//
+//        for (Pair<UserEntity, Long> pair:
+//             topRatedUsersByQuizId) {
+//            res.add(new Pair<>(UserConverter.entityToUser(pair.first), pair.second));
+//        }
+//
+//        return res;
+//    }
 }
