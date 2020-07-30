@@ -66,7 +66,7 @@
             } else if(document.getElementById("questionType").value == "Fill In Blank") {
                 window.location.href = '/fillBlank';
             } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
-                window.location.href = '/fillMultipleBLank';
+                window.location.href = '/fillMultipleBlanks';
             } else if(document.getElementById("questionType").value == "Image Answers") {
                 window.location.href = '/imageAnswers';
             } else if(document.getElementById("questionType").value == "Matching") {

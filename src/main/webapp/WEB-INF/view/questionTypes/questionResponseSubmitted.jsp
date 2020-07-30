@@ -73,7 +73,7 @@
             } else if(document.getElementById("questionType").value == "Fill In Blank") {
                 window.location.href = '/fillBlank';
             } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
-                window.location.href = '/fillMultipleBLank';
+                window.location.href = '/fillMultipleBlanks';
             } else if(document.getElementById("questionType").value == "Multiple Answers") {
                 window.location.href = '/multipleAnswers';
             } else if(document.getElementById("questionType").value == "Image Answers") {

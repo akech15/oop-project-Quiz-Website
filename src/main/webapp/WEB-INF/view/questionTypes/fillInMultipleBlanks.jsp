@@ -70,6 +70,8 @@
                 window.location.href = '/matching';
             } else if(document.getElementById("questionType").value == "Question/Response") {
                 window.location.href = '/questionResponse';
+            } else if(document.getElementById("questionType").value == "Multiple Answers") {
+                window.location.href = '/multipleAnswers';
             }
         }
         // else if(event.target == document.getElementById("about")){
