@@ -14,7 +14,6 @@
 
 <div class="bgimg w3-display-container w3-text-white">
 
-
     <div class="w3-display-topright w3-container w3-xlarge">
         <p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
         <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>
@@ -37,14 +36,18 @@
         <div class="select_arrow">
         </div><br>
     </form>
-    <form action="${pageContext.request.contextPath}/multipleAnswersSubmitted" method="post">
+    <form action="${pageContext.request.contextPath}/addQuestionResponse" method="post">
+        <label>Enter question:</label>
+        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
+
         <%
             int choices = Integer.parseInt((String) request.getAttribute("choiceCount"));
             char ch = 'a';
+            int id = 1;
             out.print("<h2> Enter possible answers </h2>");
-            for (int i = 0; i < choices; i++, ch++){
+            for (int i = 0; i < choices; i++, ch++, id++){
                 out.print("<label>Enter possible answer:  </label>");
-                out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
+                out.print("<input type=\"text\" name=\"choice" + id + "\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
                 out.print("<br>");
             }
         %>

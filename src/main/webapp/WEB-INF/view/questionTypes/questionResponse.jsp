@@ -38,8 +38,6 @@
         </div><br>
     </form>
     <form action="${pageContext.request.contextPath}/questionResponseSubmitted" method="post">
-        <label>Enter question:</label>
-        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
         <label for = "choiceCount">Enter number of possible answers: </label>
         <input type="number" name="choiceCount" required placeholder="1-5" id = "choiceCount" min = "1" max = "5"/>
         <input type="submit" value = "Add question" id="submitButton">

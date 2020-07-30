@@ -171,4 +171,27 @@ public class QuestionController {
         return "makeQuestions";
     }
 
+    @RequestMapping("/addQuestionResponse")
+    public String addQuestionResponse(@RequestParam Map<String, String> params, Map<String, Object> model){
+        String question = params.get("question");
+        List<String> answers = new ArrayList<>();
+
+        for(int i = 0; i < params.size() - 1; i++){
+            int toAppend = i + 1;
+            String toGet = "choice"+toAppend;
+            String toAdd = params.get(toGet);
+            answers.add(toAdd);
+        }
+        System.out.println(question);
+        Question addedQuestion = new Question();
+        addedQuestion.setQuestion(question);
+        addedQuestion.setAnswers(answers);
+        addedQuestion.setType(QuestionType.QUESTION_RESPONSE);
+        addedQuestion.setCorrectAnswer("");
+        addedQuestion.setCorrectAnswerIndex(-1);
+        questionService.addQuestion(addedQuestion);
+
+
+        return "makeQuestions";
+    }
 }
