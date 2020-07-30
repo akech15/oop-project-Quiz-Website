@@ -261,14 +261,13 @@ public class QuestionController {
         }
 
 
-
         for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
             String toGet = "choice" + toAppend;
             String toAdd = params.get(toGet);
             if (toAdd != null){
                 answers.add(toAdd);
-                question += toAdd + ",";
+                question += toAdd + "_";
             }
         }
 
@@ -278,6 +277,31 @@ public class QuestionController {
         addedQuestion.setType(QuestionType.MULTIPLE_BLANKS);
         addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(-1);
+        questionService.addQuestion(addedQuestion);
+
+        return "makeQuestions";
+    }
+
+    @RequestMapping("/addImageAnswer")
+    public String addImageAnswer(@RequestParam Map<String, String> params, Map<String, Object> model) {
+        String question = params.get("question");
+        List<String> answers = new ArrayList<>();
+
+        for (int i = 0; i < params.size() - 1; i++) {
+            int toAppend = i + 1;
+            String toGet = "choice" + toAppend;
+            String toAdd = params.get(toGet);
+            answers.add(toAdd);
+        }
+        System.out.println(question);
+        String imageURL = params.get("imageURL");
+        Question addedQuestion = new Question();
+        addedQuestion.setQuestion(question);
+        addedQuestion.setAnswers(answers);
+        addedQuestion.setType(QuestionType.PICTURE_RESPONSE);
+        addedQuestion.setCorrectAnswer("");
+        addedQuestion.setCorrectAnswerIndex(-1);
+        addedQuestion.setPictureURL(imageURL);
         questionService.addQuestion(addedQuestion);
 
 

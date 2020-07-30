@@ -36,7 +36,7 @@
         <div class="select_arrow">
         </div><br>
     </form>
-    <form action="${pageContext.request.contextPath}/addQuestionResponse" method="post">
+    <form action="${pageContext.request.contextPath}/addImageAnswer" method="post">
         <label>Enter question:</label>
         <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
         <label>Enter image URL:</label>
