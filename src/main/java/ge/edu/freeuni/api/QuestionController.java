@@ -194,4 +194,38 @@ public class QuestionController {
 
         return "makeQuestions";
     }
+
+    @RequestMapping("/addMultipleAnswers")
+    public String addMultipleAnswers(@RequestParam Map<String, String> params, Map<String, Object> model){
+        String question = params.get("question");
+        List<String> answers = new ArrayList<>();
+        String correctAnswer = "";
+        for(int i = 0; i < params.size() - 1; i++){
+            int toAppend = i + 1;
+            String toGet = "answer"+toAppend;
+            String toAdd = params.get(toGet);
+            if(toAdd != null)
+                correctAnswer += toAdd + ",";
+        }
+
+        for(int i = 0; i < params.size() - 1; i++){
+            int toAppend = i + 1;
+            String toGet = "choice"+toAppend;
+            String toAdd = params.get(toGet);
+            if(toAdd != null)
+                answers.add(toAdd);
+        }
+        System.out.println("qvesheni " + question);
+        System.out.println("koreqki" + correctAnswer);
+        Question addedQuestion = new Question();
+        addedQuestion.setQuestion(question);
+        addedQuestion.setAnswers(answers);
+        addedQuestion.setType(QuestionType.QUESTION_RESPONSE);
+        addedQuestion.setCorrectAnswer(correctAnswer);
+        addedQuestion.setCorrectAnswerIndex(-1);
+        questionService.addQuestion(addedQuestion);
+
+
+        return "makeQuestions";
+    }
 }

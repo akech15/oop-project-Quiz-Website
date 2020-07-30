@@ -14,7 +14,6 @@
 
 <div class="bgimg w3-display-container w3-text-white">
 
-
     <div class="w3-display-topright w3-container w3-xlarge">
         <p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
         <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>
@@ -37,20 +36,30 @@
         <div class="select_arrow">
         </div><br>
     </form>
-    <label>Enter choices and tick correct answer(s) </label><br>
-    <%
-        int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
-        char ch = 'a';
-        int id = 1;
-        for (int i = 0; i < choice; i++, ch++){
-            out.print("<label>Enter choice " + ch + ":  </label>");
-            out.print("<input type=\"text\" name=\"choice\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
-            out.print("      ");
-            out.print("<input type=\"checkbox\" id=\"trueCheckBox" + id +"\">");
+    <form action="${pageContext.request.contextPath}/addMultipleAnswers" method="post">
+        <label>Enter question:</label>
+        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
+        <label>Enter choices: </label><br>
+        <%
+            int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
+            int answerCount = Integer.parseInt((String) request.getAttribute("answerCount"));
+            char ch = 'a';
+            int id = 1;
+            for (int i = 0; i < choice; i++, ch++, id++){
+                out.print("<label>Enter choice " + ch + ":  </label>");
+                out.print("<input type=\"text\" name=\"choice" + id + "\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
+                out.print("<br>");
+            }
             out.print("<br>");
-        }
-    %>
-    <input type="submit" value = "Add question" id="submitButton">
+            out.print("<br>");
+            id = 1;
+            for (int i = 0; i < answerCount; i++, ch++, id++){
+                out.print("<label>Enter correct answer:  </label>");
+                out.print("<input type=\"text\" name=\"answer" + id + "\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
+                out.print("<br>");
+            }
+        %>
+        <input type="submit" value = "Add question" id="submitButton">
     </form>
 
     <form action="${pageContext.request.contextPath}/makeQuestions" method="post">

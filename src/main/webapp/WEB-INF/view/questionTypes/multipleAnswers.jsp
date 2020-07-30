@@ -39,12 +39,10 @@
     </form>
 
     <form action="${pageContext.request.contextPath}/multipleAnswersSubmitted" method="post">
-        <label>Enter question:</label>
-        <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
         <label for = "choiceCount">Enter number of choices: </label>
         <input type="number" name="choiceCount" required placeholder="3-7" id = "choiceCount" min = "3" max = "7"/><br>
         <label for = "choiceCount">Enter number of correct answers: </label>
-        <input type="number" name="answerCount" required placeholder="3-7" id = "answerCount" min = "3" max = "7"/>
+        <input type="number" name="answerCount" required placeholder="1-7" id = "answerCount" min = "1" max = "7"/>
         <input type="submit" value = "Add question" id="submitButton">
     </form>
 
