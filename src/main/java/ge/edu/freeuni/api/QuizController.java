@@ -37,8 +37,11 @@ public class QuizController {
         return "preQuizPage";
     }
 
-    @RequestMapping("/quizDescriptionPage/{quizName}")
-    public String aboutQuiz(@PathVariable String quizName, Map<String, Object> model) {
+    @RequestMapping("/quizDescriptionPage/{quiz_id}")
+    public String aboutQuiz(@PathVariable Long quiz_id, Map<String, Object> model) {
+        Quiz toAdd = quizService.getQuizById(quiz_id);
+        model.put("quiz",toAdd);
+
         return "quizDescription";
     }
 

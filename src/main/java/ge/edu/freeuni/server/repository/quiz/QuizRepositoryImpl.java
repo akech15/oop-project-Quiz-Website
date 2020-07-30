@@ -44,6 +44,19 @@ public class QuizRepositoryImpl implements QuizRepository {
     }
 
     @Override
+    public List<QuizEntity> getAllQuizzes() {
+        List<Long> result = new ArrayList<>();
+        String query = "select id from quiz;";
+        result.addAll(jdbcTemplate.queryForList(query, Long.class));
+        List<QuizEntity> res = new ArrayList<>();
+        for(long id : result){
+            res.add(this.getQuizById(id));
+        }
+
+        return res;
+    }
+
+    @Override
     public boolean addQuiz(QuizEntity quizEntity) {
         Date date = quizEntity.getCreationDate();
         java.sql.Date dateDB = DateUtils.getDbDate(date);

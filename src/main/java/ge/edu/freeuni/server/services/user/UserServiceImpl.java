@@ -15,7 +15,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-
     @Override
     public boolean addUser(User user) {
         return userRepository.addUserToDB(UserConverter.userToEntity(user));

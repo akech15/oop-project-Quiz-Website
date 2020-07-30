@@ -14,4 +14,5 @@ public interface QuizRepository {
 
     QuizEntity getQuizByIdentifiers(QuizEntity quizToEntity);
 
+    public List<QuizEntity> getAllQuizzes();
 }

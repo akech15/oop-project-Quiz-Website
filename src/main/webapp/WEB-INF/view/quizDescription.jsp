@@ -1,6 +1,9 @@
 <%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
 <%@ page import="ge.edu.freeuni.api.model.user.User" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="ge.edu.freeuni.server.services.quiz.QuizServiceImpl" %>
+<%@ page import="ge.edu.freeuni.server.services.quiz.QuizService" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %><%--
   Created by IntelliJ IDEA.
   User: m.ormotsadze
   Date: 7/26/2020
@@ -13,7 +16,7 @@
     <title>ABOUT QUIZ</title>
     <%
         Quiz quiz = (Quiz) request.getAttribute("quiz");
-        User creator = (User) request.getAttribute("creator");
+        User creator = quiz.getCreator();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date = formatter.format(quiz.getCreationDate());
     %>

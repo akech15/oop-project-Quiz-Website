@@ -6,6 +6,9 @@ import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public final class QuizConverter {
 
@@ -29,5 +32,15 @@ public final class QuizConverter {
                 .creationDate(quiz.getCreationDate())
                 .description(quiz.getDescription())
                 .build();
+    }
+
+    public static List<Quiz> entityToQuizList(UserRepository userRepository,
+                                              List<QuizEntity> allQuizzes) {
+        List<Quiz> res= new ArrayList<>();
+        for (QuizEntity quizEntity:
+             allQuizzes) {
+            res.add(QuizConverter.entityToQuiz(userRepository, quizEntity));
+        }
+        return res;
     }
 }

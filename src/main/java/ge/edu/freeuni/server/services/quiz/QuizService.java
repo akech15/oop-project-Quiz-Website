@@ -17,4 +17,6 @@ public interface QuizService {
     Quiz getActiveQuiz();
 
     void finishMakingQuiz();
+
+    List<Quiz> getAllQuizzes();
 }

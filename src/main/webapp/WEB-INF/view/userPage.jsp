@@ -1,4 +1,6 @@
 <%@ page import="java.util.List" %>
+<%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
+<%@ page import="ge.edu.freeuni.api.model.user.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +35,16 @@
         <div class="column">
             <h2>list of available quizzes</h2>
             <%
-                List<String> quizNames = (List<String>) request.getAttribute("quizNames");
-                for (String quizName : quizNames) {
-                    out.print(String.format("<a href=\"/quizDescriptionPage/%s\">%s</a><br>", quizName, quizName));
+                System.out.println("ZOMA manamde ");
+                List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
+                System.out.println("ZOMA " + quizzes.size());
+                for (Quiz quiz : quizzes) {
+                    String quizName = quiz.getName();
+                    User creator = quiz.getCreator();
+                    String creatorName = creator.getUsername();
+                    String toShow = quizName + " --- " + creatorName;
+                    long quiz_id = quiz.getId();
+                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quiz_id, toShow));
 
                 }
             %>

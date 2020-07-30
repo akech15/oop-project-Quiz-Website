@@ -19,6 +19,7 @@ public class UserConverter {
     }
 
     public static UserEntity userToEntity(User user) {
+
         return UserEntity.builder()
                 .username(user.getUsername())
                 .id(user.getId())

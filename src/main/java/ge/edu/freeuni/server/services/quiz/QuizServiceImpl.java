@@ -50,7 +50,6 @@ public class QuizServiceImpl implements QuizService {
 
         System.out.println("3LI MORCHA");
         setActiveQuiz(this.getQuizByIdentifiers(quiz));
-        System.out.println("MORCHA STARTI %%%%%%%%%%");
         return addQuiz;
     }
 
@@ -72,6 +71,11 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void finishMakingQuiz() {
         activeQuiz = null;
+    }
+
+    @Override
+    public List<Quiz> getAllQuizzes() {
+        return QuizConverter.entityToQuizList(userRepository, quizRepository.getAllQuizzes());
     }
 
 }
