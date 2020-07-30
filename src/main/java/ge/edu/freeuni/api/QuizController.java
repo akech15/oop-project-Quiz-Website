@@ -134,6 +134,18 @@ public class QuizController {
         return "questionTypes/fillInMultipleBlanksSubmitted";
     }
 
+    @RequestMapping("/imageAnswers")
+    public String imageAnswers(Map<String, Object> model){
+
+        return "questionTypes/imageAnswers";
+    }
+
+    @RequestMapping("/imageAnswersSubmitted")
+    public String imageAnswersSubmitted(@RequestParam String choiceCount, Map<String, Object> model){
+        model.put("choiceCount", choiceCount);
+
+        return "questionTypes/imageAnswersSubmitted";
+    }
 
     @RequestMapping("/matching")
     public String matching(Map<String, Object> model) {
