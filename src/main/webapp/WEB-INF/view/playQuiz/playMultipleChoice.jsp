@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/makeQuestions.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/multipleChoice.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/multipleChoiceSubmitted.css"/>
-    <title>Make Questions</title>
+    <title>Play Quiz</title>
 
 </head>
 <body>
