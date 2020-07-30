@@ -215,16 +215,35 @@ public class QuestionController {
             if(toAdd != null)
                 answers.add(toAdd);
         }
-        System.out.println("qvesheni " + question);
-        System.out.println("koreqki" + correctAnswer);
+
         Question addedQuestion = new Question();
         addedQuestion.setQuestion(question);
         addedQuestion.setAnswers(answers);
-        addedQuestion.setType(QuestionType.QUESTION_RESPONSE);
+        addedQuestion.setType(QuestionType.MULTIPLE_ANSWERS);
         addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(-1);
         questionService.addQuestion(addedQuestion);
 
+
+        return "makeQuestions";
+    }
+
+    @RequestMapping("/addTrueFalse")
+    public String addTrueFalse(@RequestParam Map<String, String> params, Map<String, Object> model){
+        String question = params.get("question");
+        boolean isTrue = (params.get("trueCheckBox") != null);
+        String correctAnswer;
+        if(isTrue)
+            correctAnswer = "True";
+        else
+            correctAnswer = "False";
+        Question addedQuestion = new Question();
+        addedQuestion.setQuestion(question);
+        addedQuestion.setAnswers(new ArrayList<>());
+        addedQuestion.setType(QuestionType.TRUE_FALSE);
+        addedQuestion.setCorrectAnswer(correctAnswer);
+        addedQuestion.setCorrectAnswerIndex(-1);
+        questionService.addQuestion(addedQuestion);
 
         return "makeQuestions";
     }

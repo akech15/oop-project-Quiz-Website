@@ -36,11 +36,11 @@
         <div class="select_arrow">
         </div><br>
     </form>
-    <form action="${pageContext.request.contextPath}/multipleChoice" method="post">
+    <form action="${pageContext.request.contextPath}/addTrueFalse" method="post">
         <label>Enter question:</label>
         <textarea id="questionBox" name = "question" required placeholder = "Ask anything" cols = 60></textarea><br>
         <label>Tick correct answer:</label><br>
-        True <input type="checkbox" id="trueCheckBox">
+        True <input type="checkbox" name = "trueCheckBox" id="trueCheckBox">
         False <input type="checkbox" id="falseCheckBox"><br>
         <input type="submit" value = "Add question" id="submitButton">
     </form>
