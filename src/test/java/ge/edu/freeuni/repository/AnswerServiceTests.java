@@ -3,7 +3,6 @@ package ge.edu.freeuni.repository;
 import ge.edu.freeuni.api.model.answer.Answer;
 import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 import ge.edu.freeuni.api.model.question.Question;
-import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
@@ -95,7 +94,7 @@ public class AnswerServiceTests {
         Question questionToAdd = new Question();
         questionToAdd.setCorrectAnswerIndex(-1);
         questionToAdd.setQuestion("who is the president of USA?");
-        questionToAdd.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        questionToAdd.setChoices(Arrays.asList("Donald Trump", "Trump"));
         questionToAdd.setQuiz(quiz);
         questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
 
@@ -146,7 +145,7 @@ public class AnswerServiceTests {
         Question questionToAdd = new Question();
         questionToAdd.setCorrectAnswerIndex(-1);
         questionToAdd.setQuestion("who is the president of USA?");
-        questionToAdd.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        questionToAdd.setChoices(Arrays.asList("Donald Trump", "Trump"));
         questionToAdd.setQuiz(quiz);
         questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
 

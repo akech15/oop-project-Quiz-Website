@@ -14,7 +14,7 @@ public class QuestionEntity {
     private long correctAnswerIndex;
     private String question;
     private String type;
-    private String answers;
+    private String choices;
     private String pictureURL;
     private String correctAnswer;
 }

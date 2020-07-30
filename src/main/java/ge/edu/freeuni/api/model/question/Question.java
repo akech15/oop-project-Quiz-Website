@@ -17,7 +17,7 @@ public class Question {
     private String question;
     private QuestionType type;
     private long correctAnswerIndex;
-    private List<String> answers;
+    private List<String> choices;
     private String pictureURL;
     private String correctAnswer;
 

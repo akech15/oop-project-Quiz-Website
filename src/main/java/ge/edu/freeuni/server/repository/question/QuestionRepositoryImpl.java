@@ -23,7 +23,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         entity1.setQuizId(result.getLong("quiz_id"));
         entity1.setQuestion(result.getString("question"));
         entity1.setType(result.getString("type"));
-        entity1.setAnswers(result.getString("correct_answer"));
+        entity1.setChoices(result.getString("correct_answer"));
         entity1.setCorrectAnswerIndex(result.getLong("correct_answer_index"));
         entity1.setPictureURL(result.getString("picture_url"));
         return entity1;
@@ -38,16 +38,15 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 questionEntity.getQuizId(),
                 questionEntity.getQuestion(),
                 questionEntity.getType(),
-                questionEntity.getAnswers(),
+                questionEntity.getChoices(),
                 questionEntity.getCorrectAnswer(),
                 questionEntity.getCorrectAnswerIndex(),
                 questionEntity.getPictureURL());
-        System.out.println("aqamde movedi dzmao");
-        System.out.println(query);
         try {
             jdbcTemplate.execute(query);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 

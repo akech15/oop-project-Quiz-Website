@@ -64,12 +64,12 @@ public class AnswerRepositoryImpl implements AnswerRepository {
 
         if (type.equals(String.valueOf(QuestionType.MULTIPLE_CHOICE))) {
             String correctAnswer =
-                    StringUtils.stringToList(questionEntity.getAnswers(), ',').
+                    StringUtils.stringToList(questionEntity.getChoices(), ',').
                             get((int) questionEntity.getCorrectAnswerIndex() - 1);
             return correctAnswer.equals(answer.getUserAnswer());
         }
 
-        List<String> answers = StringUtils.stringToList(questionEntity.getAnswers(), ',');
+        List<String> answers = StringUtils.stringToList(questionEntity.getChoices(), ',');
         return answers.contains(answer.getUserAnswer());
 
     }

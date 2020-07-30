@@ -2,7 +2,6 @@ package ge.edu.freeuni.api.converter.question;
 
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
 import ge.edu.freeuni.api.model.question.Question;
-import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.server.model.question.QuestionEntity;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
@@ -23,7 +22,7 @@ public final class QuestionConverter {
                 .correctAnswerIndex(entity.getCorrectAnswerIndex())
                 .quiz(QuizConverter.entityToQuiz(userRepository, quizRepository.getQuizById(entity.getQuizId())))
                 .type(Enum.valueOf(QuestionType.class, entity.getType()))
-                .answers(StringUtils.stringToList(entity.getAnswers(), ','))
+                .choices(StringUtils.stringToList(entity.getChoices(), ','))
                 .pictureURL(entity.getPictureURL())
                 .build();
     }
@@ -37,7 +36,7 @@ public final class QuestionConverter {
                 .quizId(question.getQuiz().getId())
                 .type(String.valueOf(question.getType()))
                 .correctAnswer(question.getCorrectAnswer())
-                .answers(StringUtils.listToString(question.getAnswers(), ','))
+                .choices(StringUtils.listToString(question.getChoices(), ','))
                 .pictureURL(question.getPictureURL())
                 .build();
     }

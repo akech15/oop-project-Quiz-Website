@@ -31,7 +31,7 @@
             String q = question.getQuestion();
             Integer choice = (Integer) request.getAttribute("index");
             out.print("<h1> Question: #" + choice + " : "+ q + "</h1><br>");
-            List<String> answers = question.getAnswers();
+            List<String> answers = question.getChoices();
             List<Character> chars = new ArrayList<>();
             char ch = 'a';
             int id = 0;

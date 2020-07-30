@@ -2,21 +2,17 @@ package ge.edu.freeuni.api;
 
 import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.question.Question;
-import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
 import ge.edu.freeuni.server.services.question.QuestionServiceImpl;
 import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
-import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -144,7 +140,7 @@ public class QuestionController {
         String correctAnswer = params.get("correctAnswer");
         Question addedQuestion = new Question();
         addedQuestion.setQuestion(question);
-        addedQuestion.setAnswers(answers);
+        addedQuestion.setChoices(answers);
         addedQuestion.setType(QuestionType.MULTIPLE_CHOICE);
         addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(correctAnswer.charAt(0) - 'a');
@@ -165,7 +161,7 @@ public class QuestionController {
         toAdd.setType(QuestionType.FILL_IN_THE_BLANK);
         toAdd.setCorrectAnswer(correctAnswer);
         toAdd.setCorrectAnswerIndex(-1);
-        toAdd.setAnswers(new ArrayList<>());
+        toAdd.setChoices(new ArrayList<>());
         questionService.addQuestion(toAdd);
 
         return "makeQuestions";
@@ -185,7 +181,7 @@ public class QuestionController {
         System.out.println(question);
         Question addedQuestion = new Question();
         addedQuestion.setQuestion(question);
-        addedQuestion.setAnswers(answers);
+        addedQuestion.setChoices(answers);
         addedQuestion.setType(QuestionType.QUESTION_RESPONSE);
         addedQuestion.setCorrectAnswer("");
         addedQuestion.setCorrectAnswerIndex(-1);
@@ -218,7 +214,7 @@ public class QuestionController {
 
         Question addedQuestion = new Question();
         addedQuestion.setQuestion(question);
-        addedQuestion.setAnswers(answers);
+        addedQuestion.setChoices(answers);
         addedQuestion.setType(QuestionType.MULTIPLE_ANSWERS);
         addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(-1);
@@ -239,7 +235,7 @@ public class QuestionController {
             correctAnswer = "False";
         Question addedQuestion = new Question();
         addedQuestion.setQuestion(question);
-        addedQuestion.setAnswers(new ArrayList<>());
+        addedQuestion.setChoices(new ArrayList<>());
         addedQuestion.setType(QuestionType.TRUE_FALSE);
         addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(-1);

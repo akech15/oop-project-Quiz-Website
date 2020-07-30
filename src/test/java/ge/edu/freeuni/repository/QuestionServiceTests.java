@@ -1,7 +1,6 @@
 package ge.edu.freeuni.repository;
 
 import ge.edu.freeuni.api.model.question.Question;
-import ge.edu.freeuni.api.model.question.QuestionCategoryType;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
@@ -18,10 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @SpringBootTest
 public class QuestionServiceTests {
@@ -77,17 +73,15 @@ public class QuestionServiceTests {
         toAddQuiz.setName("starting quiz");
         toAddQuiz.setDescription("description");
         toAddQuiz.setCreationDate(new Date());
-        toAddQuiz.setCreator(user);
 
         quizService.startMakingQuiz(toAddQuiz);
 
-        Quiz quiz = quizService.getQuizById(1);
+        Quiz quiz = quizService.getActiveQuiz();
 
         Question question = new Question();
         question.setCorrectAnswerIndex(-1);
         question.setQuestion("who is the president of USA?");
-        question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
-        question.setQuiz(quiz);
+        question.setChoices(Arrays.asList("Donald Trump", "Trump"));
         question.setType(QuestionType.QUESTION_RESPONSE);
 
         Assertions.assertTrue(questionService.addQuestion(question));
@@ -120,7 +114,7 @@ public class QuestionServiceTests {
         Question question = new Question();
         question.setCorrectAnswerIndex(-1);
         question.setQuestion("who is the president of USA?");
-        question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question.setChoices(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
 
@@ -156,21 +150,21 @@ public class QuestionServiceTests {
         Question question = new Question();
         question.setCorrectAnswerIndex(-1);
         question.setQuestion("who is the president of USA?");
-        question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question.setChoices(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
 
         Question question1 = new Question();
         question1.setCorrectAnswerIndex(-1);
         question1.setQuestion("who is the president of USA?");
-        question1.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question1.setChoices(Arrays.asList("Donald Trump", "Trump"));
         question1.setQuiz(quiz);
         question1.setType(QuestionType.QUESTION_RESPONSE);
 
         Question question2 = new Question();
         question2.setCorrectAnswerIndex(-1);
         question2.setQuestion("who is the president of USA?");
-        question2.setAnswers(Arrays.asList("Donald Trump", "Trump"));
+        question2.setChoices(Arrays.asList("Donald Trump", "Trump"));
         question2.setQuiz(quiz);
         question2.setType(QuestionType.QUESTION_RESPONSE);
 
@@ -180,6 +174,44 @@ public class QuestionServiceTests {
 
         Assertions.assertEquals(3, questionService.getAllQuestionsByQuiz(quiz).size());
 
+    }
+
+    @Test
+    public void getAnswersTest(){
+        User toAddUser = new User();
+        toAddUser.setUsername("admin");
+        toAddUser.setPassword("admin");
+
+        userService.addUser(toAddUser);
+
+        User user = userService.getUserById(1);
+
+        authenticationService.logIn(user);
+
+        Quiz toAddQuiz = new Quiz();
+        toAddQuiz.setName("starting quiz");
+        toAddQuiz.setDescription("description");
+        toAddQuiz.setCreationDate(new Date());
+        toAddQuiz.setCreator(user);
+
+        quizService.startMakingQuiz(toAddQuiz);
+
+        Quiz quiz = quizService.getQuizById(1);
+
+        Question questionToAdd = new Question();
+        questionToAdd.setCorrectAnswerIndex(-1);
+        questionToAdd.setQuestion("who is the president of USA?");
+        questionToAdd.setChoices(Arrays.asList("Donald Trump", "Trump"));
+        questionToAdd.setQuiz(quiz);
+        questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
+
+        Assertions.assertTrue(questionService.addQuestion(questionToAdd));
+
+        Question question = questionService.getQuestionById(1);
+
+        List<String> choices =  question.getChoices();
+
+        System.out.println(choices);
     }
 
 }

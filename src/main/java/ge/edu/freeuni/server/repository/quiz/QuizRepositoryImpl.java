@@ -98,7 +98,6 @@ public class QuizRepositoryImpl implements QuizRepository {
 				quizEntity.getCreatorId(),
 				creationDateDB
 		);
-		System.out.println("bechdavs? " + query);
 		return jdbcTemplate.queryForObject(query, quizRawMapper);
 
 	}
