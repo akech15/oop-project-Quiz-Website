@@ -12,7 +12,6 @@ public class QuestionEntity {
     private long id;
     private long quizId;
     private long correctAnswerIndex;
-    private String category;
     private String question;
     private String type;
     private String answers;

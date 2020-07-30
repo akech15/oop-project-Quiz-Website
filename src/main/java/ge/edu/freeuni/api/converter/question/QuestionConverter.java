@@ -23,7 +23,6 @@ public final class QuestionConverter {
                 .correctAnswerIndex(entity.getCorrectAnswerIndex())
                 .quiz(QuizConverter.entityToQuiz(userRepository, quizRepository.getQuizById(entity.getQuizId())))
                 .type(Enum.valueOf(QuestionType.class, entity.getType()))
-                .category(Enum.valueOf(QuestionCategoryType.class, entity.getCategory()))
                 .answers(StringUtils.stringToList(entity.getAnswers(), ','))
                 .pictureURL(entity.getPictureURL())
                 .build();
@@ -37,7 +36,6 @@ public final class QuestionConverter {
                 .correctAnswerIndex(question.getCorrectAnswerIndex())
                 .quizId(question.getQuiz().getId())
                 .type(String.valueOf(question.getType()))
-                .category(String.valueOf(question.getCategory()))
                 .correctAnswer(question.getCorrectAnswer())
                 .answers(StringUtils.listToString(question.getAnswers(), ','))
                 .pictureURL(question.getPictureURL())

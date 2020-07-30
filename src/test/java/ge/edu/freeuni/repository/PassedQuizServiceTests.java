@@ -99,7 +99,6 @@ public class PassedQuizServiceTests {
         question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
-        question.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(question);
 
@@ -141,7 +140,6 @@ public class PassedQuizServiceTests {
         questionToAdd.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         questionToAdd.setQuiz(quiz);
         questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
-        questionToAdd.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(questionToAdd);
 
@@ -196,7 +194,6 @@ public class PassedQuizServiceTests {
         question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
-        question.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(question);
 
@@ -242,7 +239,6 @@ public class PassedQuizServiceTests {
         questionToAdd.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         questionToAdd.setQuiz(quiz);
         questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
-        questionToAdd.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(questionToAdd);
 

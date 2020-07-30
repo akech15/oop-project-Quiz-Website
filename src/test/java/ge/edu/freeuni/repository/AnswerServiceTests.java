@@ -98,7 +98,6 @@ public class AnswerServiceTests {
         questionToAdd.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         questionToAdd.setQuiz(quiz);
         questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
-        questionToAdd.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(questionToAdd);
 
@@ -150,7 +149,6 @@ public class AnswerServiceTests {
         questionToAdd.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         questionToAdd.setQuiz(quiz);
         questionToAdd.setType(QuestionType.QUESTION_RESPONSE);
-        questionToAdd.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(questionToAdd);
 

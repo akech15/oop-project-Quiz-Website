@@ -21,7 +21,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         QuestionEntity entity1 = new QuestionEntity();
         entity1.setId(result.getLong("id"));
         entity1.setQuizId(result.getLong("quiz_id"));
-        entity1.setCategory(result.getString("category"));
         entity1.setQuestion(result.getString("question"));
         entity1.setType(result.getString("type"));
         entity1.setAnswers(result.getString("correct_answer"));
@@ -32,12 +31,11 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public boolean addQuestion(QuestionEntity questionEntity) {
-        String query = String.format("INSERT INTO question (quiz_id, category, question, type, " +
+        String query = String.format("INSERT INTO question (quiz_id, question, type, " +
                         "choices, correct_answer, correct_answer_index, picture_url)" +
-                        "values (\'%d\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%d\', \'%s\');",
+                        "values (\'%d\', \'%s\', \'%s\', \'%s\', \'%s\', \'%d\', \'%s\');",
 
                 questionEntity.getQuizId(),
-                questionEntity.getCategory(),
                 questionEntity.getQuestion(),
                 questionEntity.getType(),
                 questionEntity.getAnswers(),
@@ -58,6 +56,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public QuestionEntity getQuestionById(long id) {
         String query = String.format("select * from question where id = \'%d\';", id);
+        System.out.println("AMAS USHEVBS " + query);
         return jdbcTemplate.queryForObject(query, questionRawMapper);
     }
 

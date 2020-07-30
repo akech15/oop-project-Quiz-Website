@@ -89,7 +89,6 @@ public class QuestionServiceTests {
         question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
-        question.setCategory(QuestionCategoryType.EROTIC);
 
         Assertions.assertTrue(questionService.addQuestion(question));
 
@@ -124,7 +123,6 @@ public class QuestionServiceTests {
         question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
-        question.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(question);
 
@@ -161,7 +159,6 @@ public class QuestionServiceTests {
         question.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question.setQuiz(quiz);
         question.setType(QuestionType.QUESTION_RESPONSE);
-        question.setCategory(QuestionCategoryType.EROTIC);
 
         Question question1 = new Question();
         question1.setCorrectAnswerIndex(-1);
@@ -169,7 +166,6 @@ public class QuestionServiceTests {
         question1.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question1.setQuiz(quiz);
         question1.setType(QuestionType.QUESTION_RESPONSE);
-        question1.setCategory(QuestionCategoryType.EROTIC);
 
         Question question2 = new Question();
         question2.setCorrectAnswerIndex(-1);
@@ -177,7 +173,6 @@ public class QuestionServiceTests {
         question2.setAnswers(Arrays.asList("Donald Trump", "Trump"));
         question2.setQuiz(quiz);
         question2.setType(QuestionType.QUESTION_RESPONSE);
-        question2.setCategory(QuestionCategoryType.EROTIC);
 
         questionService.addQuestion(question);
         questionService.addQuestion(question1);

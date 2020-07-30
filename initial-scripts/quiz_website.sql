@@ -45,7 +45,6 @@ CREATE TABLE question
 (
     id                   int          NOT NULL AUTO_INCREMENT,
     quiz_id              int          NOT NULL,
-    category             VARCHAR(50)  NOT NULL,
     question             VARCHAR(200) NOT NULL,
     type                 varchar(50)  not null,
     choices       		 varchar(200) not null,

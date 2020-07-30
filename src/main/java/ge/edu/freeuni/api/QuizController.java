@@ -1,8 +1,10 @@
 package ge.edu.freeuni.api;
 
+import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
+import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
 import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
 import ge.edu.freeuni.server.services.user.UserServiceImpl;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -26,14 +29,19 @@ public class QuizController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private QuestionService questionService;
+
     @RequestMapping("/createNewQuiz")
     public String createQuiz(Map<String, Object> model) {
         return "createQuiz";
     }
 
-    @RequestMapping("/preQuiz")
-    public String startQuiz(Map<String, Object> model) {
+    @RequestMapping("/preQuiz/{quiz_id}")
+    public String startQuiz(@PathVariable Long quiz_id, Map<String, Object> model) {
 
+        model.put("index", 0);
+        model.put("quiz_id", quiz_id);
         return "preQuizPage";
     }
 
@@ -41,6 +49,7 @@ public class QuizController {
     public String aboutQuiz(@PathVariable Long quiz_id, Map<String, Object> model) {
         Quiz toAdd = quizService.getQuizById(quiz_id);
         model.put("quiz",toAdd);
+        model.put("quiz_id",quiz_id);
 
         return "quizDescription";
     }

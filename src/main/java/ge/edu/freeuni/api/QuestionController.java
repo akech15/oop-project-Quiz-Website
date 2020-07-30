@@ -249,13 +249,20 @@ public class QuestionController {
     }
 
 
-    @RequestMapping("/playMultipleChoice")
-    public String playMultipleChoice(Map<String, Object> model){
-        System.out.println("aq moida");
-        Question question = questionService.getQuestionById(5);
-        System.out.println("aq vegar");
-        model.put("question", question);
-        return "playMultipleChoice";
+    @RequestMapping("/playMultipleChoice/{quiz_id}/{index}")
+    public String playMultipleChoice(@PathVariable Long quiz_id, @PathVariable Integer index,
+                                     Map<String, Object> model){
+
+        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
+
+        Integer indx = index;
+        if(index < questions.size()){
+            Question question = questions.get(index);
+            model.put("question", question);
+            indx += 1;
+            model.put("index", indx);
+        }
+        return "playQuiz/playMultipleChoice";
     }
 
 }

@@ -2,6 +2,8 @@
 <%@ page import="ge.edu.freeuni.server.services.question.QuestionService" %>
 <%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ page import="ge.edu.freeuni.server.repository.question.QuestionRepository" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,72 +26,38 @@
     </div>
 
     <form action="${pageContext.request.contextPath}/addMultipleAnswers" method="post">
-        <label>question:</label>
-
-        <label>Enter choices: </label><br>
         <%
             Question question = (Question) request.getAttribute("question");
             String q = question.getQuestion();
-            out.print("<label>" + q + "</label>");
-//            int answerCount = Integer.parseInt((String) request.getAttribute("answerCount"));
-//            char ch = 'a';
-//            for (int i = 0; i < choice; i++, ch++, id++){
-//                out.print("<label>Enter choice " + ch + ":  </label>");
-//                out.print("<input type=\"text\" name=\"choice" + id + "\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
-//                out.print("<br>");
-//            }
-//            out.print("<br>");
-//            out.print("<br>");
-//            id = 1;
-//            for (int i = 0; i < answerCount; i++, ch++, id++){
-//                out.print("<label>Enter correct answer:  </label>");
-//                out.print("<input type=\"text\" name=\"answer" + id + "\" required placeholder=\"Enter Choice\" id=\"choice\"/>");
-//                out.print("<br>");
-//            }
+            Integer choice = (Integer) request.getAttribute("index");
+            out.print("<h1> Question: #" + choice + " : "+ q + "</h1><br>");
+            List<String> answers = question.getAnswers();
+            List<Character> chars = new ArrayList<>();
+            char ch = 'a';
+            int id = 0;
+            out.print("<h2> Possible Answers: </h2><br>");
+            for (int i = 0; i < answers.size(); i++, ch++, id++){
+                out.print("<h2> " + ch + ":  </h2>");
+                out.print("<h2> " + answers.get(i) + " </h2>");
+                out.print("<br>");
+                chars.add(ch);
+            }
+            out.print("<br>");
+            out.print("<br>");
+            String toShow = "<label>Enter if correct answer is either ";
+            for(int i = 0; i < chars.size() - 1; i++){
+                toShow += chars.get(i) +  ", ";
+            }
+            toShow += "or " + chars.get(chars.size() - 1);
+            toShow += "</label>";
+            out.print(toShow);
+            out.print("<br>");
         %>
-        <input type="submit" value = "Add question" id="submitButton">
-    </form>
 
-    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
-        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
-    </form>
-
-    <form action="${pageContext.request.contextPath}/viewQuiz" method="post">
-        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
+        <input type="text" name="correctAnswer" required placeholder="Enter correct answer" id = "correctAnswer"/>
+        <input type="submit" value = "Submit Answer" id="submitButton">
     </form>
 </div>
-
-<script>
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("questionType")){
-            if(document.getElementById("questionType").value == "Multiple Choice") {
-                window.location.href = '/multipleChoice';
-            } else if(document.getElementById("questionType").value == "True/False") {
-                window.location.href = '/trueFalse';
-            } else if(document.getElementById("questionType").value == "Fill In Blank") {
-                window.location.href = '/fillBlank';
-            } else if(document.getElementById("questionType").value == "Fill In Multiple Blanks") {
-                window.location.href = '/fillMultipleBLank';
-            } else if(document.getElementById("questionType").value == "Image Answers") {
-                window.location.href = '/imageAnswers';
-            } else if(document.getElementById("questionType").value == "Matching") {
-                window.location.href = '/matching';
-            } else if(document.getElementById("questionType").value == "Question/Response") {
-                window.location.href = '/questionResponse';
-            }
-        }
-        // else if(event.target == document.getElementById("about")){
-        //     document.getElementById("about").style.display = "none";
-        // } else if(event.target == document.getElementById("topUsers")){
-        //     document.getElementById("topUsers").style.display = "none";
-        // } else if(event.target == document.getElementById("topQuizzes")){
-        //     document.getElementById("topQuizzes").style.display = "none";
-        // }
-    }
-
-
-
-</script>
 </body>
 </html>
 
