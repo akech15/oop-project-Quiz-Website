@@ -294,4 +294,19 @@ public class QuestionController {
         }
         return "playQuiz/playMultipleAnswers";
     }
+
+    @RequestMapping("/playTrueFalse/{quiz_id}/{index}")
+    public String playTrueFalse(@PathVariable Long quiz_id, @PathVariable Integer index,
+                                      Map<String, Object> model){
+        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
+
+        Integer indx = index;
+        if (index < questions.size()) {
+            Question question = questions.get(index);
+            model.put("question", question);
+            indx += 1;
+            model.put("index", indx);
+        }
+        return "playQuiz/playTrueFalse";
+    }
 }
