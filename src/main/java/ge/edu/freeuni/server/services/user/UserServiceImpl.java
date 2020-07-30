@@ -1,6 +1,7 @@
 package ge.edu.freeuni.server.services.user;
 
 import ge.edu.freeuni.api.converter.user.UserConverter;
+import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;

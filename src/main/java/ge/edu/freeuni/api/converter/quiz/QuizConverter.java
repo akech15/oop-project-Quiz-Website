@@ -2,8 +2,11 @@ package ge.edu.freeuni.api.converter.quiz;
 
 import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.quiz.Quiz;
+import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
+import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
+import jdk.internal.net.http.common.Pair;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,4 +46,16 @@ public final class QuizConverter {
         }
         return res;
     }
+
+	public static List<Pair<Quiz, Long>> entityToQuizPairList(UserRepository userRepository,
+                                                              List<Pair<QuizEntity, Long>> topRatedQuizzes) {
+        List<Pair<Quiz, Long> > res = new ArrayList<>();
+
+        for (Pair<QuizEntity, Long> pair:
+                topRatedQuizzes) {
+            res.add(new Pair<>(QuizConverter.entityToQuiz(userRepository, pair.first), pair.second));
+        }
+
+        return res;
+	}
 }
