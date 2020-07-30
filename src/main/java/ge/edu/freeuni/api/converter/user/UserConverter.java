@@ -12,6 +12,8 @@ import java.util.List;
 public class UserConverter {
 
     public static User entityToUser(UserEntity userEntity) {
+        if(userEntity == null)
+            return null;
         return User.builder()
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())

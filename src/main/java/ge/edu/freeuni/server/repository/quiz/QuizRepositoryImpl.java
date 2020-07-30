@@ -68,7 +68,7 @@ public class QuizRepositoryImpl implements QuizRepository {
         java.sql.Date dateDB = DateUtils.getDbDate(date);
         String query = String.format(
                 "INSERT INTO quiz (name, creator_id, description, creation_date)" +
-                        " values (\'%s\', \'%s\', \'%s\', \'%s\');",
+                        " values (\'%s\', \'%d\', \'%s\', \'%s\');",
                 quizEntity.getName(),
                 quizEntity.getCreatorId(),
                 quizEntity.getDescription(),
@@ -100,7 +100,7 @@ public class QuizRepositoryImpl implements QuizRepository {
                 quizEntity.getCreatorId(),
                 creationDateDB
         );
-        System.out.println(query);
+        System.out.println("bechdavs? " + query);
         return jdbcTemplate.queryForObject(query, quizRawMapper);
 
     }

@@ -36,10 +36,7 @@ public class UserController {
                         Map<String, Object> model) throws SQLException {
         model.put("username", username);
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        boolean validUser = authenticationService.logIn(user);
+        boolean validUser = authenticationService.logIn(userService.getUserByUsername(username));
 
         if (validUser) {
             List<Quiz> quizList = quizService.getAllQuizzes();

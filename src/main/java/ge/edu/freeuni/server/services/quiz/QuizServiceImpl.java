@@ -50,7 +50,6 @@ public class QuizServiceImpl implements QuizService {
 
         boolean addQuiz = quizRepository.addQuiz(QuizConverter.quizToEntity(quiz));
 
-        System.out.println("3LI MORCHA");
         setActiveQuiz(this.getQuizByIdentifiers(quiz));
         return addQuiz;
     }

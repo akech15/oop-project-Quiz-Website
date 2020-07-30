@@ -7,7 +7,7 @@
 
 <h2 class="glow">ARE YOU READY FOR THE QUIZ?</h2>
    <div class="a">
-      <a  href="/quiz.jsp">HELL YEAH</a></p>
+      <a  href="playMultipleChoice">HELL YEAH</a></p>
    </div>
 
 </body>

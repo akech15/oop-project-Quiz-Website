@@ -247,4 +247,15 @@ public class QuestionController {
 
         return "makeQuestions";
     }
+
+
+    @RequestMapping("/playMultipleChoice")
+    public String playMultipleChoice(Map<String, Object> model){
+        System.out.println("aq moida");
+        Question question = questionService.getQuestionById(5);
+        System.out.println("aq vegar");
+        model.put("question", question);
+        return "playMultipleChoice";
+    }
+
 }

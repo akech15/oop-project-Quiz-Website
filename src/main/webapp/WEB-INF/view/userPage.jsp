@@ -35,9 +35,7 @@
         <div class="column">
             <h2>list of available quizzes</h2>
             <%
-                System.out.println("ZOMA manamde ");
                 List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
-                System.out.println("ZOMA " + quizzes.size());
                 for (Quiz quiz : quizzes) {
                     String quizName = quiz.getName();
                     User creator = quiz.getCreator();
