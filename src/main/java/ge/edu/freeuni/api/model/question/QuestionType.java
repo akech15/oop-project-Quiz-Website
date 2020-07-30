@@ -7,6 +7,7 @@ public enum QuestionType {
     MULTIPLE_CHOICE,
     PICTURE_RESPONSE,
     MULTIPLE_ANSWERS,
-    TRUE_FALSE
+    TRUE_FALSE,
+    MULTIPLE_BLANKS
 
 }

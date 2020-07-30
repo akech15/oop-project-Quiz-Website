@@ -38,7 +38,7 @@
         <div class="select_arrow">
         </div><br>
     </form>
-    <form action="${pageContext.request.contextPath}/addMultipleAnswers" method="post">
+    <form action="${pageContext.request.contextPath}/addMultipleBLanks" method="post">
 
         <%
             int choice = Integer.parseInt((String) request.getAttribute("choiceCount"));
