@@ -130,13 +130,13 @@ public class QuestionController {
 
 
     @RequestMapping("/addMultipleChoice")
-    public String addMultipleChoiceQuestion(@RequestParam String question, @RequestParam Map<String, String> params, Map<String, Object> model){
+    public String addMultipleChoiceQuestion(@RequestParam String question, @RequestParam Map<String, String> params, Map<String, Object> model) {
 
         List<String> answers = new ArrayList<>();
 
-        for(int i = 0; i < params.size() - 1; i++){
+        for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
-            String toGet = "choice"+toAppend;
+            String toGet = "choice" + toAppend;
             String toAdd = params.get(toGet);
             answers.add(toAdd);
         }
@@ -155,7 +155,7 @@ public class QuestionController {
     @RequestMapping("/addFillInBlankQuestion")
     public String addFillInBlankQuestion(@RequestParam String firstPart, @RequestParam String secondPart,
                                          @RequestParam String blank,
-                                         Map<String, Object> model){
+                                         Map<String, Object> model) {
 
         String question = firstPart + "_" + secondPart;
         String correctAnswer = blank;
@@ -172,13 +172,13 @@ public class QuestionController {
     }
 
     @RequestMapping("/addQuestionResponse")
-    public String addQuestionResponse(@RequestParam Map<String, String> params, Map<String, Object> model){
+    public String addQuestionResponse(@RequestParam Map<String, String> params, Map<String, Object> model) {
         String question = params.get("question");
         List<String> answers = new ArrayList<>();
 
-        for(int i = 0; i < params.size() - 1; i++){
+        for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
-            String toGet = "choice"+toAppend;
+            String toGet = "choice" + toAppend;
             String toAdd = params.get(toGet);
             answers.add(toAdd);
         }
@@ -196,23 +196,23 @@ public class QuestionController {
     }
 
     @RequestMapping("/addMultipleAnswers")
-    public String addMultipleAnswers(@RequestParam Map<String, String> params, Map<String, Object> model){
+    public String addMultipleAnswers(@RequestParam Map<String, String> params, Map<String, Object> model) {
         String question = params.get("question");
         List<String> answers = new ArrayList<>();
         String correctAnswer = "";
-        for(int i = 0; i < params.size() - 1; i++){
+        for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
-            String toGet = "answer"+toAppend;
+            String toGet = "answer" + toAppend;
             String toAdd = params.get(toGet);
-            if(toAdd != null)
+            if (toAdd != null)
                 correctAnswer += toAdd + ",";
         }
 
-        for(int i = 0; i < params.size() - 1; i++){
+        for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
-            String toGet = "choice"+toAppend;
+            String toGet = "choice" + toAppend;
             String toAdd = params.get(toGet);
-            if(toAdd != null)
+            if (toAdd != null)
                 answers.add(toAdd);
         }
 
@@ -229,11 +229,11 @@ public class QuestionController {
     }
 
     @RequestMapping("/addTrueFalse")
-    public String addTrueFalse(@RequestParam Map<String, String> params, Map<String, Object> model){
+    public String addTrueFalse(@RequestParam Map<String, String> params, Map<String, Object> model) {
         String question = params.get("question");
         boolean isTrue = (params.get("trueCheckBox") != null);
         String correctAnswer;
-        if(isTrue)
+        if (isTrue)
             correctAnswer = "True";
         else
             correctAnswer = "False";
@@ -251,12 +251,12 @@ public class QuestionController {
 
     @RequestMapping("/playMultipleChoice/{quiz_id}/{index}")
     public String playMultipleChoice(@PathVariable Long quiz_id, @PathVariable Integer index,
-                                     Map<String, Object> model){
+                                     Map<String, Object> model) {
 
         List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
 
         Integer indx = index;
-        if(index < questions.size()){
+        if (index < questions.size()) {
             Question question = questions.get(index);
             model.put("question", question);
             indx += 1;
@@ -265,4 +265,18 @@ public class QuestionController {
         return "playQuiz/playMultipleChoice";
     }
 
+    @RequestMapping("/playFillInBlank/{quiz_id}/{index}")
+    public String playFillInBlank(@PathVariable Long quiz_id, @PathVariable Integer index,
+                                     Map<String, Object> model){
+        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
+
+        Integer indx = index;
+        if (index < questions.size()) {
+            Question question = questions.get(index);
+            model.put("question", question);
+            indx += 1;
+            model.put("index", indx);
+        }
+        return "playQuiz/playFillInBlank";
+    }
 }
