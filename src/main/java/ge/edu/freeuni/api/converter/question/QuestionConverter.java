@@ -19,6 +19,7 @@ public final class QuestionConverter {
         return Question.builder()
                 .id(entity.getId())
                 .question(entity.getQuestion())
+                .correctAnswer(entity.getCorrectAnswer())
                 .correctAnswerIndex(entity.getCorrectAnswerIndex())
                 .quiz(QuizConverter.entityToQuiz(userRepository, quizRepository.getQuizById(entity.getQuizId())))
                 .type(Enum.valueOf(QuestionType.class, entity.getType()))

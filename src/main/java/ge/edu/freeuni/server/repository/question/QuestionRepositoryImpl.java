@@ -69,6 +69,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
 
         List<QuestionEntity> res = new ArrayList<>();
+
         for (long id :
                 ids) {
             res.add(this.getQuestionById(id));

@@ -37,9 +37,15 @@
 <%--		<p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>--%>
 	</div>
 
+<%--	<div class="w3-display-topright w3-container w3-xlarge">--%>
+<%--		<%--%>
+<%--			out.print("<p><button class=\"w3-button w3-black\"><a  href=\"/logOut\">Log Out</a></button></p>");--%>
+<%--		%>--%>
+<%--	</div>\--%>
+
 	<div class="w3-display-topright w3-container w3-xlarge">
 		<%
-			out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/logOut\">Log Out</a></button></p>"));
+			out.print("<p><button class=\"w3-button w3-black\"><a  href=\"/userhomepage\">User Page</a></button></p>");
 		%>
 	</div>
 
@@ -105,19 +111,19 @@
 <%--</div>--%>
 
 
-<script>
-    // window.onclick = function(event) {
-    //     if (event.target == document.getElementById("aboutQuiz")) {
-    //         document.getElementById("aboutQuiz").style.display = "none";
-    //     } else if(event.target == document.getElementById("aboutAuthor")){
-    //         document.getElementById("aboutQuiz").style.display = "none";
-    //     } else if(event.target == document.getElementById("questions")){
-    //         document.getElementById("questions").style.display = "none";
-    //     }
-	//
-    // }
+<%--<script>--%>
+<%--    // window.onclick = function(event) {--%>
+<%--    //     if (event.target == document.getElementById("aboutQuiz")) {--%>
+<%--    //         document.getElementById("aboutQuiz").style.display = "none";--%>
+<%--    //     } else if(event.target == document.getElementById("aboutAuthor")){--%>
+<%--    //         document.getElementById("aboutQuiz").style.display = "none";--%>
+<%--    //     } else if(event.target == document.getElementById("questions")){--%>
+<%--    //         document.getElementById("questions").style.display = "none";--%>
+<%--    //     }--%>
+<%--	//--%>
+<%--    // }--%>
 
-</script>
+<%--</script>--%>
 
 </body>
 </html>

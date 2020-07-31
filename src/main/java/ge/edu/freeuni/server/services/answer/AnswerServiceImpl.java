@@ -91,7 +91,7 @@ public class AnswerServiceImpl implements AnswerService {
         }
 
         private boolean isMultipleChoiceCorrect(Answer answer, Question question) {
-            return answer.getUserAnswer().equals(question.getCorrectAnswer());
+            return answer.getUserAnswer().equals(question.getChoices().get((int) question.getCorrectAnswerIndex()));
         }
 
         private boolean isFillInBlankCorrect(Answer answer, Question question) {
@@ -100,7 +100,7 @@ public class AnswerServiceImpl implements AnswerService {
 
         private boolean isQuestionResponseCorrect(Answer answer, Question question){
             String userAnswer = answer.getUserAnswer();
-            return question.getChoices().contains(userAnswer);
+            return StringUtils.stringToList(question.getCorrectAnswer(),',').contains(userAnswer);
         }
 
     @Override

@@ -49,7 +49,7 @@
             }
             out.print("<br>");
 
-            System.out.println("shemovida");
+            out.print("<p>shemovidaaaaaaaaaaaaaaaaaaaa</p>");
 
             String toShow = "<label>Enter if correct answer is either ";
             for (int i = 0; i < chars.size() - 1; i++) {
@@ -62,7 +62,7 @@
         %>
 
         <input type="text" name="correctAnswer" required placeholder="Enter correct answer" id="correctAnswer"/>
-        <button class="w3-button w3-black"><a href="/questionsWrapper/<%=choice%>/<%=quizId%>">Submit question</a></button>
+        <input type="submit" value="Submit Answer" id="submitButton">
 
     </form>
 </div>
