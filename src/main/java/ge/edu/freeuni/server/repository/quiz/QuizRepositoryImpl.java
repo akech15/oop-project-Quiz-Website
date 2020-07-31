@@ -1,7 +1,9 @@
 package ge.edu.freeuni.server.repository.quiz;
 
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
+import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
+import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -96,49 +98,50 @@ public class QuizRepositoryImpl implements QuizRepository {
         return jdbcTemplate.queryForObject(query, quizRawMapper);
     }
 
-//    @Override
-//    public List<Pair<UserEntity, Long>> getTopRatedUsersByQuizId(long quiz_id) {
-//
-//        String queryIds = String.format(
-//                "SELECT user_id FROM passed_quiz WHERE quiz_id = \'%d\' ORDER BY score desc",
-//                quiz_id
-//        );
-//
-//        String queryScores = String.format(
-//                "SELECT score FROM passed_quiz WHERE quiz_id = \'%d\' ORDER BY 1 desc",
-//                quiz_id
-//        );
-//
-//        List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
-//
-//        List<Long> counts = jdbcTemplate.queryForList(queryScores, Long.class);
-//
-//        List<Pair<UserEntity, Long>> res = new ArrayList<>();
-//
-//        for (int i = 0; i < ids.size(); i++){
-//            res.add(new Pair<>(userRepository.getUserById(ids.get(i)), counts.get(i)));
-//        }
-//
-//        return res;
-//    }
-//
-//    @Override
-//    public List<Pair<QuizEntity, Long>> getTopRatedQuizzes() {
-//
-//        String queryIds = "select quiz_id from passed_quiz group by quiz_id order by count(quiz_id) desc;";
-//        String queryCounts = "select count(quiz_id) from passed_quiz group by quiz_id order by 1 desc;";
-//
-//        List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
-//        List<Long> counts = jdbcTemplate.queryForList(queryCounts, Long.class);
-//
-//        List<Pair<QuizEntity, Long>> res = new ArrayList<>();
-//
-//        for (int i = 0; i < ids.size(); i++){
-//            res.add(new Pair<>(this.getQuizById(ids.get(i)), counts.get(i)));
-//        }
-//
-//        return res;
-//    }
+    @Override
+    public List<Wyvili<UserEntity, Long>> getTopRatedUsersByQuizId(long quiz_id) {
+
+        String queryIds = String.format(
+                "SELECT user_id FROM passed_quiz WHERE quiz_id = \'%d\' ORDER BY score desc",
+                quiz_id
+        );
+
+        String queryScores = String.format(
+                "SELECT score FROM passed_quiz WHERE quiz_id = \'%d\' ORDER BY 1 desc",
+                quiz_id
+        );
+
+        List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
+
+        List<Long> counts = jdbcTemplate.queryForList(queryScores, Long.class);
+
+        List<Wyvili<UserEntity, Long>> res = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++){
+            res.add(new Wyvili<>(userRepository.getUserById(ids.get(i)), counts.get(i)));
+        }
+
+        return res;
+    }
+
+    @Override
+    public List<Wyvili<QuizEntity, Long>> getTopRatedQuizzes() {
+
+        String queryIds = "select quiz_id from passed_quiz group by quiz_id order by count(quiz_id) desc;";
+
+        String queryCounts = "select count(quiz_id) from passed_quiz group by quiz_id order by 1 desc;";
+
+        List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
+        List<Long> counts = jdbcTemplate.queryForList(queryCounts, Long.class);
+
+        List<Wyvili<QuizEntity, Long>> res = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++){
+            res.add(new Wyvili<>(this.getQuizById(ids.get(i)), counts.get(i)));
+        }
+
+        return res;
+    }
 
 
 }

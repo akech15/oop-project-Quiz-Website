@@ -40,15 +40,15 @@
             List<Character> chars = new ArrayList<>();
             char ch = 'a';
             int id = 0;
+
             out.print("<h2> Possible Answers: </h2><br>");
             for (int i = 0; i < answers.size(); i++, ch++, id++) {
-                out.print("<h2> " + ch + ":  </h2>");
-                out.print("<h2> " + answers.get(i) + " </h2>");
+                out.print("<h2> " + ch + ": "  + answers.get(i) + "</h2>");
                 out.print("<br>");
                 chars.add(ch);
             }
             out.print("<br>");
-            out.print("<br>");
+
             String toShow = "<label>Enter if correct answer is either ";
             for (int i = 0; i < chars.size() - 1; i++) {
                 toShow += chars.get(i) + ", ";
@@ -60,7 +60,8 @@
         %>
 
         <input type="text" name="correctAnswer" required placeholder="Enter correct answer" id="correctAnswer"/>
-        <input type="submit" value="Submit Answer" id="submitButton">
+        <button class="w3-button w3-black"><a href="/questionsWrapper/<%=choice%>/<%=quizId%>">Submit question</a></button>
+
     </form>
 </div>
 </body>

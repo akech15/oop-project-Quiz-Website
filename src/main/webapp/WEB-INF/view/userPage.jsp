@@ -15,11 +15,11 @@
 
 
 <div class="topnav">
-    <a class="active" href="/userhomepage">Home</a>
+    <a href="/logOut">Log Out</a>
     <a href="/messagingpage">Messages</a>
     <a href="/challengepage">Challenge</a>
     <a href="/friendrequestpage">Friend Requests</a>
-
+    <a class="active" href="/userhomepage">Home</a>
     <form class="example" action="??????????" style="margin:auto;max-width:300px">
 
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search People">

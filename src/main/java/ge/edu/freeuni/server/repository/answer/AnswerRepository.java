@@ -8,6 +8,6 @@ public interface AnswerRepository {
 
     boolean addAnswer(AnswerEntity answer);
 
-    boolean isAnswerCorrect(AnswerEntity answer);
+//    boolean isAnswerCorrect(AnswerEntity answer);
 
 }

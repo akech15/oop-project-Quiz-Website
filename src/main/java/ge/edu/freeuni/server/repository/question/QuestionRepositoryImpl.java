@@ -23,7 +23,8 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         entity1.setQuizId(result.getLong("quiz_id"));
         entity1.setQuestion(result.getString("question"));
         entity1.setType(result.getString("type"));
-        entity1.setChoices(result.getString("correct_answer"));
+        entity1.setCorrectAnswer(result.getString("correct_answer"));
+        entity1.setChoices(result.getString("choices"));
         entity1.setCorrectAnswerIndex(result.getLong("correct_answer_index"));
         entity1.setPictureURL(result.getString("picture_url"));
         return entity1;

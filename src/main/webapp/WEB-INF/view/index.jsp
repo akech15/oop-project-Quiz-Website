@@ -96,6 +96,7 @@
 
 <script>
     window.onclick = function(event) {
+
         if (event.target == document.getElementById("login")) {
             document.getElementById("login").style.display = "none";
         } else if(event.target == document.getElementById("about")){

@@ -1,6 +1,8 @@
 package ge.edu.freeuni.server.repository.quiz;
 
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
+import ge.edu.freeuni.server.model.user.UserEntity;
+import ge.edu.freeuni.utils.Wyvili;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public interface QuizRepository {
 
 	public List<QuizEntity> getAllQuizzes();
 
-//    List<jdk.internal.net.http.common.Pair<UserEntity, Long>> getTopRatedUsersByQuizId(long quiz_id);
-//
-//    List<Pair<QuizEntity, Long>> getTopRatedQuizzes();
+    List<Wyvili<UserEntity, Long>> getTopRatedUsersByQuizId(long quiz_id);
+
+    List<Wyvili<QuizEntity, Long>> getTopRatedQuizzes();
 }

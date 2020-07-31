@@ -16,9 +16,9 @@ public final class StringUtils {
 
 	public static String listToString(List<String> list, char delimiter){
 		String result = "";
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < list.size() - 1; i++) {
 			result += list.get(i);
-			if(i == list.size() - 1){
+			if(i == list.size() - 2){
 				continue;
 			}
 			result += delimiter;

@@ -1,5 +1,6 @@
 package ge.edu.freeuni.server.repository.answer;
 
+import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
 import ge.edu.freeuni.server.model.question.QuestionEntity;
@@ -57,22 +58,71 @@ public class AnswerRepositoryImpl implements AnswerRepository {
 
     }
 
-    @Override
-    public boolean isAnswerCorrect(AnswerEntity answer) {
-        QuestionEntity questionEntity = questionRepository.getQuestionById(answer.getQuestionId());
-        String type = questionEntity.getType();
+//    @Override
+//    public boolean isAnswerCorrect(AnswerEntity answerEntity) {
+//        QuestionEntity questionEntity = questionRepository.getQuestionById(answerEntity.getQuestionId());
+//
+//        switch (Enum.valueOf(QuestionType.class,questionEntity.getType())) {
+//            case QUESTION_RESPONSE:
+//                return isQuestionResponseCorrect(answerEntity, questionEntity);
+//            case FILL_IN_THE_BLANK:
+//                return isFillInBlankCorrect(answerEntity, questionEntity);
+//            case MULTIPLE_CHOICE:
+//                return isMultipleChoiceCorrect(answerEntity, questionEntity);
+//            case TRUE_FALSE:
+//                return isTrueOrFalseCorrect(answerEntity, questionEntity);
+//            case MULTIPLE_ANSWERS:
+//                return isMultipleAnswersCorrect(answerEntity, questionEntity);
+//            case MULTIPLE_BLANKS:
+//                return isMultipleBlanksCorrect(answerEntity, questionEntity);
+//            default:
+//                return isPictureResponseCorrect(answerEntity, questionEntity);
+//        }
 
-        if (type.equals(String.valueOf(QuestionType.MULTIPLE_CHOICE))) {
-            String correctAnswer =
-                    StringUtils.stringToList(questionEntity.getChoices(), ',').
-                            get((int) questionEntity.getCorrectAnswerIndex() - 1);
-            return correctAnswer.equals(answer.getUserAnswer());
-        }
 
-        List<String> answers = StringUtils.stringToList(questionEntity.getChoices(), ',');
-        return answers.contains(answer.getUserAnswer());
 
-    }
+//        QuestionEntity questionEntity = questionRepository.getQuestionById(answer.getQuestionId());
+//        String type = questionEntity.getType();
+//
+//        if (type.equals(String.valueOf(QuestionType.MULTIPLE_CHOICE))) {
+//            String correctAnswer =
+//                    StringUtils.stringToList(questionEntity.getChoices(), ',').
+//                            get((int) questionEntity.getCorrectAnswerIndex() - 1);
+//            return correctAnswer.equals(answer.getUserAnswer());
+//        }
+//
+//        List<String> answers = StringUtils.stringToList(questionEntity.getChoices(), ',');
+//        return answers.contains(answer.getUserAnswer());
+
+
+//    private boolean isPictureResponseCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
+//        String userAnswer =
+//        return false;
+//    }
+//
+//    private boolean isMultipleBlanksCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
+//        return false;
+//    }
+//
+//    private boolean isMultipleAnswersCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
+//        return false;
+//    }
+//
+//    private boolean isTrueOrFalseCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
+//        return false;
+//    }
+//
+//    private boolean isMultipleChoiceCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
+//        return false;
+//    }
+//
+//    private boolean isFillInBlankCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
+//        return false;
+//    }
+//
+//    private boolean isQuestionResponseCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity){
+//        return false;
+//    }
 
 
 }

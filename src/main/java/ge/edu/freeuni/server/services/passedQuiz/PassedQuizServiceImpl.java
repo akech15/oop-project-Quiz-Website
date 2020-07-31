@@ -96,14 +96,15 @@ public class PassedQuizServiceImpl implements PassedQuizService {
     @Override
     public long getPassedQuizScore(PassedQuiz passedQuiz) {
 
-        List<AnswerEntity> answersByPassedQuiz = passedQuizRepository.getAnswersByPassedQuiz(PassedQuizConverter.
-                passedQuizToEntity(quizRepository, passedQuiz));
+        List<AnswerEntity> answersByPassedQuiz = passedQuizRepository.getAnswersByPassedQuiz(PassedQuizConverter
+                                                    .passedQuizToEntity(quizRepository, passedQuiz));
+
         List<Answer> passedQuizAnswers = AnswerConverter.entityToAnswerList(
-                questionRepository,
-                quizRepository,
-                passedQuizRepository,
-                userRepository,
-                answersByPassedQuiz);
+                                            questionRepository,
+                                            quizRepository,
+                                            passedQuizRepository,
+                                            userRepository,
+                                            answersByPassedQuiz);
 
         long score = 0;
 

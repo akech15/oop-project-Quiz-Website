@@ -64,6 +64,28 @@
     </div>
 </div>
 
+<!-- About Questions -->
+<div id="questions" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black w3-display-container">
+            <span onclick="document.getElementById('questions').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+            <h1>Quiz Questions</h1>
+        </div>
+
+        <div class="w3-container">
+            <%
+                for (int i = 0; i < questions.size(); i++) {
+                    Question question = questions.get(i);
+
+                    String questionText = question.getQuestion();
+                    String questionType = String.valueOf(question.getType());
+                    out.print("<h5><b>Question #" + (i+1) + ", Question text: '" + questionText + "', Question type: '" + questionType +  "'</b></h5>");
+                }
+            %>
+        </div>
+    </div>
+</div>
+
 <!-- About Author -->
 <div id="aboutAuthor" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
@@ -91,7 +113,10 @@
             document.getElementById("aboutQuiz").style.display = "none";
         } else if(event.target == document.getElementById("aboutAuthor")){
             document.getElementById("aboutQuiz").style.display = "none";
+        } else if(event.target == document.getElementById("questions")){
+            document.getElementById("questions").style.display = "none";
         }
+
     }
 
 </script>

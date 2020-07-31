@@ -1,12 +1,14 @@
 package ge.edu.freeuni.server.services.quiz;
 
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
+import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import ge.edu.freeuni.server.services.user.UserService;
+import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,14 +81,14 @@ public class QuizServiceImpl implements QuizService {
         return QuizConverter.entityToQuizList(userRepository, quizRepository.getAllQuizzes());
     }
 
-//    @Override
-//    public List<Pair<User, Long>> getTopRatedUsersByQuiz(Quiz quiz) {
-//        return UserConverter.entityToUserPairList(quizRepository.getTopRatedUsersByQuizId(quiz.getId()));
-//    }
+    @Override
+    public List<Wyvili<User, Long>> getTopRatedUsersByQuiz(Quiz quiz) {
+        return UserConverter.entityToUserPairList(quizRepository.getTopRatedUsersByQuizId(quiz.getId()));
+    }
 
-//    @Override
-//    public List<Pair<Quiz, Long>> getTopRatedQuizzes() {
-//        return QuizConverter.entityToQuizPairList(userRepository, quizRepository.getTopRatedQuizzes());
-//    }
+    @Override
+    public List<Wyvili<Quiz, Long>> getTopRatedQuizzes() {
+        return QuizConverter.entityToQuizPairList(userRepository, quizRepository.getTopRatedQuizzes());
+    }
 
 }

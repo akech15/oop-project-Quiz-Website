@@ -4,6 +4,7 @@ import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
+import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -44,15 +45,15 @@ public final class QuizConverter {
 		return res;
 	}
 
-//	public static List<Pair<Quiz, Long>> entityToQuizPairList(UserRepository userRepository,
-//															  List<Pair<QuizEntity, Long>> topRatedQuizzes) {
-//		List<Pair<Quiz, Long>> res = new ArrayList<>();
-//
-//		for (Pair<QuizEntity, Long> pair :
-//				topRatedQuizzes) {
-//			res.add(new Pair<>(QuizConverter.entityToQuiz(userRepository, pair.first), pair.second));
-//		}
-//
-//		return res;
-//	}
+	public static List<Wyvili<Quiz, Long>> entityToQuizPairList(UserRepository userRepository,
+																List<Wyvili<QuizEntity, Long>> topRatedQuizzes) {
+		List<Wyvili<Quiz, Long>> res = new ArrayList<>();
+
+		for (Wyvili<QuizEntity, Long> wyvili :
+				topRatedQuizzes) {
+			res.add(new Wyvili<>(QuizConverter.entityToQuiz(userRepository, wyvili.first), wyvili.second));
+		}
+
+		return res;
+	}
 }

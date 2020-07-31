@@ -296,24 +296,4 @@ public class QuestionController {
 //    }
 
 
-    @RequestMapping("questionsWrapper/{index_of_question}/{quizId}")
-    public String questionsWrapper(@PathVariable long quizId,
-                                   @PathVariable long index_of_question,
-                                   Map<String, Object> model){
-
-        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quizId));
-
-        if(index_of_question >= questions.size() - 1){
-            return "finishPlayingQuiz";
-        }
-
-        Question question = questions.get((int) (index_of_question + 1));
-
-        model.put("quizId", quizId);
-        model.put("question", question);
-        model.put("index", index_of_question + 1);
-
-        return QuestionConverter.getJspFromType(question.getType());
-    }
-
 }
