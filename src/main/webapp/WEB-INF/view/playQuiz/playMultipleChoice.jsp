@@ -49,6 +49,8 @@
             }
             out.print("<br>");
 
+            System.out.println("shemovida");
+
             String toShow = "<label>Enter if correct answer is either ";
             for (int i = 0; i < chars.size() - 1; i++) {
                 toShow += chars.get(i) + ", ";

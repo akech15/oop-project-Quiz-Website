@@ -43,6 +43,36 @@
         <input type="submit" value = "Submit Answer" id="submitButton">
     </form>
 </div>
+
+<script>
+    window.onclick = function(event) {
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("trueCheckBox")){
+                if(document.getElementById("falseCheckBox").checked = true){
+                    uncheckFalse();
+                }
+            } else if (event.target == document.getElementById("falseCheckBox")){
+                if(document.getElementById("trueCheckBox").checked = true){
+                    uncheckTrue();
+                }
+            }
+        }
+
+        function uncheckTrue() {
+            document.getElementById("trueCheckBox").checked = false;
+        }
+
+        function uncheckFalse() {
+            document.getElementById("falseCheckBox").checked = false;
+        }
+
+    }
+
+
+
+</script>
+
 </body>
 </html>
 

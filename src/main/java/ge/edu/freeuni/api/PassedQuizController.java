@@ -4,11 +4,13 @@ import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.answer.Answer;
 import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 import ge.edu.freeuni.api.model.question.Question;
+import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.services.answer.AnswerService;
 import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
+import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,17 +58,29 @@ public class PassedQuizController {
                                 @PathVariable long index_of_question,
                                 Map<String, Object> model){
 
-
         List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quizId));
 
         Question currQuestion = questions.get((int) index_of_question);
-        String userAnswer = (String) params.get("correctAnswer");
 
         Answer answer = new Answer();
 
         answer.setPassedQuiz(passedQuizService.getActivePassedQuiz());
         answer.setQuestion(currQuestion);
-        answer.setUserAnswer(userAnswer);
+
+        String answerTextToSet;
+
+
+        if (currQuestion.getType() == QuestionType.MULTIPLE_CHOICE) {
+            String yle = (String) params.get("correctAnswer");
+            answerTextToSet = currQuestion.getChoices().get(yle.charAt(0) - 'a');
+        }else if (currQuestion.getType() == QuestionType.TRUE_FALSE){
+            answerTextToSet = (params.get("trueCheckBox") != null) ? "True" : "False";
+
+        }else{
+            answerTextToSet = (String) params.get("correctAnswer");
+        }
+
+        answer.setUserAnswer(answerTextToSet);
 
         answerService.addAnswer(answer);
 

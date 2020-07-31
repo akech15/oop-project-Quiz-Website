@@ -56,7 +56,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     @Override
     public QuestionEntity getQuestionById(long id) {
         String query = String.format("select * from question where id = \'%d\';", id);
-        System.out.println("AMAS USHEVBS " + query);
         return jdbcTemplate.queryForObject(query, questionRawMapper);
     }
 

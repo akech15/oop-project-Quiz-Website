@@ -12,8 +12,11 @@ import ge.edu.freeuni.server.repository.question.QuestionRepository;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
+import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AnswerServiceImpl implements AnswerService {
@@ -38,7 +41,6 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public boolean isAnswerCorrect(Answer answer) {
-//        return answerRepository.isAnswerCorrect(AnswerConverter.AnswerToEntity(answer, quizRepository));
 
         Question question = answer.getQuestion();
 
@@ -66,25 +68,34 @@ public class AnswerServiceImpl implements AnswerService {
         }
 
         private boolean isMultipleBlanksCorrect(Answer answer, Question question) {
-            return false;
+            return isMultipleAnswersCorrect(answer, question);
         }
 
         private boolean isMultipleAnswersCorrect(Answer answer, Question question) {
-            String userAnswer = answer.getUserAnswer();
 
-            return false;
+            List<String> userAnswers = StringUtils.stringToList(answer.getUserAnswer(), ',');
+
+            List<String> correctAnswers = StringUtils.stringToList(question.getCorrectAnswer(), ',');
+
+            for (String userAnswer:
+                 userAnswers) {
+                if(!correctAnswers.contains(userAnswer)){
+                    return false;
+                }
+            }
+            return true;
         }
 
         private boolean isTrueOrFalseCorrect(Answer answer, Question question) {
-            return false;
+            return isFillInBlankCorrect(answer, question);
         }
 
         private boolean isMultipleChoiceCorrect(Answer answer, Question question) {
-            return false;
+            return answer.getUserAnswer().equals(question.getCorrectAnswer());
         }
 
         private boolean isFillInBlankCorrect(Answer answer, Question question) {
-            return false;
+            return answer.getUserAnswer().equals(question.getCorrectAnswer());
         }
 
         private boolean isQuestionResponseCorrect(Answer answer, Question question){

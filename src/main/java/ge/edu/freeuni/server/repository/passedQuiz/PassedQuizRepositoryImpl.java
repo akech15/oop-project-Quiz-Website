@@ -64,8 +64,6 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
                 durationDB
         );
 
-        System.out.println(query);
-
         try {
             jdbcTemplate.update(query);
             return true;
