@@ -133,4 +133,13 @@ public class PassedQuizServiceImpl implements PassedQuizService {
                 );
     }
 
+    @Override
+    public List<PassedQuiz> getPassedQuizzesByUserId(long userId) {
+
+        return PassedQuizConverter.entityToPassedQuizList(userRepository,
+                                                            quizRepository,
+                passedQuizRepository.getPassedQuizesByUserId(userId));
+
+    }
+
 }

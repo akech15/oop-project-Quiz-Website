@@ -1,5 +1,6 @@
 package ge.edu.freeuni.server.repository.quiz;
 
+import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
 import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
@@ -138,6 +139,25 @@ public class QuizRepositoryImpl implements QuizRepository {
 
         for (int i = 0; i < ids.size(); i++){
             res.add(new Wyvili<>(this.getQuizById(ids.get(i)), counts.get(i)));
+        }
+
+        return res;
+    }
+
+    @Override
+    public List<QuizEntity> getAllQuizesByUserId(long user_id) {
+        String query = String.format(
+                "SELECT id FROM quiz WHERE creator_id = \'%d\';",
+                user_id
+        );
+
+        List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
+
+        List<QuizEntity> res = new ArrayList<>();
+
+        for (long id :
+                ids) {
+            res.add(this.getQuizById(id));
         }
 
         return res;

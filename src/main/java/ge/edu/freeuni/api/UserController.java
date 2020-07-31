@@ -1,13 +1,12 @@
 package ge.edu.freeuni.api;
 
+import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
-import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
+import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
-import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
 import ge.edu.freeuni.server.services.user.UserService;
-import ge.edu.freeuni.server.services.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +25,9 @@ public class UserController {
     @Autowired
     private QuizService quizService;
 
+    @Autowired
+    private PassedQuizService passedQuizService;
+
     @GetMapping("/")
     public String index() {
         return "index";
@@ -36,11 +38,20 @@ public class UserController {
                         Map<String, Object> model) {
         model.put("username", username);
 
-        boolean validUser = authenticationService.logIn(userService.getUserByUsername(username));
+        boolean validUser = authenticationService.logIn(userService.getUserByUsernameAndPassword(username, password));
 
         if (validUser) {
-            List<Quiz> quizList = quizService.getAllQuizzes();
-            model.put("quizzes", quizList);
+            model.put("username", authenticationService.getActiveUser().getUsername());
+
+            List<Quiz> availableQuizzes = quizService.getAllQuizzes();
+            List<PassedQuiz> passedQuizzes = passedQuizService
+                    .getPassedQuizzesByUserId(authenticationService.getActiveUser().getId());
+
+            List<Quiz> userQuizzes = quizService.getQuizesByUserId(authenticationService.getActiveUser().getId());
+
+            model.put("quizzes", availableQuizzes);
+            model.put("passedQuizzes", passedQuizzes);
+            model.put("userQuizes", userQuizzes);
             return "userPage";
         }
 
@@ -52,8 +63,15 @@ public class UserController {
     public String userPage(Map<String, Object> model) {
         model.put("username", authenticationService.getActiveUser().getUsername());
 
-        List<Quiz> quizList = quizService.getAllQuizzes();
-        model.put("quizzes", quizList);
+        List<Quiz> availableQuizzes = quizService.getAllQuizzes();
+        List<PassedQuiz> passedQuizzes = passedQuizService
+                .getPassedQuizzesByUserId(authenticationService.getActiveUser().getId());
+
+        List<Quiz> userQuizzes = quizService.getQuizesByUserId(authenticationService.getActiveUser().getId());
+
+        model.put("quizzes", availableQuizzes);
+        model.put("passedQuizzes", passedQuizzes);
+        model.put("userQuizes", userQuizzes);
 
         return "userPage";
     }

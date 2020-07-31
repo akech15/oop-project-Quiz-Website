@@ -26,4 +26,5 @@ public interface QuizService {
 
     List<Wyvili<Quiz, Long>> getTopRatedQuizzes();
 
+	List<Quiz> getQuizesByUserId(long id);
 }

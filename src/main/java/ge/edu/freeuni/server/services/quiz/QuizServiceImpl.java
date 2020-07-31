@@ -91,4 +91,10 @@ public class QuizServiceImpl implements QuizService {
         return QuizConverter.entityToQuizPairList(userRepository, quizRepository.getTopRatedQuizzes());
     }
 
+    @Override
+    public List<Quiz> getQuizesByUserId(long id) {
+        return QuizConverter.entityToQuizList(userRepository,
+                quizRepository.getAllQuizesByUserId(id));
+    }
+
 }

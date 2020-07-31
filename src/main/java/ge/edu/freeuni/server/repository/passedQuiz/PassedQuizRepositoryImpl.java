@@ -2,6 +2,7 @@ package ge.edu.freeuni.server.repository.passedQuiz;
 
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
 import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
+import ge.edu.freeuni.server.model.question.QuestionEntity;
 import ge.edu.freeuni.server.repository.answer.AnswerRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -128,6 +129,25 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
 
         return jdbcTemplate.queryForObject(query, passedQuizRawMapper);
 
+    }
+
+    @Override
+    public List<PassedQuizEntity> getPassedQuizesByUserId(long userId) {
+        String query = String.format(
+                "SELECT id FROM passed_quiz WHERE user_id = \'%d\';",
+                userId
+        );
+
+        List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
+
+        List<PassedQuizEntity> res = new ArrayList<>();
+
+        for (long id :
+                ids) {
+            res.add(this.getPassedQuizById(id));
+        }
+
+        return res;
     }
 
 }

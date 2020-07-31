@@ -1,11 +1,17 @@
 package ge.edu.freeuni.api.converter.passedQuiz;
 
+import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.converter.quiz.QuizConverter;
 import ge.edu.freeuni.api.converter.user.UserConverter;
 import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
+import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
+import ge.edu.freeuni.server.model.question.QuestionEntity;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class PassedQuizConverter {
 
@@ -37,4 +43,17 @@ public final class PassedQuizConverter {
                 .build();
     }
 
+
+    public static List<PassedQuiz> entityToPassedQuizList(UserRepository userRepository,
+                                                    QuizRepository quizRepository,
+                                                    List<PassedQuizEntity> passedQuizzes) {
+        List<PassedQuiz> res = new ArrayList<>();
+
+        for (PassedQuizEntity passedQuizEntity :
+                passedQuizzes) {
+            res.add(PassedQuizConverter.entityToPassedQuiz(userRepository, quizRepository, passedQuizEntity));
+        }
+
+        return res;
+    }
 }

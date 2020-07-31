@@ -1,6 +1,5 @@
 package ge.edu.freeuni.server.services.user;
 
-import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 
 import java.util.List;
@@ -13,5 +12,5 @@ public interface UserService {
 
     List<User> getUsersByUsernameFragment(String usernameFragment);
 
-    User getUserByUsername(String username);
+    User getUserByUsernameAndPassword(String username, String password);
 }

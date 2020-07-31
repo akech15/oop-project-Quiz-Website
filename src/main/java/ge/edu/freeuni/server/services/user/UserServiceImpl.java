@@ -1,7 +1,6 @@
 package ge.edu.freeuni.server.services.user;
 
 import ge.edu.freeuni.api.converter.user.UserConverter;
-import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
@@ -32,8 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsernameAndPassword(String username, String password) {
         UserEntity userEntity = userRepository.getUsersByUsername(username);
-        return UserConverter.entityToUser(userEntity);
+        if (userEntity != null && userEntity.getPassword().equals(password)) {
+            return UserConverter.entityToUser(userEntity);
+        }
+        return null;
     }
 }
