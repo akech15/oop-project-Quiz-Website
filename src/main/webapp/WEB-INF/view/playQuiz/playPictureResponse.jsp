@@ -20,8 +20,6 @@
 </head>
 <body>
 
-<img src="<%=URL%>" alt="Trulli" width="500" height="333">
-
 <div class="bgimg w3-display-container w3-text-white">
 
 	<div class="w3-display-topright w3-container w3-xlarge">
@@ -31,7 +29,10 @@
 		<p>
 			<button class="w3-button w3-black"><a href="/">Log Out</a></button>
 		</p>
+
 	</div>
+
+	<img src="<%=URL%>" alt="Trulli" width="500" height="333">
 
 	<form action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
 		<%

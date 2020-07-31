@@ -16,9 +16,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<title>Quiz Result</title>
+	<title>VIEW QUIZ</title>
 	<%
 		PassedQuiz passedQuiz = (PassedQuiz) request.getAttribute("passedQuiz");
+		int questionsSize = (int) request.getAttribute("questionsSize");
 
 	%>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -26,47 +27,38 @@
 </head>
 <body>
 
-<h1>SHENA GAQVS <%=passedQuiz.getScore()%> QULA</h1>
-
 <div class="bgimg w3-display-container w3-text-white">
 
 	<div class="w3-display-topleft w3-container w3-xlarge">
-<%--		<p><button onclick="document.getElementById('aboutQuiz').style.display='block'" class="w3-button w3-black">About this quiz</button></p>--%>
-<%--		<p><button onclick="document.getElementById('questions').style.display='block'" class="w3-button w3-black">Quiz questions</button></p>--%>
-<%--		<p><button onclick="document.getElementById('aboutAuthor').style.display='block'" class="w3-button w3-black">About author</button></p>--%>
-<%--		<p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>--%>
+		<p><button onclick="document.getElementById('aboutQuiz').style.display='block'" class="w3-button w3-black">About this quiz</button></p>
+		<p><button onclick="document.getElementById('questions').style.display='block'" class="w3-button w3-black">Quiz questions</button></p>
+		<p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
 	</div>
-
-<%--	<div class="w3-display-topright w3-container w3-xlarge">--%>
-<%--		<%--%>
-<%--			out.print("<p><button class=\"w3-button w3-black\"><a  href=\"/logOut\">Log Out</a></button></p>");--%>
-<%--		%>--%>
-<%--	</div>\--%>
 
 	<div class="w3-display-topright w3-container w3-xlarge">
 		<%
-			out.print("<p><button class=\"w3-button w3-black\"><a  href=\"/userhomepage\">User Page</a></button></p>");
+			out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/logOut\">Log Out</a></button></p>"));
 		%>
 	</div>
 
 </div>
 
-<%--<!-- About Quiz -->--%>
-<%--<div id="aboutQuiz" class="w3-modal">--%>
-<%--	<div class="w3-modal-content w3-animate-zoom">--%>
-<%--		<div class="w3-container w3-black w3-display-container">--%>
-<%--			<span onclick="document.getElementById('aboutQuiz').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>--%>
-<%--			<h1>About Quiz</h1>--%>
-<%--		</div>--%>
+<!-- About Quiz -->
+<div id="aboutQuiz" class="w3-modal">
+	<div class="w3-modal-content w3-animate-zoom">
+		<div class="w3-container w3-black w3-display-container">
+			<span onclick="document.getElementById('aboutQuiz').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+			<h1>About Passed Quiz</h1>
+		</div>
 
-<%--		<div class="w3-container">--%>
+		<div class="w3-container">
 
-<%--			<h5>Name: <b><%=quiz.getName()%></b></h5>--%>
-<%--			<h5>Description: <b><%=quiz.getDescription()%></b></h5>--%>
-<%--			<h5>creation date: <b><%=date%></b></h5>--%>
-<%--		</div>--%>
-<%--	</div>--%>
-<%--</div>--%>
+			<h5>Quiz Name: <b><%=passedQuiz.getQuiz().getName()%></b></h5>
+			<h5>Duration: <b><%=passedQuiz.getDuration()%></b></h5>
+			<h5>Final point: <b><%=questionsSize%></b></h5>
+		</div>
+	</div>
+</div>
 
 <%--<!-- About Questions -->--%>
 <%--<div id="questions" class="w3-modal">--%>
@@ -108,22 +100,22 @@
 <%--<!-- start Quiz -->--%>
 <%--<div id="startQuiz" class="button">--%>
 
-<%--</div>--%>
+</div>
 
 
-<%--<script>--%>
-<%--    // window.onclick = function(event) {--%>
-<%--    //     if (event.target == document.getElementById("aboutQuiz")) {--%>
-<%--    //         document.getElementById("aboutQuiz").style.display = "none";--%>
-<%--    //     } else if(event.target == document.getElementById("aboutAuthor")){--%>
-<%--    //         document.getElementById("aboutQuiz").style.display = "none";--%>
-<%--    //     } else if(event.target == document.getElementById("questions")){--%>
-<%--    //         document.getElementById("questions").style.display = "none";--%>
-<%--    //     }--%>
-<%--	//--%>
-<%--    // }--%>
+<script>
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("aboutQuiz")) {
+            document.getElementById("aboutQuiz").style.display = "none";
+        } else if(event.target == document.getElementById("aboutAuthor")){
+            document.getElementById("aboutQuiz").style.display = "none";
+        } else if(event.target == document.getElementById("questions")){
+            document.getElementById("questions").style.display = "none";
+        }
 
-<%--</script>--%>
+    }
+
+</script>
 
 </body>
 </html>

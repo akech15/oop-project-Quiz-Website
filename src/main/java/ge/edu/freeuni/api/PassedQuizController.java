@@ -88,6 +88,7 @@ public class PassedQuizController {
 
             PassedQuiz passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
+            model.put("questionsSize", questions.size());
 
             return "finishPlayingQuiz";
         }

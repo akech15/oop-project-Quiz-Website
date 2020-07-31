@@ -149,10 +149,6 @@ public class QuizController {
         return "questionTypes/imageAnswersSubmitted";
     }
 
-    @RequestMapping("/matching")
-    public String matching(Map<String, Object> model) {
-        return "questionTypes/matching";
-    }
 
 //    @RequestMapping("/finishQuiz")
 //    public String finishQuiz(Map<String, Object> model) {
