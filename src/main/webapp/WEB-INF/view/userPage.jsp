@@ -41,8 +41,8 @@
                     User creator = quiz.getCreator();
                     String creatorName = creator.getUsername();
                     String toShow = quizName + " --- " + creatorName;
-                    long quiz_id = quiz.getId();
-                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quiz_id, toShow));
+                    long quizId = quiz.getId();
+                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
 
                 }
             %>

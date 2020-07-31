@@ -10,6 +10,7 @@ import ge.edu.freeuni.server.repository.question.QuestionRepository;
 import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.services.answer.AnswerService;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,9 @@ public class PassedQuizServiceImpl implements PassedQuizService {
     @Autowired
     private AnswerService answerService;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
 
     @Override
     public PassedQuiz getActivePassedQuiz() {
@@ -44,6 +48,12 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
     @Override
     public boolean startQuiz(PassedQuiz passedQuiz) {
+
+        passedQuiz.setUser(authenticationService.getActiveUser());
+        passedQuiz.setStartDate(new Date());
+        passedQuiz.setEndDate(new Date());
+        passedQuiz.setDuration(new Date());
+
         boolean startQuiz = passedQuizRepository
                 .startQuiz(PassedQuizConverter
                         .passedQuizToEntity(quizRepository,

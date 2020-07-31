@@ -7,7 +7,7 @@ public final class DateUtils {
 
     public static java.sql.Date getDbDate(Date date) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); // your template here
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String d = formatter.format(date);
             java.util.Date dateStr = formatter.parse(d);
             return new java.sql.Date(dateStr.getTime());

@@ -60,9 +60,9 @@ CREATE TABLE passed_quiz
     user_id    int NOT NULL,
     quiz_id    int NOT NULL,
     score      int not null,
-    start_date date,
-    end_date   date,
-    duration   date,
+    start_date long,
+    end_date   long ,
+    duration   long ,
     primary key (id),
     FOREIGN KEY (quiz_id) references quiz (id),
     FOREIGN KEY (user_id) references user (id)

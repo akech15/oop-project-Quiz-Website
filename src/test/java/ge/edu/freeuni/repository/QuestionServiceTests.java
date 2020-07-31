@@ -211,7 +211,6 @@ public class QuestionServiceTests {
 
         List<String> choices =  question.getChoices();
 
-        System.out.println(choices);
     }
 
 }

@@ -36,8 +36,8 @@
 
     <div class="w3-display-topright w3-container w3-xlarge">
         <%
-            Long quiz_id = (Long) request.getAttribute("quiz_id");
-            out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/preQuiz/%d\">Start Quiz</a></button></p>", quiz_id));
+            Long quizId = (Long) request.getAttribute("quizId");
+            out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/preQuiz/%d\">Start Quiz</a></button></p>", quizId));
         %>
     </div>
 

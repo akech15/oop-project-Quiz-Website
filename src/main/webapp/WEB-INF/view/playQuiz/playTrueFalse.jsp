@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/multipleChoiceSubmitted.css"/>
     <title>Play Quiz</title>
 
+    <%
+        Question question = (Question) request.getAttribute("question");
+        Long choice = (Long) request.getAttribute("index");
+        Long quizId = (Long) request.getAttribute("quizId");
+    %>
+
 </head>
 <body>
 
@@ -25,11 +31,9 @@
         <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>
     </div>
 
-    <form action="${pageContext.request.contextPath}/addMultipleAnswers" method="post">
+    <form action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
         <%
-            Question question = (Question) request.getAttribute("question");
             String q = question.getQuestion();
-            Integer choice = (Integer) request.getAttribute("index");
             out.print("<h1> Question: #" + choice + " : "+ q + "</h1><br>");
             out.print("<h2> Tick what you think is correct Answer: </h2><br>");
             out.print("<br>");

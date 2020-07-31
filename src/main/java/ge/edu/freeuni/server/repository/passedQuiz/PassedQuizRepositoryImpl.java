@@ -3,7 +3,6 @@ package ge.edu.freeuni.server.repository.passedQuiz;
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
 import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
 import ge.edu.freeuni.server.repository.answer.AnswerRepositoryImpl;
-import ge.edu.freeuni.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -30,9 +29,12 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
         entity1.setQuizId(result.getLong("quiz_id"));
         entity1.setUserId(result.getLong("user_id"));
         entity1.setScore(result.getLong("score"));
-        entity1.setStartDate(result.getDate("start_date"));
-        entity1.setEndDate(result.getDate("end_date"));
-        entity1.setDuration(result.getDate("duration"));
+        Date startDate = new Date(result.getLong("start_date"));
+        entity1.setStartDate(startDate);
+        Date endDate = new Date(result.getLong("end_date"));
+        entity1.setEndDate(endDate);
+        Date duration = new Date(result.getLong("duration"));
+        entity1.setDuration(duration);
         return entity1;
     };
 
@@ -45,20 +47,15 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
     @Override
     public boolean startQuiz(PassedQuizEntity passedQuizEntity) {
 
-        Date startDate = passedQuizEntity.getStartDate();
-        java.sql.Date startDateDB = DateUtils.getDbDate(startDate);
+        long startDateDB = passedQuizEntity.getStartDate().getTime();
 
-        Date endDate = passedQuizEntity.getStartDate();
-        java.sql.Date endDateDB = DateUtils.getDbDate(endDate);
+        long endDateDB = passedQuizEntity.getEndDate().getTime();
 
-        Date duration = passedQuizEntity.getStartDate();
-        java.sql.Date durationDB = DateUtils.getDbDate(duration);
-
+        long durationDB = passedQuizEntity.getDuration().getTime();
 
         String query = String.format(
-                "INSERT INTO passed_quiz (id, user_id, quiz_id, score, start_date, end_date, duration)" +
-                        "values (\'%d\', \'%d\', \'%d\', \'%d\', \'%s\', \'%s\', \'%s\');",
-                passedQuizEntity.getId(),
+                "INSERT INTO passed_quiz (user_id, quiz_id, score, start_date, end_date, duration)" +
+                        "values (\'%d\', \'%d\', \'%d\', \'%d\', \'%d\', \'%d\');",
                 passedQuizEntity.getUserId(),
                 passedQuizEntity.getQuizId(),
                 passedQuizEntity.getScore(),
@@ -67,10 +64,13 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
                 durationDB
         );
 
+        System.out.println(query);
+
         try {
             jdbcTemplate.update(query);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
@@ -78,14 +78,13 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
 
     @Override
     public boolean finishQuiz(PassedQuizEntity passedQuizEntity) {
-        Date endDate = passedQuizEntity.getEndDate();
-        java.sql.Date endDateDB = DateUtils.getDbDate(endDate);
+
+        long endDateDB = passedQuizEntity.getEndDate().getTime();
         long score = passedQuizEntity.getScore();
-        Date duration = passedQuizEntity.getDuration();
-        java.sql.Date durationDB = DateUtils.getDbDate(duration);
+        long durationDB = passedQuizEntity.getDuration().getTime();
 
         String query = String.format(
-                "UPDATE passed_quiz SET score = \'%s\', end_date = \'%s\', duration = \'%s\'" +
+                "UPDATE passed_quiz SET score = \'%d\', end_date = \'%d\', duration = \'%d\'" +
                         "WHERE id = \'%d\';",
                 score,
                 endDateDB,
@@ -120,11 +119,10 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
     @Override
     public PassedQuizEntity getPassedQuizByIdentifiers(PassedQuizEntity passedQuizEntity) {
 
-        Date startDate = passedQuizEntity.getStartDate();
-        java.sql.Date startDateDB = DateUtils.getDbDate(startDate);
+        long startDateDB = passedQuizEntity.getStartDate().getTime();
 
         String query = String.format(
-                "SELECT * FROM passed_quiz WHERE user_id = \'%d\' AND quiz_id = \'%d\' AND start_date = \'%s\';",
+                "SELECT * FROM passed_quiz WHERE user_id = \'%d\' AND quiz_id = \'%d\' AND start_date = \'%d\';",
                 passedQuizEntity.getUserId(),
                 passedQuizEntity.getQuizId(),
                 startDateDB

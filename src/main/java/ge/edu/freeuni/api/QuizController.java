@@ -37,19 +37,20 @@ public class QuizController {
         return "createQuiz";
     }
 
-    @RequestMapping("/preQuiz/{quiz_id}")
-    public String startQuiz(@PathVariable Long quiz_id, Map<String, Object> model) {
+    @RequestMapping("/preQuiz/{quizId}")
+    public String startQuiz(@PathVariable Long quizId, Map<String, Object> model) {
 
         model.put("index", 0);
-        model.put("quiz_id", quiz_id);
+        model.put("quizId", quizId);
+
         return "preQuizPage";
     }
 
-    @RequestMapping("/quizDescriptionPage/{quiz_id}")
-    public String aboutQuiz(@PathVariable Long quiz_id, Map<String, Object> model) {
-        Quiz toAdd = quizService.getQuizById(quiz_id);
+    @RequestMapping("/quizDescriptionPage/{quizId}")
+    public String aboutQuiz(@PathVariable Long quizId, Map<String, Object> model) {
+        Quiz toAdd = quizService.getQuizById(quizId);
         model.put("quiz",toAdd);
-        model.put("quiz_id",quiz_id);
+        model.put("quizId",quizId);
 
         return "quizDescription";
     }

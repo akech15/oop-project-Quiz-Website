@@ -41,17 +41,21 @@ public final class QuestionConverter {
                 .build();
     }
 
-    public static String getJspFromType(String type) {
-        QuestionType type1 = Enum.valueOf(QuestionType.class, type);
-        switch (type1) {
+    public static String getJspFromType(QuestionType type) {
+        switch (type) {
             case QUESTION_RESPONSE:
-                return "questionResponse";
+                return "playQuiz/playQuestionResponse";
             case FILL_IN_THE_BLANK:
-                return "fillInTheBlank";
+                return "playQuiz/playFillInBlank";
             case MULTIPLE_CHOICE:
-                return "multipleChoice";
+                return "playQuiz/playMultipleChoice";
+            case TRUE_FALSE:
+                return "playQuiz/playTrueFalse";
+            case MULTIPLE_ANSWERS:
+                return "playQuiz/playMultipleAnswers";
+            case MULTIPLE_BLANKS:
             default:
-                return "pictureResponse";
+                return "playQuiz/playPictureResponse";
         }
     }
 
