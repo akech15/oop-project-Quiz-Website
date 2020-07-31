@@ -87,7 +87,7 @@ public class AuthenticationServiceTests {
 
         Assertions.assertEquals("admin", authenticationService.getActiveUser().getUsername());
 
-        authenticationService.logOut(user);
+        authenticationService.logOut();
 
         Assertions.assertNull(authenticationService.getActiveUser());
     }

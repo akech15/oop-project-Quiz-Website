@@ -33,7 +33,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password,
-                        Map<String, Object> model) throws SQLException {
+                        Map<String, Object> model) {
         model.put("username", username);
 
         boolean validUser = authenticationService.logIn(userService.getUserByUsername(username));
@@ -91,7 +91,13 @@ public class UserController {
     }
 
     @RequestMapping("/viewUser")
-    public String viewUser(Map<String, Object> model){
+    public String viewUser(Map<String, Object> model) {
         return "viewUserPage";
+    }
+
+    @RequestMapping("/logOut")
+    public String logOut(){
+        authenticationService.logOut();
+        return "index";
     }
 }

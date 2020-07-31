@@ -12,6 +12,6 @@ public interface AuthenticationService {
 
     boolean logIn(User user);
 
-    void logOut(User user);
+    void logOut();
 
 }

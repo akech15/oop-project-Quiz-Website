@@ -49,8 +49,8 @@ public class QuizController {
     @RequestMapping("/quizDescriptionPage/{quizId}")
     public String aboutQuiz(@PathVariable Long quizId, Map<String, Object> model) {
         Quiz toAdd = quizService.getQuizById(quizId);
-        model.put("quiz",toAdd);
-        model.put("quizId",quizId);
+        model.put("quiz", toAdd);
+        model.put("quizId", quizId);
 
         return "quizDescription";
     }
@@ -64,8 +64,9 @@ public class QuizController {
     @RequestMapping("/startQuizMaking")
     public String startQuizMaking(@RequestParam String quizName, @RequestParam String description,
                                   Map<String, Object> model) {
-        String name = quizName;
-        quizService.startMakingQuiz(new Quiz(name, description));
+
+        quizService.startMakingQuiz(new Quiz(quizName, description));
+
         return "makeQuestions";
     }
 
@@ -110,39 +111,39 @@ public class QuizController {
     }
 
     @RequestMapping("/questionResponse")
-    public String questionResponse(Map<String, Object> model){
+    public String questionResponse(Map<String, Object> model) {
 
         return "questionTypes/questionResponse";
     }
 
 
     @RequestMapping("/questionResponseSubmitted")
-    public String questionResponseSubmitted(@RequestParam String choiceCount, Map<String, Object> model){
+    public String questionResponseSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
         model.put("choiceCount", choiceCount);
 
         return "questionTypes/questionResponseSubmitted";
     }
 
     @RequestMapping("/fillMultipleBlanks")
-    public String fillInMultipleBlank(Map<String, Object> model){
+    public String fillInMultipleBlank(Map<String, Object> model) {
 
         return "questionTypes/fillInMultipleBlanks";
     }
 
     @RequestMapping("/fillMultipleBlanksSubmitted")
-    public String fillInMultipleBlankSubmitted(@RequestParam String choiceCount, Map<String, Object> model){
+    public String fillInMultipleBlankSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
         model.put("choiceCount", choiceCount);
         return "questionTypes/fillInMultipleBlanksSubmitted";
     }
 
     @RequestMapping("/imageAnswers")
-    public String imageAnswers(Map<String, Object> model){
+    public String imageAnswers(Map<String, Object> model) {
 
         return "questionTypes/imageAnswers";
     }
 
     @RequestMapping("/imageAnswersSubmitted")
-    public String imageAnswersSubmitted(@RequestParam String choiceCount, Map<String, Object> model){
+    public String imageAnswersSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
         model.put("choiceCount", choiceCount);
 
         return "questionTypes/imageAnswersSubmitted";
@@ -153,10 +154,20 @@ public class QuizController {
         return "questionTypes/matching";
     }
 
-    @RequestMapping("/finishQuiz")
-    public String finishQuiz(Map<String, Object> model){
-        quizService.finishMakingQuiz();
-        return "finishedQuiz";
+//    @RequestMapping("/finishQuiz")
+//    public String finishQuiz(Map<String, Object> model) {
+//        quizService.finishMakingQuiz();
+//        return "finishedQuiz";
+//    }
+
+    @RequestMapping("/viewQuiz")
+    public String viewQuiz(Map<String,Object> model) {
+
+        Quiz quiz = quizService.finishMakingQuiz();
+        model.put("quiz", quiz);
+        model.put("questions", questionService.getAllQuestionsByQuiz(quiz));
+        return "viewQuiz";
     }
+
 
 }

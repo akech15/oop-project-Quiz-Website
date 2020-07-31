@@ -42,7 +42,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public void logOut(User user) {
+    public void logOut() {
         cancelActiveUser();
     }
 }

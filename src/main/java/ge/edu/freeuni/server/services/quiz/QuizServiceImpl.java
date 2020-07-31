@@ -68,8 +68,10 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void finishMakingQuiz() {
+    public Quiz finishMakingQuiz() {
+        Quiz quiz = new Quiz(activeQuiz);
         activeQuiz = null;
+        return quiz;
     }
 
     @Override

@@ -22,4 +22,12 @@ public class Quiz {
         this.name = name;
         this.description = description;
     }
+
+    public Quiz(Quiz other) {
+        setCreator(other.getCreator());
+        setName(other.getName());
+        setCreationDate(other.getCreationDate());
+        setId(other.getId());
+        setDescription(other.getDescription());
+    }
 }

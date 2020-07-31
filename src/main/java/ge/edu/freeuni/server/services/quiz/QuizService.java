@@ -16,7 +16,7 @@ public interface QuizService {
 
     Quiz getActiveQuiz();
 
-    void finishMakingQuiz();
+    Quiz finishMakingQuiz();
 
     List<Quiz> getAllQuizzes();
 

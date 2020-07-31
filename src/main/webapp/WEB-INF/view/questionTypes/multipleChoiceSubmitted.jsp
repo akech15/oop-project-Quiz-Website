@@ -76,13 +76,13 @@
         <input type="submit" value = "Add question" id="submitButton">
     </form>
 
-    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">
-        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>
-    </form>
+<%--    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">--%>
+<%--        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>--%>
+<%--    </form>--%>
 
-    <form action="${pageContext.request.contextPath}/finishQuiz" method="post">
-        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>
-    </form>
+<%--    <form action="${pageContext.request.contextPath}/finishQuiz" method="post">--%>
+<%--        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>--%>
+<%--    </form>--%>
 </div>
 
 <script>
