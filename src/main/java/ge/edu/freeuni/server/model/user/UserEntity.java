@@ -10,6 +10,7 @@ import lombok.*;
 public class UserEntity {
 
     private long id;
+    private String name;
     private String username;
     private String password;
     private static final long defaultId = -1;

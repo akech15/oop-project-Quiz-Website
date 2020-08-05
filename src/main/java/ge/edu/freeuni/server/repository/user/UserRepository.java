@@ -15,4 +15,6 @@ public interface UserRepository {
     List<UserEntity> getUsersByUsernameFragment(String usernameFragment);
 
     UserEntity getUsersByUsername(String username);
+
+    List<UserEntity> getAllUsers();
 }

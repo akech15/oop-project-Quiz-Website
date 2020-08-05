@@ -15,6 +15,17 @@
         });
     </script>
 
+    <style>
+        #nameBox {
+            border-radius: 25px;
+            border: 2px solid #609;
+            padding: 20px;
+            width: 200px;
+            height: 15px;
+            outline: none;
+        }
+    </style>
+</head>
 <body>
 <div class="bgimg w3-display-container w3-text-white">
 
@@ -38,7 +49,8 @@
         </div>
         <div class="login-item">
             <form action="${pageContext.request.contextPath}/createAccount" method="post">
-                Username: <input type="text" name="username" placeholder="Enter User Name" id = "usernameBox"/><br>
+                Name: <input type="text" name="name" placeholder="Enter Name" id = "nameBox"/><br>
+                Username: <input type="text" name="username" placeholder="Enter Username" id = "usernameBox"/><br>
                 Password: <input type="password" name="password" placeholder="Enter Password" id = "passwordBox"/><br><br>
                 <input class="btn" type="submit" value="Create Account" id="loginButton">
             </form>

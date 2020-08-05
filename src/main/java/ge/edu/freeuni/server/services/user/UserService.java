@@ -12,5 +12,7 @@ public interface UserService {
 
     List<User> getUsersByUsernameFragment(String usernameFragment);
 
+    List<User> getAllUsers();
+
     User getUserByUsernameAndPassword(String username, String password);
 }

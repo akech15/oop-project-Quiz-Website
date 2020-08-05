@@ -1,7 +1,8 @@
-<%@ page import="java.util.List" %>
+<%@ page import="ge.edu.freeuni.api.model.passedQuiz.PassedQuiz" %>
 <%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
 <%@ page import="ge.edu.freeuni.api.model.user.User" %>
-<%@ page import="ge.edu.freeuni.api.model.passedQuiz.PassedQuiz" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ge.edu.freeuni.server.services.user.UserService" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,10 @@
 
     <title>User Page</title>
 
+    <%
+        User user = (User) request.getAttribute("user");
+    %>
+
 </head>
 <body>
 
@@ -19,14 +24,16 @@
     <a href="/logOut">Log Out</a>
     <a href="/messagingpage">Messages</a>
     <a href="/challengepage">Challenge</a>
-    <a href="/friendrequestpage">Friend Requests</a>
+    <a href="/viewUserPage/2">Friend Requests</a>
     <a class="active" href="/userhomepage">Home</a>
-    <form class="example" action="??????????" style="margin:auto;max-width:300px">
 
-        <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search People">
+    <form class="example" action="/viewUsers" style="margin:auto;max-width:300px">
+
+        <input type="text" id="searchInput" name="usernameFragment"
+               onkeyup="searchFunction()" placeholder="Search People">
 
     </form>
-    <p id="welcome">Welcome ${username}, here is your quizzes</p>
+    <p id="welcome">Welcome <%=user.getName()%>, here is your quizzes</p>
 </div>
 
 <div class="bgimg w3-display-container w3-text-white">
@@ -39,7 +46,7 @@
                 List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
                 int index = 0;
                 for (Quiz quiz : quizzes) {
-                    if(index == 10)
+                    if (index == 10)
                         break;
                     String quizName = quiz.getName();
                     User creator = quiz.getCreator();
@@ -47,20 +54,21 @@
                     String toShow = "name: " + quizName + ", creator: " + creatorName;
                     long quizId = quiz.getId();
                     out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
-                    index ++;
+                    index++;
                 }
             %>
 
             <%--        change count and view more logic--%>
             <a href="/friendrequestpage">view more</a>
         </div>
+
         <div class="column">
             <h2>list of taken quizzes</h2>
             <%
                 List<PassedQuiz> passedQuizzes = (List<PassedQuiz>) request.getAttribute("passedQuizzes");
                 index = 0;
                 for (PassedQuiz passedQuiz : passedQuizzes) {
-                    if(index == 10)
+                    if (index == 10)
                         break;
                     String quizName = passedQuiz.getQuiz().getName();
                     long score = passedQuiz.getScore();
@@ -81,11 +89,9 @@
                 List<Quiz> userQuizes = (List<Quiz>) request.getAttribute("userQuizes");
                 index = 0;
                 for (Quiz quiz : userQuizes) {
-                    if(index==10)
+                    if (index == 10)
                         break;
                     String quizName = quiz.getName();
-//                    User creator = quiz.getCreator();
-//                    String creatorName = creator.getUsername();
                     String toShow = "name: " + quizName;
                     long quizId = quiz.getId();
                     out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
@@ -101,7 +107,7 @@
 
 </ul>
 
-<script src="../../searchSuggestions.js"></script>
+<%--<script src="../../searchSuggestions.js"></script>--%>
 
 </body>
 </html>

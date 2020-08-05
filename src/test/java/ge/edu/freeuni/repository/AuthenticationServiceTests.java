@@ -56,7 +56,7 @@ public class AuthenticationServiceTests {
         User user = userService.getUserById(1);
 
         Assertions.assertTrue(authenticationService.logIn(user));
-        Assertions.assertFalse(authenticationService.logIn(new User(-1, "user", "user")));
+        Assertions.assertFalse(authenticationService.logIn(new User(-1, "user", "user", "user")));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AuthenticationServiceTests {
         User user = userService.getUserById(1);
 
         Assertions.assertTrue(authenticationService.isUserValid(user));
-        Assertions.assertFalse(authenticationService.isUserValid(new User(-1, "user", "user")));
+        Assertions.assertFalse(authenticationService.isUserValid(new User(-1, "user", "user", "user")));
     }
 
 }

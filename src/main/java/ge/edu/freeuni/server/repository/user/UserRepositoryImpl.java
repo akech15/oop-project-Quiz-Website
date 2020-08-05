@@ -22,6 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
         entity1.setId(result.getLong("id"));
         entity1.setUsername(result.getString("username"));
         entity1.setPassword(result.getString("password"));
+        entity1.setName(result.getString("name"));
         return entity1;
     };
 
@@ -29,10 +30,17 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean addUserToDB(UserEntity userEntity) {
         String username = userEntity.getUsername();
         String password = userEntity.getPassword();
+        String name = userEntity.getName();
         if (isUsernameUsed(username))
             return false;
-        jdbcTemplate.execute("insert into user (username, password) values ("
-                + "\"" + username + "\" , \"" + password + "\");");
+        String query = String.format(
+                "insert into user (username, password, name) " +
+                "values (\'%s\', \'%s\', \'%s\');",
+                username,
+                password,
+                name
+        );
+        jdbcTemplate.update(query);
         return true;
     }
 
@@ -85,6 +93,22 @@ public class UserRepositoryImpl implements UserRepository {
         if(ids.size() == 0)
             return null;
         return this.getUserById(ids.get(0));
+    }
+
+    @Override
+    public List<UserEntity> getAllUsers() {
+        String query = "SELECT id FROM user;";
+
+        List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
+
+        List<UserEntity> usersList = new ArrayList<>();
+
+        for (long id:
+                ids) {
+            usersList.add(this.getUserById(id));
+        }
+
+        return usersList;
     }
 
 }

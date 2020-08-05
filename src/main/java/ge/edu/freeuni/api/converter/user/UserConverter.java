@@ -18,6 +18,7 @@ public class UserConverter {
                 .username(userEntity.getUsername())
                 .password(userEntity.getPassword())
                 .id(userEntity.getId())
+                .name(userEntity.getName())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class UserConverter {
                 .username(user.getUsername())
                 .id(user.getId())
                 .password(user.getPassword())
+                .name(user.getName())
                 .build();
     }
 

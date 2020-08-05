@@ -1,4 +1,6 @@
-<%--
+<%@ page import="ge.edu.freeuni.api.model.user.User" %>
+<%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: m.ormotsadze
   Date: 7/27/2020
@@ -10,6 +12,9 @@
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/makeQuestions.css"/>
+    <%
+        User user = (User) request.getAttribute("user");
+    %>
     <title>User Page</title>
 </head>
 <body>
@@ -37,7 +42,7 @@
             <h1>User Info</h1>
         </div>
         <div class="w3-container">
-            <h5>saxeliiii da gvari</h5>
+            <h5><%=user.getUsername()%>></h5>
             <h5>dab dge da egetobebi</h5>
         </div>
     </div>
@@ -52,7 +57,19 @@
             <h1>User's Quizzes</h1>
         </div>
         <div class="w3-container">
-            <h5>linkebi raebi aqvs sheqmnili</h5>
+            <%
+                List<Quiz> userQuizes = (List<Quiz>) request.getAttribute("userQuizes");
+                int index = 0;
+                for (Quiz quiz : userQuizes) {
+                    if(index==10)
+                        break;
+                    String quizName = quiz.getName();
+                    String toShow = "name: " + quizName;
+                    long quizId = quiz.getId();
+                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
+                    index++;
+                }
+            %>
         </div>
     </div>
 </div>

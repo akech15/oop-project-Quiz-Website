@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return UserConverter.entityToFriendshipList(userRepository.getAllUsers());
+    }
+
+    @Override
     public User getUserByUsernameAndPassword(String username, String password) {
         UserEntity userEntity = userRepository.getUsersByUsername(username);
         if (userEntity != null && userEntity.getPassword().equals(password)) {

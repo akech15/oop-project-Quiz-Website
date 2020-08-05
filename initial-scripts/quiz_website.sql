@@ -14,6 +14,7 @@ drop table if exists user;
 CREATE TABLE user
 (
     id       int         NOT NULL AUTO_INCREMENT,
+    name     VARCHAR(50) NOT NULL,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     CONSTRAINT unique_username UNIQUE (username),
@@ -47,7 +48,7 @@ CREATE TABLE question
     quiz_id              int          NOT NULL,
     question             VARCHAR(200) NOT NULL,
     type                 varchar(50)  not null,
-    choices       		 varchar(200) not null,
+    choices              varchar(200) not null,
     correct_answer       varchar(200) not null,
     correct_answer_index int          not null,
     picture_url          varchar(100),
@@ -61,8 +62,8 @@ CREATE TABLE passed_quiz
     quiz_id    int NOT NULL,
     score      int not null,
     start_date long,
-    end_date   long ,
-    duration   long ,
+    end_date   long,
+    duration   long,
     primary key (id),
     FOREIGN KEY (quiz_id) references quiz (id),
     FOREIGN KEY (user_id) references user (id)
