@@ -4,6 +4,7 @@ import ge.edu.freeuni.server.model.answer.AnswerEntity;
 import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
 import ge.edu.freeuni.server.model.question.QuestionEntity;
 import ge.edu.freeuni.server.repository.answer.AnswerRepositoryImpl;
+import ge.edu.freeuni.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -34,7 +35,7 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
         entity1.setStartDate(startDate);
         Date endDate = new Date(result.getLong("end_date"));
         entity1.setEndDate(endDate);
-        Date duration = new Date(result.getLong("duration"));
+        String duration = DateUtils.millisecondsToTimeFormat(result.getLong("duration"));
         entity1.setDuration(duration);
         return entity1;
     };
@@ -52,7 +53,7 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
 
         long endDateDB = passedQuizEntity.getEndDate().getTime();
 
-        long durationDB = passedQuizEntity.getDuration().getTime();
+        long durationDB = DateUtils.timeToMillisecondsFormat(passedQuizEntity.getDuration());
 
         String query = String.format(
                 "INSERT INTO passed_quiz (user_id, quiz_id, score, start_date, end_date, duration)" +
@@ -80,7 +81,7 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
 
         long endDateDB = passedQuizEntity.getEndDate().getTime();
         long score = passedQuizEntity.getScore();
-        long durationDB = passedQuizEntity.getDuration().getTime();
+        long durationDB = DateUtils.timeToMillisecondsFormat(passedQuizEntity.getDuration());
 
         String query = String.format(
                 "UPDATE passed_quiz SET score = \'%d\', end_date = \'%d\', duration = \'%d\'" +

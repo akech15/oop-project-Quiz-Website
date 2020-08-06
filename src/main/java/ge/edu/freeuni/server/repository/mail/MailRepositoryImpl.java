@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -24,6 +25,8 @@ public class MailRepositoryImpl implements MailRepository {
         entity1.setContext(result.getString("context"));
         entity1.setSenderId(result.getLong("sender_id"));
         entity1.setReceiverId(result.getLong("receiver_id"));
+        Date sent_date = new Date(result.getLong("sent_date"));
+        entity1.setSent_date(sent_date);
         return entity1;
     };
 
@@ -40,11 +43,12 @@ public class MailRepositoryImpl implements MailRepository {
     @Override
     public void addMail(MailEntity mail) {
         String query = String.format(
-                "INSERT INTO mail (sender_id, receiver_id, context) " +
-                        "values(\'%d\', \'%d\', \'%s\')",
+                "INSERT INTO mail (sender_id, receiver_id, context, sent_date) " +
+                        "values(\'%d\', \'%d\', \'%s\', \'%d\')",
                 mail.getSenderId(),
                 mail.getReceiverId(),
-                mail.getContext()
+                mail.getContext(),
+                mail.getSent_date().getTime()
         );
 
         jdbcTemplate.update(query);
@@ -97,6 +101,7 @@ public class MailRepositoryImpl implements MailRepository {
 
         return mails;
     }
+
 
 
 }

@@ -15,4 +15,5 @@ public interface MailService {
 
     List<Mail> searchMailsBySender(User sender);
 
+    Mail getMailById(long id);
 }

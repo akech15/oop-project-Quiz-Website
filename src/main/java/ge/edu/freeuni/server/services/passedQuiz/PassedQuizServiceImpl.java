@@ -11,6 +11,7 @@ import ge.edu.freeuni.server.repository.quiz.QuizRepository;
 import ge.edu.freeuni.server.repository.user.UserRepository;
 import ge.edu.freeuni.server.services.answer.AnswerService;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
+import ge.edu.freeuni.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class PassedQuizServiceImpl implements PassedQuizService {
         passedQuiz.setUser(authenticationService.getActiveUser());
         passedQuiz.setStartDate(new Date());
         passedQuiz.setEndDate(new Date());
-        passedQuiz.setDuration(new Date());
+        passedQuiz.setDuration("0:0:0");
 
         boolean startQuiz = passedQuizRepository
                 .startQuiz(PassedQuizConverter
@@ -74,7 +75,7 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
         long duration = currentPassedQuiz.getEndDate().getTime() - currentPassedQuiz.getStartDate().getTime();
 
-        currentPassedQuiz.setDuration(new Date(duration));
+        currentPassedQuiz.setDuration(DateUtils.millisecondsToTimeFormat(duration));
 
         passedQuizRepository.finishQuiz(PassedQuizConverter.passedQuizToEntity(quizRepository, currentPassedQuiz));
         long quizId = currentPassedQuiz.getId();

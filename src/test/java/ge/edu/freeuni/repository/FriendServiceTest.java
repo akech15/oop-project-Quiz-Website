@@ -65,7 +65,7 @@ public class FriendServiceTest {
 
         friendshipService.sendRequest(sender, receiver);
         Assertions.assertEquals(FriendshipStatusType.PENDING, friendshipService.getFriendshipStatus(sender, receiver));
-        friendshipService.approveRequest(sender, receiver);
+        friendshipService.approveRequest(sender.getId(), receiver.getId());
         Assertions.assertEquals(FriendshipStatusType.APPROVED, friendshipService.getFriendshipStatus(sender, receiver));
     }
 

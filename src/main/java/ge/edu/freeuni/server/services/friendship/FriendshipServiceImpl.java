@@ -30,10 +30,9 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     @Override
-    public boolean approveRequest(User sender, User receiver) {
+    public boolean approveRequest(long sender, long receiver) {
         return friendsRepository
-                .approveRequest(UserConverter.userToEntity(sender),
-                        UserConverter.userToEntity(receiver));
+                .approveRequest(sender,receiver);
     }
 
     @Override
@@ -41,6 +40,11 @@ public class FriendshipServiceImpl implements FriendshipService {
         return friendsRepository
                 .removeRequest(UserConverter.userToEntity(sender),
                         UserConverter.userToEntity(receiver));
+    }
+
+    @Override
+    public boolean cancelRequest(User sender, User receiver) {
+        return removeRequest(receiver, sender);
     }
 
     @Override

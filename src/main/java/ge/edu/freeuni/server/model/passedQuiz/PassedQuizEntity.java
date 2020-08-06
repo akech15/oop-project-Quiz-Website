@@ -17,7 +17,7 @@ public class PassedQuizEntity {
     private long score;
     private Date startDate;
     private Date endDate;
-    private Date duration;
+    private String duration;
 
 }
 

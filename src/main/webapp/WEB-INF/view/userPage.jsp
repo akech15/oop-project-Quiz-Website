@@ -24,17 +24,15 @@
     <a href="/logOut">Log Out</a>
     <a href="/messagingpage">Messages</a>
     <a href="/challengepage">Challenge</a>
-    <a href="/viewUserPage/2">Friend Requests</a>
+    <a href="/friendrequestpage">Friend Request</a>
     <a class="active" href="/userhomepage">Home</a>
-
     <form class="example" action="/viewUsers" style="margin:auto;max-width:300px">
-
         <input type="text" id="searchInput" name="usernameFragment"
                onkeyup="searchFunction()" placeholder="Search People">
-
     </form>
     <p id="welcome">Welcome <%=user.getName()%>, here is your quizzes</p>
 </div>
+
 
 <div class="bgimg w3-display-container w3-text-white">
 
@@ -50,7 +48,7 @@
                         break;
                     String quizName = quiz.getName();
                     User creator = quiz.getCreator();
-                    String creatorName = creator.getUsername();
+                    String creatorName = creator.getName();
                     String toShow = "name: " + quizName + ", creator: " + creatorName;
                     long quizId = quiz.getId();
                     out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
@@ -72,7 +70,8 @@
                         break;
                     String quizName = passedQuiz.getQuiz().getName();
                     long score = passedQuiz.getScore();
-                    String toShow = "quiz name: " + quizName + ", score: " + score;
+                    String duration = passedQuiz.getDuration();
+                    String toShow = "quiz name: " + quizName + ", score: " + score + ", duration: " + duration;
                     out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>",
                             passedQuiz.getQuiz().getId(), toShow));
                     index++;
@@ -103,9 +102,7 @@
     </div>
 
 </div>
-<ul id="searchUL">
 
-</ul>
 
 <%--<script src="../../searchSuggestions.js"></script>--%>
 

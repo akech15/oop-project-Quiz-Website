@@ -16,6 +16,7 @@ public final class MailConverter {
                 .context(from.getContext())
                 .sender(UserConverter.entityToUser(userRepository.getUserById(from.getSenderId())))
                 .receiver(UserConverter.entityToUser(userRepository.getUserById(from.getReceiverId())))
+                .sent_date(from.getSent_date())
                 .build();
     }
 
@@ -25,6 +26,7 @@ public final class MailConverter {
                 .context(mail.getContext())
                 .senderId(mail.getSender().getId())
                 .receiverId(mail.getReceiver().getId())
+                .sent_date(mail.getSent_date())
                 .build();
     }
 

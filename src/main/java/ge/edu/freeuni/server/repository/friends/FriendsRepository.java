@@ -11,7 +11,7 @@ public interface FriendsRepository {
 
     boolean sendRequest(UserEntity sender, UserEntity receiver);
 
-    boolean approveRequest(UserEntity sender, UserEntity receiver);
+    boolean approveRequest(long sender, long receiver);
 
     boolean removeRequest(UserEntity sender, UserEntity receiver);
 

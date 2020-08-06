@@ -20,7 +20,7 @@
 
     <style>
         .bgimg {
-            background-image: url(../../images/userBackground.jpg);
+            background-image: url(../../images/search-people.jpg);
             min-height: 100%;
             background-position: center;
             background-size: cover;
@@ -41,9 +41,10 @@
         ul li {
             border-radius: 20px;
             /*border-color: #33ccff;*/
-            color: #33ccff;
+            background-color: #33ccff;
+            color: red;
             font-family: Georgia, serif;
-            font-size: large;
+            font-size: 20px;
             text-align: center;
             max-width: 300px;
             border: 1px solid #ddd;
@@ -57,8 +58,16 @@
 
 <div class="bgimg w3-display-container w3-text-white">
 
-    <h1 style="margin: auto; align-content: center">Users by username fragment: <%=usernameFragment%>
-    </h1>
+    <p
+            style="margin: auto; text-align: center; font-size: 50px; color: black; border-radius: 20px;
+
+            background-color: #33ccff;
+            font-family: Georgia, serif;
+            max-width: 720px;
+            border: 1px solid #ddd;
+            padding: 12px;">
+            Users by username fragment: <%=usernameFragment%>
+    </p>
 
     <ul>
         <%

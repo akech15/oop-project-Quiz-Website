@@ -11,9 +11,11 @@ public interface FriendshipService {
 
     boolean sendRequest(User sender, User receiver);
 
-    boolean approveRequest(User sender, User receiver);
+    boolean approveRequest(long sender, long receiver);
 
     boolean removeRequest(User sender, User receiver);
+
+    boolean cancelRequest(User sender, User receiver);
 
     boolean removeFriend(User sender, User receiver);
 

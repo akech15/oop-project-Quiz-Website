@@ -1,6 +1,8 @@
-<%@ page import="ge.edu.freeuni.api.model.user.User" %>
+<%@ page import="ge.edu.freeuni.api.model.friends.FriendshipStatusType" %>
 <%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="ge.edu.freeuni.api.model.user.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ge.edu.freeuni.api.model.passedQuiz.PassedQuiz" %><%--
   Created by IntelliJ IDEA.
   User: m.ormotsadze
   Date: 7/27/2020
@@ -14,7 +16,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/makeQuestions.css"/>
     <%
         User user = (User) request.getAttribute("user");
+        FriendshipStatusType friendshipStatusType = (FriendshipStatusType) request.getAttribute("friendShipType");
     %>
+
+    <style>
+        .bgimg {
+            background-image: url(../../images/userBackground.jpg);
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
     <title>User Page</title>
 </head>
 <body>
@@ -22,14 +34,38 @@
 <div class="bgimg w3-display-container w3-text-white">
 
     <div class="w3-display-topleft w3-container w3-xlarge">
-        <p><button onclick="document.getElementById('aboutUser').style.display='block'" class="w3-button w3-black">About User</button></p>
-        <p><button onclick="document.getElementById('usersQuizzes').style.display='block'" class="w3-button w3-black">Quizzes</button></p>
-        <p><button class="w3-button w3-black"><a  href="/userhomepage">Send Friend Request</a></button></p>
+        <p>
+            <button onclick="document.getElementById('aboutUser').style.display='block'" class="w3-button w3-black">
+                About User
+            </button>
+        </p>
+        <p>
+            <button onclick="document.getElementById('usersQuizzes').style.display='block'" class="w3-button w3-black">
+                Created Quizzes
+            </button>
+        </p>
+        <p>
+            <button onclick="document.getElementById('passedQuizzes').style.display='block'" class="w3-button w3-black">
+                Passed Quizzes
+            </button>
+        </p>
+        <%
+            if (friendshipStatusType.equals(FriendshipStatusType.STRANGERS)) {
+                out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" + user.getId() + "/send\">Send Friend Request</a></button>\n" + "</p>");
+            } else if (friendshipStatusType.equals(FriendshipStatusType.PENDING)) {
+                out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" + user.getId() + "/cancel\">Cancel Request</a></button>\n" + "</p>");
+            } else {
+                out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" + user.getId() + "/remove\">Remove Friend</a></button>\n" + "</p>");
+
+            }
+        %>
     </div>
 
 
     <div class="w3-display-topright w3-container w3-xlarge">
-        <p><button class="w3-button w3-black"><a  href="/userhomepage">Home</a></button></p>
+        <p>
+            <button class="w3-button w3-black"><a href="/userhomepage">Home</a></button>
+        </p>
     </div>
 
 </div>
@@ -38,12 +74,13 @@
 <div id="aboutUser" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-black w3-display-container">
-            <span onclick="document.getElementById('aboutUser').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+            <span onclick="document.getElementById('aboutUser').style.display='none'"
+                  class="w3-button w3-display-topright w3-large">x</span>
             <h1>User Info</h1>
         </div>
         <div class="w3-container">
-            <h5><%=user.getUsername()%>></h5>
-            <h5>dab dge da egetobebi</h5>
+            <h5>Name: <%=user.getName()%>
+            </h5>
         </div>
     </div>
 </div>
@@ -53,18 +90,19 @@
 <div id="usersQuizzes" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-black w3-display-container">
-            <span onclick="document.getElementById('usersQuizzes').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+            <span onclick="document.getElementById('usersQuizzes').style.display='none'"
+                  class="w3-button w3-display-topright w3-large">x</span>
             <h1>User's Quizzes</h1>
         </div>
         <div class="w3-container">
             <%
-                List<Quiz> userQuizes = (List<Quiz>) request.getAttribute("userQuizes");
+                List<Quiz> userQuizes = (List<Quiz>) request.getAttribute("userQuizzes");
                 int index = 0;
                 for (Quiz quiz : userQuizes) {
-                    if(index==10)
+                    if (index == 10)
                         break;
                     String quizName = quiz.getName();
-                    String toShow = "name: " + quizName;
+                    String toShow = "Name: " + quizName;
                     long quizId = quiz.getId();
                     out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
                     index++;
@@ -74,12 +112,40 @@
     </div>
 </div>
 
+<div id="passedQuizzes" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom">
+        <div class="w3-container w3-black w3-display-container">
+            <span onclick="document.getElementById('passedQuizzes').style.display='none'"
+                  class="w3-button w3-display-topright w3-large">x</span>
+            <h1>User's Quizzes</h1>
+        </div>
+        <div class="w3-container">
+            <%
+                List<PassedQuiz> passedQuizzes = (List<PassedQuiz>) request.getAttribute("passedQuizzes");
+                index = 0;
+                for (PassedQuiz quiz : passedQuizzes) {
+                    if (index == 10)
+                        break;
+                    String quizName = quiz.getQuiz().getName();
+                    String toShow = "Name: " + quizName + ", " + "Score: " + quiz.getScore();
+                    long quizId = quiz.getId();
+                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
+                    index++;
+                }
+            %>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("aboutUser")) {
+    window.onclick = function (event) {
+        if (event.target === document.getElementById("aboutUser")) {
             document.getElementById("aboutUser").style.display = "none";
-        } else if(event.target == document.getElementById("usersQuizzes")){
+        } else if (event.target === document.getElementById("usersQuizzes")) {
             document.getElementById("usersQuizzes").style.display = "none";
+        } else if (event.target === document.getElementById("passedQuizzes")) {
+            document.getElementById("passedQuizzes").style.display = "none";
         }
     }
 </script>

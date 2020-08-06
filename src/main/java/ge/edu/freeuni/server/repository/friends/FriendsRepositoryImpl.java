@@ -22,13 +22,20 @@ public class FriendsRepositoryImpl implements FriendsRepository {
     @Override
     public FriendshipStatusType getFriendshipStatus(UserEntity firstUser, UserEntity secondUser) {
         String query = String.format(
-                "SELECT status FROM friends WHERE sender_id = \'%d\' AND receiver_id = \'%d\';",
+                "SELECT status " +
+                        "FROM friends " +
+                        "WHERE (sender_id = \'%d\' AND receiver_id = \'%d\') OR " +
+                        "(sender_id = \'%d\' AND receiver_id = \'%d\');",
                 firstUser.getId(),
-                secondUser.getId()
+                secondUser.getId(),
+                secondUser.getId(),
+                firstUser.getId()
         );
-
-        String status = jdbcTemplate.queryForObject(query, String.class);
-        return status == null ? FriendshipStatusType.STRANGERS : Enum.valueOf(FriendshipStatusType.class, status);
+        List<String> result = jdbcTemplate.queryForList(query, String.class);
+        if (!result.isEmpty()) {
+            return Enum.valueOf(FriendshipStatusType.class, result.get(0));
+        }
+        return FriendshipStatusType.STRANGERS;
     }
 
     @Override
@@ -49,12 +56,13 @@ public class FriendsRepositoryImpl implements FriendsRepository {
     }
 
     @Override
-    public boolean approveRequest(UserEntity sender, UserEntity receiver) {
+    public boolean approveRequest(long sender, long receiver) {
+
         String query = String.format(
                 "UPDATE friends SET status = \'%s\' WHERE sender_id = \'%d\' AND receiver_id = \'%d\';",
                 String.valueOf(FriendshipStatusType.APPROVED),
-                sender.getId(),
-                receiver.getId()
+                receiver,
+                sender
         );
 
         try {

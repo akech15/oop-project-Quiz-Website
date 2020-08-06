@@ -1,12 +1,9 @@
 package ge.edu.freeuni.api;
 
-import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
-import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
-import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
 import ge.edu.freeuni.server.services.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -112,7 +108,6 @@ public class QuizController {
 
     @RequestMapping("/questionResponse")
     public String questionResponse(Map<String, Object> model) {
-
         return "questionTypes/questionResponse";
     }
 
@@ -120,7 +115,6 @@ public class QuizController {
     @RequestMapping("/questionResponseSubmitted")
     public String questionResponseSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
         model.put("choiceCount", choiceCount);
-
         return "questionTypes/questionResponseSubmitted";
     }
 
@@ -157,7 +151,7 @@ public class QuizController {
 //    }
 
     @RequestMapping("/viewQuiz")
-    public String viewQuiz(Map<String,Object> model) {
+    public String viewQuiz(Map<String, Object> model) {
 
         Quiz quiz = quizService.finishMakingQuiz();
         model.put("quiz", quiz);

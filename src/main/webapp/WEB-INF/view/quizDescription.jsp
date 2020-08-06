@@ -69,7 +69,7 @@
         </div>
 
         <div class="w3-container">
-            <h5>Creator Username: <b><%=creator.getUsername()%></b></h5>
+            <h5>Creator Username: <b><%=creator.getName()%></b></h5>
         </div>
     </div>
 </div>

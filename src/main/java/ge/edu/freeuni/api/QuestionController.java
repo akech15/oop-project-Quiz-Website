@@ -1,6 +1,5 @@
 package ge.edu.freeuni.api;
 
-import ge.edu.freeuni.api.converter.question.QuestionConverter;
 import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.server.services.authentication.AuthenticationServiceImpl;
@@ -9,7 +8,6 @@ import ge.edu.freeuni.server.services.quiz.QuizServiceImpl;
 import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -156,6 +154,7 @@ public class QuestionController {
 
         return "makeQuestions";
     }
+
     @RequestMapping("/addMultipleBLanks")
     public String addMultipleBLanks(@RequestParam Map<String, String> params, Map<String, Object> model) {
         String question = "";
@@ -174,7 +173,7 @@ public class QuestionController {
             int toAppend = i + 1;
             String toGet = "choice" + toAppend;
             String toAdd = params.get(toGet);
-            if (toAdd != null){
+            if (toAdd != null) {
                 answers.add(toAdd);
                 question += toAdd + "_";
             }
@@ -216,84 +215,6 @@ public class QuestionController {
 
         return "makeQuestions";
     }
-
-
-//    @RequestMapping("/playMultipleChoice/{quiz_id}/{index}")
-//    public String playMultipleChoice(@PathVariable Long quiz_id, @PathVariable Integer index,
-//                                     Map<String, Object> model) {
-//
-//        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
-//
-//        Integer indx = index;
-//        if (index < questions.size()) {
-//            Question question = questions.get(index);
-//            model.put("question", question);
-//            indx += 1;
-//            model.put("index", indx);
-//        }
-//        return "playQuiz/playMultipleChoice";
-//    }
-//
-//    @RequestMapping("/playFillInBlank/{quiz_id}/{index}")
-//    public String playFillInBlank(@PathVariable Long quiz_id, @PathVariable Integer index,
-//                                     Map<String, Object> model){
-//        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
-//
-//        Integer indx = index;
-//        if (index < questions.size()) {
-//            Question question = questions.get(index);
-//            model.put("question", question);
-//            indx += 1;
-//            model.put("index", indx);
-//        }
-//        return "playQuiz/playFillInBlank";
-//    }
-//
-//    @RequestMapping("/playMultipleAnswers/{quiz_id}/{index}")
-//    public String playMultipleAnswers(@PathVariable Long quiz_id, @PathVariable Integer index,
-//                                  Map<String, Object> model){
-//        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
-//
-//        Integer indx = index;
-//        if (index < questions.size()) {
-//            Question question = questions.get(index);
-//            model.put("question", question);
-//            indx += 1;
-//            model.put("index", indx);
-//        }
-//        return "playQuiz/playMultipleAnswers";
-//    }
-//
-//    @RequestMapping("/playTrueFalse/{quiz_id}/{index}")
-//    public String playTrueFalse(@PathVariable Long quiz_id, @PathVariable Integer index,
-//                                      Map<String, Object> model){
-//        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
-//
-//        Integer indx = index;
-//        if (index < questions.size()) {
-//            Question question = questions.get(index);
-//            model.put("question", question);
-//            indx += 1;
-//            model.put("index", indx);
-//        }
-//        return "playQuiz/playTrueFalse";
-//    }
-//
-//    @RequestMapping("/playQuestionResponse/{quiz_id}/{index}")
-//    public String playQuestionResponse(@PathVariable Long quiz_id, @PathVariable Integer index,
-//                                Map<String, Object> model){
-//
-//        List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quiz_id));
-//
-//        Integer indx = index;
-//        if (index < questions.size()) {
-//            Question question = questions.get(index);
-//            model.put("question", question);
-//            indx += 1;
-//            model.put("index", indx);
-//        }
-//        return "playQuiz/playQuestionResponse";
-//    }
 
 
 }

@@ -45,4 +45,9 @@ public class MailServiceImpl implements MailService {
                         searchMailsBySender(UserConverter.
                                 userToEntity(sender)));
     }
+
+    @Override
+    public Mail getMailById(long id) {
+        return MailConverter.entityToMail(mailRepository.getMailById(id), userRepository);
+    }
 }

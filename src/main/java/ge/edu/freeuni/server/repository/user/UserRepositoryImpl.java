@@ -35,7 +35,7 @@ public class UserRepositoryImpl implements UserRepository {
             return false;
         String query = String.format(
                 "insert into user (username, password, name) " +
-                "values (\'%s\', \'%s\', \'%s\');",
+                        "values (\'%s\', \'%s\', \'%s\');",
                 username,
                 password,
                 name
@@ -66,7 +66,10 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public UserEntity getUserById(long id) {
         String query = String.format("select * from user where id = %d", id);
-        return jdbcTemplate.queryForObject(query, userRawMapper);
+        if (jdbcTemplate.queryForObject(query, userRawMapper) != null) {
+            return jdbcTemplate.queryForObject(query, userRawMapper);
+        }
+        return null;
     }
 
     @Override
@@ -78,8 +81,8 @@ public class UserRepositoryImpl implements UserRepository {
 
         List<UserEntity> usersList = new ArrayList<>();
 
-        for (long id:
-             ids) {
+        for (long id :
+                ids) {
             usersList.add(this.getUserById(id));
         }
 
@@ -90,7 +93,7 @@ public class UserRepositoryImpl implements UserRepository {
     public UserEntity getUsersByUsername(String username) {
         String query = "SELECT id FROM user WHERE username = '" + username + "';";
         List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
-        if(ids.size() == 0)
+        if (ids.size() == 0)
             return null;
         return this.getUserById(ids.get(0));
     }
@@ -103,7 +106,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         List<UserEntity> usersList = new ArrayList<>();
 
-        for (long id:
+        for (long id :
                 ids) {
             usersList.add(this.getUserById(id));
         }

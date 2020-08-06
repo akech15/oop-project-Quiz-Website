@@ -10,7 +10,6 @@ import ge.edu.freeuni.server.services.answer.AnswerService;
 import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
-import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +35,7 @@ public class PassedQuizController {
     private AnswerService answerService;
 
     @RequestMapping("/startPlayingQuiz/{quizId}")
-    public String startPlayingQuiz(@PathVariable long quizId, Map<String, Object> model){
+    public String startPlayingQuiz(@PathVariable long quizId, Map<String, Object> model) {
 
         Quiz quiz = quizService.getQuizById(quizId);
         PassedQuiz passedQuiz = new PassedQuiz();
@@ -46,7 +45,7 @@ public class PassedQuizController {
         List<Question> questions = questionService.getAllQuestionsByQuiz(quiz);
 
         model.put("question", questions.get(0));
-        model.put("index", (long)(0));
+        model.put("index", (long) (0));
         model.put("quizId", quizId);
 
         return QuestionConverter.getJspFromType(questions.get(0).getType());
@@ -56,7 +55,7 @@ public class PassedQuizController {
     public String answerHandler(@RequestParam Map<String, Object> params,
                                 @PathVariable long quizId,
                                 @PathVariable long index_of_question,
-                                Map<String, Object> model){
+                                Map<String, Object> model) {
 
         List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quizId));
 
@@ -73,10 +72,10 @@ public class PassedQuizController {
         if (currQuestion.getType() == QuestionType.MULTIPLE_CHOICE) {
             String yle = (String) params.get("correctAnswer");
             answerTextToSet = currQuestion.getChoices().get(yle.charAt(0) - 'a');
-        }else if (currQuestion.getType() == QuestionType.TRUE_FALSE){
+        } else if (currQuestion.getType() == QuestionType.TRUE_FALSE) {
             answerTextToSet = (params.get("trueCheckBox") != null) ? "True" : "False";
 
-        }else{
+        } else {
             answerTextToSet = (String) params.get("correctAnswer");
         }
 
@@ -84,12 +83,11 @@ public class PassedQuizController {
 
         answerService.addAnswer(answer);
 
-        if(index_of_question >= questions.size() - 1){
-
+        if (index_of_question >= questions.size() - 1) {
             PassedQuiz passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
             model.put("questionsSize", questions.size());
-
+            System.out.println(passedQuiz.getScore());
             return "finishPlayingQuiz";
         }
 

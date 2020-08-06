@@ -43,4 +43,15 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        UserEntity userEntity = userRepository.getUsersByUsername(username);
+
+        if (userEntity != null) {
+            return UserConverter.entityToUser(userEntity);
+        }
+
+        return null;
+    }
 }
