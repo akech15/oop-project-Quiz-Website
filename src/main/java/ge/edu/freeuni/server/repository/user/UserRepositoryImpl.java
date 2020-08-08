@@ -1,6 +1,8 @@
 package ge.edu.freeuni.server.repository.user;
 
+import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.model.user.UserEntity;
+import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -112,6 +114,24 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
         return usersList;
+    }
+
+    @Override
+    public List<Wyvili<UserEntity, Long>> getTopRatedUsers() {
+        String queryIds = "select creator_id from quiz group by creator_id order by count(creator_id) desc;";
+
+        String queryCounts = "select count(creator_id) from quiz group by creator_id order by 1 desc;";
+
+        List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
+        List<Long> counts = jdbcTemplate.queryForList(queryCounts, Long.class);
+
+        List<Wyvili<UserEntity, Long>> res = new ArrayList<>();
+
+        for (int i = 0; i < ids.size(); i++){
+            res.add(new Wyvili<>(this.getUserById(ids.get(i)), counts.get(i)));
+        }
+
+        return res;
     }
 
 }

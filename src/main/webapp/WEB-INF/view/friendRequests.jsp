@@ -40,7 +40,7 @@
         <input type="text" id="searchInput" name="usernameFragment"
                onkeyup="searchFunction()" placeholder="Search People">
     </form>
-    <p id="welcome">Welcome <%=user.getName()%>, here is your quizzes</p>
+    <p style=" font-size: 32px" id="welcome">Welcome <%=user.getName()%> :)</p>
 </div>
 
 <div class="bgimg w3-display-container w3-text-white">
@@ -71,7 +71,7 @@
 
             <%--        change count and view more logic--%>
             <a style = "border-color: black; font-size: 20px; color: red"
-               href="/friendrequestpage">view more</a>
+               href="/allAvailableQuizzes">view more</a>
         </div>
 
         <div class="column">
@@ -97,7 +97,7 @@
             %>
             <%--        change count and view more logic--%>
             <a style = "border-color: black; font-size: 20px; color: red"
-               href="/friendrequestpage">view more</a>
+               href="/allTakenQuizzes">view more</a>
         </div>
 
         <div class="column">

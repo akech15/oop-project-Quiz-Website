@@ -66,4 +66,13 @@ public class ChallengeServiceImpl implements ChallengeService {
                                         (UserConverter.userToEntity(sender))
                 );
     }
+
+    @Override
+    public Challenge getChallengeById(long challengeId) {
+        return ChallengeConverter.
+                entityToChallenge(challengeRepository.getChallengeById(challengeId),
+                        quizRepository,
+                        userRepository
+                );
+    }
 }

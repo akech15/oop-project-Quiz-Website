@@ -9,7 +9,11 @@
    <div class="a">
        <%
            Long quizId = (Long) request.getAttribute("quizId");
-           out.print(String.format("<p><button class=\"w3-button w3-black\"><a  href=\"/startPlayingQuiz/%d\">HELL YEAH</a></button></p>", quizId));
+           out.print(String.format("<a  style=\"font-size : 40px\" " +
+                   "href=\"/startPlayingQuiz/%d\">HELL YEAH</a><br><br>", quizId));
+
+           out.print("<a  style=\"font-size : 40px\" " +
+                   "href=\"/userhomepage\">ABSOLUTELY NOT :( </a>");
        %>
    </div>
 

@@ -52,9 +52,6 @@ public final class QuestionConverter {
                 return "playQuiz/playMultipleChoice";
             case TRUE_FALSE:
                 return "playQuiz/playTrueFalse";
-            case MULTIPLE_ANSWERS:
-                return "playQuiz/playMultipleAnswers";
-            case MULTIPLE_BLANKS:
             default:
                 return "playQuiz/playPictureResponse";
         }

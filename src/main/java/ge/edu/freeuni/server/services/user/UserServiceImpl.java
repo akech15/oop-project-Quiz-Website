@@ -1,9 +1,12 @@
 package ge.edu.freeuni.server.services.user;
 
+import ge.edu.freeuni.api.converter.quiz.QuizConverter;
 import ge.edu.freeuni.api.converter.user.UserConverter;
+import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.server.repository.user.UserRepository;
+import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,5 +56,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public List<Wyvili<User, Long>> getTopRatedUsers() {
+        return UserConverter.entityToUserPairList(userRepository.getTopRatedUsers());
     }
 }

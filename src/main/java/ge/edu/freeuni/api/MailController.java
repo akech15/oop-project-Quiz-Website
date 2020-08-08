@@ -34,15 +34,25 @@ public class MailController {
     private MailService mailService;
 
     @RequestMapping("/createMessage")
-    public String createMessage() {
+    public String createMessage(Map<String, Object> model) {
+        boolean valid = true;
+        model.put("valid", valid);
         return "createMessage";
     }
 
     @RequestMapping("/sendMessage")
     public String sendMessage(@RequestParam String receiverUsername,
-                              @RequestParam String mailContext) {
+                              @RequestParam String mailContext,
+                              Map<String, Object> model) {
 
         User toSend = userService.getUserByUsername(receiverUsername);
+        boolean valid = true;
+        if(toSend == null){
+            valid = false;
+            model.put("valid", valid);
+            return "createMessage";
+        }
+        model.put("valid", valid);
         Mail mail = new Mail();
         mail.setSender(authenticationService.getActiveUser());
         mail.setReceiver(toSend);

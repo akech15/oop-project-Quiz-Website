@@ -21,6 +21,12 @@
         Long quizId = (Long) request.getAttribute("quizId");
     %>
 
+    <style>
+        .bgimg{
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -34,9 +40,8 @@
     <form action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
         <%
             String q = question.getQuestion();
-            out.print("<h1> Question: #" + choice + " : "+ q + "</h1><br>");
-            out.print("<h2> Tick what you think is correct Answer: </h2><br>");
-            out.print("<br>");
+            out.print("<p style=\"font-size:50px\"> Question #: " + choice + ", type: " + question.getType() + ":</p>");
+            out.print("<p style=\"font-size:30px\">Question: <b>\"" + q + "\"</b></p>");
         %>
          True <input type="checkbox" name = "trueCheckBox" id="trueCheckBox">
          False <input type="checkbox" id="falseCheckBox"><br>

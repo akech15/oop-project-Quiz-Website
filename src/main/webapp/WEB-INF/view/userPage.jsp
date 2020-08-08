@@ -35,7 +35,7 @@
         <input type="text" id="searchInput" name="usernameFragment"
                onkeyup="searchFunction()" placeholder="Search People">
     </form>
-    <p id="welcome">Welcome <%=user.getName()%>, here is your quizzes</p>
+    <p style=" font-size: 32px" id="welcome">Welcome <%=user.getName()%> :)</p>
 </div>
 
 

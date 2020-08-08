@@ -20,11 +20,11 @@
 
     <style>
         .bgimg {
-            background-image: url(../../images/search-people.jpg);
-            min-height: 100%;
-            background-position: center;
-            background-size: cover;
-        }
+             background-image: url(../../images/viewMoreQuizzesDarkvol2.jpg);
+             min-height: 100%;
+             background-position: center;
+             background-size: cover;
+         }
 
         * {
             box-sizing: border-box;
@@ -44,10 +44,10 @@
             color: red;
             font-family: Georgia, serif;
             font-size: 20px;
-            text-align: center;
+            text-align: left;
             max-width: 300px;
             border: 1px solid #ddd;
-            margin: auto; /* Prevent double borders */
+            margin: auto;
             padding: 12px;
         }
     </style>
@@ -68,12 +68,11 @@
 
 
         <p
-                style="margin: auto; text-align: center; font-size: 50px; color: black; border-radius: 20px;
-            background-color: #33ccff;
+                style="margin: auto; text-align: center; font-size: 50px; border-radius: 20px;
+            color: white; stroke-width: 20px;
             font-family: Georgia, serif;
             max-width: 720px;
-            border: 1px solid #ddd;
-            padding: 12px;">
+            padding: 12px; -webkit-text-stroke: 2px red;">
             List of all available quizzes:
         </p>
 
@@ -87,8 +86,11 @@
                     String toShow = "name: " + quizName + ", creator: " + creatorName;
                     long quizId = quiz.getId();
                     out.print(String.format("<a " +
-                            "style = \"border-color: red; " +
-                            "font-size: 20px; border-width: medium;\" " +
+                            "style=\"margin: auto; text-align: left; font-size: 25px;\n" +
+                            "            color: orangered; stroke-width: 20px; \n" +
+                            "            font-family: Georgia, serif;\n" +
+                            "            max-width: 720px;\n" +
+                            "           -webkit-text-stroke: 1px red;\" " +
                             "href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
                 }
             %>

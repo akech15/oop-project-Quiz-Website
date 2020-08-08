@@ -15,7 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <title>Friend Requests</title>
+    <title>Messages</title>
     <script>
         $(document).ready(function () {
             document.getElementById('friendRequests').style.display = 'block';
@@ -42,7 +42,7 @@
         <input type="text" id="searchInput" name="usernameFragment"
                onkeyup="searchFunction()" placeholder="Search People">
     </form>
-    <p id="welcome">Welcome <%=user.getName()%>, here is your quizzes</p>
+    <p style=" font-size: 32px" id="welcome">Welcome <%=user.getName()%> :)</p>
 </div>
 
 <div class="bgimg w3-display-container w3-text-white">
@@ -73,7 +73,7 @@
 
             <%--        change count and view more logic--%>
             <a style = "border-color: black; font-size: 20px; color: red"
-               href="/friendrequestpage">view more</a>
+               href="/allAvailableQuizzes">view more</a>
         </div>
 
         <div class="column">
@@ -99,7 +99,7 @@
             %>
             <%--        change count and view more logic--%>
             <a style = "border-color: black; font-size: 20px; color: red"
-               href="/friendrequestpage">view more</a>
+               href="/allTakenQuizzes">view more</a>
         </div>
 
         <div class="column">
@@ -135,7 +135,7 @@
                   class="w3-button w3-display-topright w3-large">x</span>
             <h1>Messages</h1>
         </div>
-        <h1>Sent Messages</h1>
+        <h1>Sent Messages:</h1>
         <div class="w3-container">
             <%
                 if(sentMails.isEmpty()){
@@ -143,14 +143,19 @@
                 }else {
                     for (Mail mail:
                             sentMails) {
-                        out.print(String.format("<a href=\"/viewMessage/%d\">Sent to: %s</a><br>",mail.getId(), mail.getReceiver().getName()));
+                        out.print(String.format(
+                                "<a href=\"/viewMessage/%d\">Sent to: %s, sent time: %s</a><br>",
+                                mail.getId(),
+                                mail.getReceiver().getUsername(),
+                                mail.getSent_date()));
                     }
                 }
-                out.print("<a href=\"/createMessage\">Create new message</a>");
-
             %>
+
+            <a style="color: red; font-size: 20px" href="/createMessage">Create new message</a>
+
         </div>
-        <h1>Received Messages</h1>
+        <h1>Received Messages:</h1>
         <div class="w3-container">
             <%
                 if(receivedMails.isEmpty()){
@@ -158,7 +163,12 @@
                 }else {
                     for (Mail mail :
                             receivedMails) {
-                        out.print(String.format("<a href=\"/viewMessage/%d\">Sent by: %s</a><br>", mail.getId(), mail.getSender().getName()));
+                        out.print(String.format(
+                                "<a href=\"/viewMessage/%d\">Sent by: %s, sent time: %s</a><br>",
+                                mail.getId(),
+                                mail.getSender().getUsername()
+                                ,
+                                mail.getSent_date()));
                     }
                 }
             %>

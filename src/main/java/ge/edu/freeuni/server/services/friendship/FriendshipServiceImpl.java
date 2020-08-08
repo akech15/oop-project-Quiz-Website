@@ -17,6 +17,9 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     @Override
     public FriendshipStatusType getFriendshipStatus(User firstUser, User secondUser) {
+        if(firstUser == null || secondUser == null){
+            return FriendshipStatusType.STRANGERS;
+        }
         return friendsRepository
                 .getFriendshipStatus(UserConverter.userToEntity(firstUser),
                         UserConverter.userToEntity(secondUser));

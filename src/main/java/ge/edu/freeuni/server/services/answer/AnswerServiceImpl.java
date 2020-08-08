@@ -53,10 +53,6 @@ public class AnswerServiceImpl implements AnswerService {
                 return isMultipleChoiceCorrect(answer, question);
             case TRUE_FALSE:
                 return isTrueOrFalseCorrect(answer, question);
-            case MULTIPLE_ANSWERS:
-                return isMultipleAnswersCorrect(answer, question);
-            case MULTIPLE_BLANKS:
-                return isMultipleBlanksCorrect(answer, question);
             default:
                 return isPictureResponseCorrect(answer, question);
 
@@ -65,25 +61,6 @@ public class AnswerServiceImpl implements AnswerService {
     }
         private boolean isPictureResponseCorrect(Answer answer, Question question) {
             return isQuestionResponseCorrect(answer, question);
-        }
-
-        private boolean isMultipleBlanksCorrect(Answer answer, Question question) {
-            return isMultipleAnswersCorrect(answer, question);
-        }
-
-        private boolean isMultipleAnswersCorrect(Answer answer, Question question) {
-
-            List<String> userAnswers = StringUtils.stringToList(answer.getUserAnswer(), ',');
-
-            List<String> correctAnswers = StringUtils.stringToList(question.getCorrectAnswer(), ',');
-
-            for (String userAnswer:
-                 userAnswers) {
-                if(!correctAnswers.contains(userAnswer)){
-                    return false;
-                }
-            }
-            return true;
         }
 
         private boolean isTrueOrFalseCorrect(Answer answer, Question question) {

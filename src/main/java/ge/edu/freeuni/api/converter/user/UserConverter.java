@@ -46,6 +46,7 @@ public class UserConverter {
     }
 
 	public static List<Wyvili<User,Long>> entityToUserPairList(List<Wyvili<UserEntity, Long>> topRatedUsersByQuizId) {
+
 	    List<Wyvili<User, Long> > res = new ArrayList<>();
 
         for (Wyvili<UserEntity, Long> pair:

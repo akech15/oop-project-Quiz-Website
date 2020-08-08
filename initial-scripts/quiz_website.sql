@@ -87,7 +87,7 @@ CREATE TABLE mail
     id          int         NOT NULL AUTO_INCREMENT,
     sender_id   int         NOT NULL,
     receiver_id int         NOT NULL,
-    context     VARCHAR(50) NOT NULL,
+    context     VARCHAR(300) NOT NULL,
     sent_date   long,
     foreign key (sender_id) references user (id),
     foreign key (receiver_id) references user (id),

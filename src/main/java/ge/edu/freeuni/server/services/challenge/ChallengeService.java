@@ -17,4 +17,5 @@ public interface ChallengeService {
 
     List<Challenge> searchChallengesBySender(User sender);
 
+    Challenge getChallengeById(long challengeId);
 }

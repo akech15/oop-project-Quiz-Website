@@ -15,11 +15,6 @@
 <div class="bgimg w3-display-container w3-text-white">
 
 
-    <div class="w3-display-topright w3-container w3-xlarge">
-        <p><button class="w3-button w3-black"><a  href="/userhomepage">Home Page</a></button></p>
-        <p><button class="w3-button w3-black"><a  href="/">Log Out</a></button></p>
-    </div>
-
     <h1>Make Questions</h1>
     <form class="select">
         <label>Choose question type:</label>
@@ -29,9 +24,6 @@
             <option>Multiple Choice</option>
             <option>True/False</option>
             <option>Fill In Blank</option>
-            <option>Fill In Multiple Blanks</option>
-            <option>Multiple Answers</option>
-            <option>Matching</option>
         </select>
 
         <div class="select_arrow">
@@ -42,14 +34,6 @@
         <input type="number" name="choiceCount" required placeholder="1-5" id = "choiceCount" min = "1" max = "5"/>
         <input type="submit" value = "Add question" id="submitButton">
     </form>
-
-<%--    <form action="${pageContext.request.contextPath}/makeQuestions" method="post">--%>
-<%--        <input class="btn" type="submit" value="Make Another Question" id="makeQuestions"><br>--%>
-<%--    </form>--%>
-
-<%--    <form action="${pageContext.request.contextPath}/viewQuiz" method="post">--%>
-<%--        <input class="btn" type="submit" value="Finish Making Quiz" id="finishQuiz"><br>--%>
-<%--    </form>--%>
 </div>
 
 <script>

@@ -50,13 +50,18 @@
             </button>
         </p>
         <%
-            if (friendshipStatusType.equals(FriendshipStatusType.STRANGERS)) {
-                out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" + user.getId() + "/send\">Send Friend Request</a></button>\n" + "</p>");
-            } else if (friendshipStatusType.equals(FriendshipStatusType.PENDING)) {
-                out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" + user.getId() + "/cancel\">Cancel Request</a></button>\n" + "</p>");
-            } else {
-                out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" + user.getId() + "/remove\">Remove Friend</a></button>\n" + "</p>");
-
+            long activeUsrId = (long) request.getAttribute("activeUsrId");
+            if(activeUsrId != user.getId()){
+                if (friendshipStatusType.equals(FriendshipStatusType.STRANGERS)) {
+                    out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" +
+                            user.getId() + "/send\">Send Friend Request</a></button>\n" + "</p>");
+                } else if (friendshipStatusType.equals(FriendshipStatusType.PENDING)) {
+                    out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" +
+                            user.getId() + "/cancel\">Cancel Request</a></button>\n" + "</p>");
+                } else {
+                    out.print(" <p>\n" + "<button class=\"w3-button w3-black\"><a href=\"/friendRequest/" +
+                            user.getId() + "/remove\">Remove Friend</a></button>\n" + "</p>");
+                }
             }
         %>
     </div>
@@ -79,8 +84,9 @@
             <h1>User Info</h1>
         </div>
         <div class="w3-container">
-            <h5>Name: <%=user.getName()%>
+            <h5>Name: <b><%=user.getName()%></b>
             </h5>
+            <h5>Username: <b><%=user.getUsername()%></b></h5>
         </div>
     </div>
 </div>

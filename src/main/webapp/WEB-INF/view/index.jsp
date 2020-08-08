@@ -5,6 +5,7 @@
 <%@ page import="ge.edu.freeuni.utils.Wyvili" %>
 <%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
 <%@ page import="java.util.List" %>
+<%@ page import="ge.edu.freeuni.api.model.user.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,12 +16,28 @@
 
     <%
         List<Wyvili<Quiz, Long>> topRatedQuizzes = (List<Wyvili<Quiz, Long>>) request.getAttribute("topRatedQuizzes");
+        List<Wyvili<User, Long>> topRatedUsers = (List<Wyvili<User, Long>>) request.getAttribute("topRatedUsers");
+
     %>
     <title>QUIZ TIME</title>
 </head>
 <body>
 
 <div class="bgimg w3-display-container w3-text-white">
+
+    <div class="w3-display-topright w3-container w3-xlarge">
+        <p>
+            <button onclick="document.getElementById('topUsers').style.display='block'" class="w3-button w3-black">Top
+                Rated Users
+            </button>
+        </p>
+        <p>
+            <button onclick="document.getElementById('topQuizzes').style.display='block'" class="w3-button w3-black">Top
+                Rated Quizzes
+            </button>
+        </p>
+
+    </div>
 
     <div class="w3-display-topleft w3-container w3-xlarge">
         <p>
@@ -34,19 +51,6 @@
         </p>
     </div>
 
-
-    <div class="w3-display-topright w3-container w3-xlarge">
-        <p>
-            <button onclick="document.getElementById('topUsers').style.display='block'" class="w3-button w3-black">Top
-                Rated Users
-            </button>
-        </p>
-        <p>
-            <button onclick="document.getElementById('topQuizzes').style.display='block'" class="w3-button w3-black">Top
-                Rated Quizzes
-            </button>
-        </p>
-    </div>
 
 </div>
 
@@ -83,14 +87,19 @@
             <%
                 String fileName = "WEB-INF/AboutQuizTime.txt";
                 InputStream ins = application.getResourceAsStream(fileName);
+                String[] colors = new String[]{"blue", "red", "pink", "green", "purple"};
                 try {
                     if (ins == null) {
                         response.setStatus(response.SC_NOT_FOUND);
                     } else {
                         BufferedReader br = new BufferedReader((new InputStreamReader(ins)));
                         String line;
+                        int i = 0;
                         while ((line = br.readLine()) != null) {
-                            out.println(line + "<br>");
+                            out.println("<h5 style=\"color:" + colors[i % colors.length] + "; " +
+                                    "font-size:20px\">" +
+                                    line + "</h5><br>");
+                            i++;
                         }
                     }
                 } catch (IOException e) {
@@ -107,7 +116,20 @@
         <div class="w3-container w3-black w3-display-container">
             <span onclick="document.getElementById('topUsers').style.display='none'"
                   class="w3-button w3-display-topright w3-large">x</span>
-            <h1>Top Rated Users</h1>
+            <h1>Top Users By Created Quizzes</h1>
+            <%
+                int index = 0;
+                for (Wyvili<User, Long> pair : topRatedUsers) {
+                    if(index==10)
+                        break;
+                    String username = pair.first.getUsername();
+                    String toShow = "name: " + username + "; created: " + pair.second + " quizzes";
+                    out.print(
+                            String.format("<a style=\"font-size:25px; color:blue\"> %s</a><br>", toShow)
+                    );
+                    index++;
+                }
+            %>
         </div>
     </div>
 </div>
@@ -119,18 +141,20 @@
             <span onclick="document.getElementById('topQuizzes').style.display='none'"
                   class="w3-button w3-display-topright w3-large">x</span>
             <h1>Mostly Played Quizzes</h1>
-<%--            <%--%>
-<%--                int index = 0;--%>
-<%--                for (Wyvili<Quiz, Long> pair : topRatedQuizzes) {--%>
-<%--                    if(index==10)--%>
-<%--                        break;--%>
-<%--                    String quizName = pair.first.getName();--%>
-<%--                    String toShow = "name: " + quizName + "; played: " + pair.second + " times";--%>
-<%--                    long quizId = pair.first.getId();--%>
-<%--                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));--%>
-<%--                    index++;--%>
-<%--                }--%>
-<%--            %>--%>
+            <%
+                index = 0;
+                for (Wyvili<Quiz, Long> pair : topRatedQuizzes) {
+                    if(index==10)
+                        break;
+                    String quizName = pair.first.getName();
+                    String toShow = "name: " + quizName + "; played: " + pair.second + " times";
+                    out.print(
+                            String.format("<a style=\"font-size:25px; color:blue\">" +
+                                    " %s</a><br>", toShow)
+                    );
+                    index++;
+                }
+            %>
         </div>
     </div>
 </div>
@@ -138,13 +162,13 @@
 <script>
     window.onclick = function (event) {
 
-        if (event.target == document.getElementById("login")) {
+        if (event.target === document.getElementById("login")) {
             document.getElementById("login").style.display = "none";
-        } else if (event.target == document.getElementById("about")) {
+        } else if (event.target === document.getElementById("about")) {
             document.getElementById("about").style.display = "none";
-        } else if (event.target == document.getElementById("topUsers")) {
+        } else if (event.target === document.getElementById("topUsers")) {
             document.getElementById("topUsers").style.display = "none";
-        } else if (event.target == document.getElementById("topQuizzes")) {
+        } else if (event.target === document.getElementById("topQuizzes")) {
             document.getElementById("topQuizzes").style.display = "none";
         }
     }

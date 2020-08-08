@@ -38,11 +38,11 @@ public class UserController {
 
     @GetMapping("/")
     public String index(Map<String, Object> model) {
-
         List<Wyvili<Quiz, Long>> topRatedQuizzes = quizService.getTopRatedQuizzes();
+        List<Wyvili<User, Long>> topRatedUsers = userService.getTopRatedUsers();
 
         model.put("topRatedQuizzes", topRatedQuizzes);
-
+        model.put("topRatedUsers", topRatedUsers);
         return "index";
     }
 
@@ -93,11 +93,6 @@ public class UserController {
         model.put("userService", userService);
 
         return "userPage";
-    }
-
-    @RequestMapping("/challengepage")
-    public String challengePage(Map<String, Object> model) {
-        return "challenge";
     }
 
     @RequestMapping("/messagingpage")
@@ -176,20 +171,27 @@ public class UserController {
         toAdd.setPassword(password);
         toAdd.setName(name);
         boolean addUser = userService.addUser(toAdd);
+        List<Wyvili<Quiz, Long>> topRatedQuizzes = quizService.getTopRatedQuizzes();
+        List<Wyvili<User, Long>> topRatedUsers = userService.getTopRatedUsers();
+
+        model.put("topRatedQuizzes", topRatedQuizzes);
+        model.put("topRatedUsers", topRatedUsers);
         if (addUser) {
             return "index";
         }
         return "duplicateUser";
     }
 
-//    @RequestMapping("/viewUser")
-//    public String viewUser(Map<String, Object> model) {
-//        return "viewUserPage";
-//    }
-
     @RequestMapping("/logOut")
-    public String logOut() {
+    public String logOut(Map<String, Object> model) {
         authenticationService.logOut();
+
+        List<Wyvili<Quiz, Long>> topRatedQuizzes = quizService.getTopRatedQuizzes();
+        List<Wyvili<User, Long>> topRatedUsers = userService.getTopRatedUsers();
+
+        model.put("topRatedQuizzes", topRatedQuizzes);
+        model.put("topRatedUsers", topRatedUsers);
+
         return "index";
     }
 
@@ -201,11 +203,14 @@ public class UserController {
         List<PassedQuiz> passedQuizzes = passedQuizService
                 .getPassedQuizzesByUserId(userId);
         List<Quiz> userQuizzes = quizService.getQuizesByUserId(userId);
-        FriendshipStatusType friendship = friendshipService.getFriendshipStatus(authenticationService.getActiveUser(), user);
+        FriendshipStatusType friendship = friendshipService
+                                          .getFriendshipStatus(authenticationService
+                                                               .getActiveUser(), user);
         model.put("passedQuizzes", passedQuizzes);
         model.put("userQuizzes", userQuizzes);
         model.put("user", user);
         model.put("friendShipType", friendship);
+        model.put("activeUsrId", authenticationService.getActiveUser().getId());
         return "viewUserPage";
     }
 
@@ -231,6 +236,7 @@ public class UserController {
         model.put("userQuizzes", userQuizzes);
         model.put("user", user);
         model.put("friendShipType", friendship);
+        model.put("activeUsrId", authenticationService.getActiveUser().getId());
         return "viewUserPage";
     }
 

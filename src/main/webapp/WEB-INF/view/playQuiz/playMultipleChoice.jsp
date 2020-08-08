@@ -18,38 +18,33 @@
         Long quizId = (Long) request.getAttribute("quizId");
     %>
 
+    <style>
+        .bgimg{
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 
 <div class="bgimg w3-display-container w3-text-white">
 
-    <div class="w3-display-topright w3-container w3-xlarge">
-        <p>
-            <button class="w3-button w3-black"><a href="/userhomepage">Home Page</a></button>
-        </p>
-        <p>
-            <button class="w3-button w3-black"><a href="/">Log Out</a></button>
-        </p>
-    </div>
-
-    <form action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
+    <form
+          action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
         <%
             String q = question.getQuestion();
-            out.print("<h1> Question: #" + choice + " : " + q + "</h1><br>");
+            out.print("<p style=\"font-size:50px\"> Question #: " + choice + ", type: " + question.getType() + ":</p>");
+            out.print("<p style=\"font-size:30px\">Question: <b>\"" + q + "\"</b></p>");
             List<String> answers = question.getChoices();
             List<Character> chars = new ArrayList<>();
             char ch = 'a';
             int id = 0;
 
-            out.print("<h2> Possible Answers: </h2><br>");
+            out.print("<h2> Possible Answers: </h2>");
             for (int i = 0; i < answers.size(); i++, ch++, id++) {
-                out.print("<h2> " + ch + ": "  + answers.get(i) + "</h2>");
-                out.print("<br>");
+                out.print("<h2> " + ch + ": <b>"  + answers.get(i) + "</b></h2>");
                 chars.add(ch);
             }
-            out.print("<br>");
-
-            out.print("<p>shemovidaaaaaaaaaaaaaaaaaaaa</p>");
 
             String toShow = "<label>Enter if correct answer is either ";
             for (int i = 0; i < chars.size() - 1; i++) {

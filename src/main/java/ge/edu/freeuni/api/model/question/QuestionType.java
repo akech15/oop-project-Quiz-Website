@@ -6,8 +6,6 @@ public enum QuestionType {
     FILL_IN_THE_BLANK,
     MULTIPLE_CHOICE,
     PICTURE_RESPONSE,
-    MULTIPLE_ANSWERS,
     TRUE_FALSE,
-    MULTIPLE_BLANKS
 
 }

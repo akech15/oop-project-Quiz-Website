@@ -1,10 +1,14 @@
 package ge.edu.freeuni.api;
 
+import ge.edu.freeuni.api.model.passedQuiz.PassedQuiz;
 import ge.edu.freeuni.api.model.quiz.Quiz;
+import ge.edu.freeuni.api.model.user.User;
 import ge.edu.freeuni.server.services.authentication.AuthenticationService;
+import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
 import ge.edu.freeuni.server.services.user.UserServiceImpl;
+import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +33,9 @@ public class QuizController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private PassedQuizService passedQuizService;
+
     @RequestMapping("/createNewQuiz")
     public String createQuiz(Map<String, Object> model) {
         return "createQuiz";
@@ -46,9 +53,10 @@ public class QuizController {
     @RequestMapping("/quizDescriptionPage/{quizId}")
     public String aboutQuiz(@PathVariable Long quizId, Map<String, Object> model) {
         Quiz toAdd = quizService.getQuizById(quizId);
+        List<Wyvili<User, Long>> topRatedUsersByQuiz = quizService.getTopRatedUsersByQuiz(toAdd);
         model.put("quiz", toAdd);
         model.put("quizId", quizId);
-
+        model.put("topRatedUsersByQuiz",topRatedUsersByQuiz);
         return "quizDescription";
     }
 
@@ -91,22 +99,6 @@ public class QuizController {
         return "questionTypes/fillBlank";
     }
 
-
-    @RequestMapping("/multipleAnswers")
-    public String multipleAnswers(Map<String, Object> model) {
-
-        return "questionTypes/multipleAnswers";
-    }
-
-    @RequestMapping("/multipleAnswersSubmitted")
-    public String multipleAnswersSubmitted(@RequestParam String choiceCount, @RequestParam String answerCount,
-                                           Map<String, Object> model) {
-        model.put("choiceCount", choiceCount);
-        model.put("answerCount", answerCount);
-
-        return "questionTypes/multipleAnswersSubmitted";
-    }
-
     @RequestMapping("/questionResponse")
     public String questionResponse(Map<String, Object> model) {
         return "questionTypes/questionResponse";
@@ -117,18 +109,6 @@ public class QuizController {
     public String questionResponseSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
         model.put("choiceCount", choiceCount);
         return "questionTypes/questionResponseSubmitted";
-    }
-
-    @RequestMapping("/fillMultipleBlanks")
-    public String fillInMultipleBlank(Map<String, Object> model) {
-
-        return "questionTypes/fillInMultipleBlanks";
-    }
-
-    @RequestMapping("/fillMultipleBlanksSubmitted")
-    public String fillInMultipleBlankSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
-        model.put("choiceCount", choiceCount);
-        return "questionTypes/fillInMultipleBlanksSubmitted";
     }
 
     @RequestMapping("/imageAnswers")
@@ -153,7 +133,7 @@ public class QuizController {
         return "viewQuiz";
     }
 
-    @RequestMapping("allAvailableQuizzes")
+    @RequestMapping("/allAvailableQuizzes")
     public String allAvailableQuizzes(Map<String, Object> model){
         List<Quiz> available = quizService.getAllQuizzes();
         model.put("available", available);

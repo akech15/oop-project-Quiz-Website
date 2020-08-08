@@ -48,6 +48,14 @@ public class PassedQuizController {
 
         List<Question> questions = questionService.getAllQuestionsByQuiz(quiz);
 
+        if(questions.isEmpty()){
+            passedQuiz = passedQuizService.finishQuiz();
+            model.put("passedQuiz", passedQuiz);
+            model.put("questions", questions);
+            System.out.println(passedQuiz.getScore());
+            return "finishPlayingQuiz";
+        }
+
         model.put("question", questions.get(0));
         model.put("index", (long) (0));
         model.put("quizId", quizId);
@@ -90,7 +98,7 @@ public class PassedQuizController {
         if (index_of_question >= questions.size() - 1) {
             PassedQuiz passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
-            model.put("questionsSize", questions.size());
+            model.put("questions", questions);
             System.out.println(passedQuiz.getScore());
             return "finishPlayingQuiz";
         }
@@ -106,15 +114,13 @@ public class PassedQuizController {
 
     @RequestMapping("/allTakenQuizzes")
     public String allTakenQuizzes(Map<String, Object> model){
-        List<PassedQuiz> passedQuizzes = passedQuizService
-                                     .getPassedQuizzesByUserId(authenticationService
-                                                               .getActiveUser()
-                                                               .getId()
-                                     );
+        List<PassedQuiz> takenQuizzes = passedQuizService
+                .getPassedQuizzesByUserId(authenticationService
+                        .getActiveUser()
+                        .getId());
+        model.put("takenQuizzes", takenQuizzes);
 
-        model.put("passedQuizzes", passedQuizzes);
-        return "availableQuizes";
+        return "takenQuizzes";
     }
-
 
 }

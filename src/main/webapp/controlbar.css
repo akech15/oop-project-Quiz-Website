@@ -49,7 +49,8 @@ body {
 
 .topnav {
     overflow: hidden;
-    background-color: #800080;
+    background-image: url(images/quizBanner.jpg);
+    border-bottom: 20px red;
     font-weight: bold;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
@@ -57,7 +58,7 @@ body {
 .topnav a {
     float: right;
     display: block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
