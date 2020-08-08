@@ -14,10 +14,6 @@
     content: "";
 }
 
-/* visited link */
-a:visited {
-    color: white;
-}
 
 /* mouse over link */
 a:hover {
@@ -25,7 +21,9 @@ a:hover {
 }
 
 .column {
-    color: #D8BFD8;;
+    color: #D8BFD8;
+    text-align: center;
+    border-spacing: 10px;
     padding: 10px;
     height: 700px;
     width: 33.33%;

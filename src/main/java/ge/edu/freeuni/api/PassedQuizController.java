@@ -7,6 +7,7 @@ import ge.edu.freeuni.api.model.question.Question;
 import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.api.model.quiz.Quiz;
 import ge.edu.freeuni.server.services.answer.AnswerService;
+import ge.edu.freeuni.server.services.authentication.AuthenticationService;
 import ge.edu.freeuni.server.services.passedQuiz.PassedQuizService;
 import ge.edu.freeuni.server.services.question.QuestionService;
 import ge.edu.freeuni.server.services.quiz.QuizService;
@@ -24,6 +25,9 @@ public class PassedQuizController {
 
     @Autowired
     private PassedQuizService passedQuizService;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @Autowired
     private QuizService quizService;
@@ -98,6 +102,18 @@ public class PassedQuizController {
         model.put("index", index_of_question + 1);
 
         return QuestionConverter.getJspFromType(nextQuestion.getType());
+    }
+
+    @RequestMapping("/allTakenQuizzes")
+    public String allTakenQuizzes(Map<String, Object> model){
+        List<PassedQuiz> passedQuizzes = passedQuizService
+                                     .getPassedQuizzesByUserId(authenticationService
+                                                               .getActiveUser()
+                                                               .getId()
+                                     );
+
+        model.put("passedQuizzes", passedQuizzes);
+        return "availableQuizes";
     }
 
 

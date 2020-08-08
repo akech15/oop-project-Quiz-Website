@@ -1,3 +1,4 @@
+<%@ page import="ge.edu.freeuni.api.model.quiz.Quiz" %>
 <%@ page import="ge.edu.freeuni.api.model.user.User" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
@@ -14,8 +15,7 @@
     <title>User Page</title>
 
     <%
-        List<User> usersList = (List<User>) request.getAttribute("usersList");
-        String usernameFragment = (String) request.getAttribute("usernameFragment");
+        List<Quiz> available = (List<Quiz>) request.getAttribute("available");
     %>
 
     <style>
@@ -40,7 +40,6 @@
 
         ul li {
             border-radius: 20px;
-            /*border-color: #33ccff;*/
             background-color: #33ccff;
             color: red;
             font-family: Georgia, serif;
@@ -58,36 +57,44 @@
 
 <div class="bgimg w3-display-container w3-text-white">
 
-    <div class="w3-display-topright w3-container w3-xlarge">
-        <p>
-            <button class="w3-button w3-black"><a href="/userhomepage">Home Page</a></button>
-        </p>
-        <p>
-            <button class="w3-button w3-black"><a href="/">Log Out</a></button>
-        </p>
-    </div>
+        <div class="w3-display-topright w3-container w3-xlarge">
+            <p>
+                <button class="w3-button w3-black"><a href="/userhomepage">Home Page</a></button>
+            </p>
+            <p>
+                <button class="w3-button w3-black"><a href="/">Log Out</a></button>
+            </p>
+        </div>
 
-    <p
-            style="margin: auto; text-align: center; font-size: 50px; color: black; border-radius: 20px;
 
+        <p
+                style="margin: auto; text-align: center; font-size: 50px; color: black; border-radius: 20px;
             background-color: #33ccff;
             font-family: Georgia, serif;
             max-width: 720px;
             border: 1px solid #ddd;
             padding: 12px;">
-            Users by username fragment: <%=usernameFragment%>
-    </p>
+            List of all available quizzes:
+        </p>
 
-    <ul>
-        <%
-            for (User user :
-                    usersList) {
-                out.println("<li><a href=\"/viewUserPage/" + user.getId() + "\">" + user.getUsername() + "</a></li>");
-            }
-        %>
-    </ul>
+        <ul>
+            <%
+                for (Quiz quiz :
+                        available) {
+                    String quizName = quiz.getName();
+                    User creator = quiz.getCreator();
+                    String creatorName = creator.getName();
+                    String toShow = "name: " + quizName + ", creator: " + creatorName;
+                    long quizId = quiz.getId();
+                    out.print(String.format("<a " +
+                            "style = \"border-color: red; " +
+                            "font-size: 20px; border-width: medium;\" " +
+                            "href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
+                }
+            %>
+        </ul>
 
-</div>
+    </div>
 
 </body>
 </html>

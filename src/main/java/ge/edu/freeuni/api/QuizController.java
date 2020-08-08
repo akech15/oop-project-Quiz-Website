@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -143,13 +144,6 @@ public class QuizController {
         return "questionTypes/imageAnswersSubmitted";
     }
 
-
-//    @RequestMapping("/finishQuiz")
-//    public String finishQuiz(Map<String, Object> model) {
-//        quizService.finishMakingQuiz();
-//        return "finishedQuiz";
-//    }
-
     @RequestMapping("/viewQuiz")
     public String viewQuiz(Map<String, Object> model) {
 
@@ -159,5 +153,11 @@ public class QuizController {
         return "viewQuiz";
     }
 
+    @RequestMapping("allAvailableQuizzes")
+    public String allAvailableQuizzes(Map<String, Object> model){
+        List<Quiz> available = quizService.getAllQuizzes();
+        model.put("available", available);
+        return "availableQuizes";
+    }
 
 }

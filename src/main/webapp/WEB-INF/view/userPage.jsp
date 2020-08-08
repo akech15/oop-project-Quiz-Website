@@ -6,9 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/controlbar.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/homepage.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <title>User Page</title>
 
@@ -38,8 +43,9 @@
 
 
     <div class="row">
+
         <div class="column">
-            <h2>list of available quizzes</h2>
+            <h2 style="color: #33ccff">list of available quizzes</h2>
             <%
                 List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
                 int index = 0;
@@ -51,17 +57,21 @@
                     String creatorName = creator.getName();
                     String toShow = "name: " + quizName + ", creator: " + creatorName;
                     long quizId = quiz.getId();
-                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
+                    out.print(String.format("<a " +
+                            "style = \"border-color: red; " +
+                            "font-size: 20px; border-width: medium;\" " +
+                            "href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
                     index++;
                 }
             %>
 
             <%--        change count and view more logic--%>
-            <a href="/friendrequestpage">view more</a>
+            <a style = "border-color: black; font-size: 20px; color: red"
+               href="/allAvailableQuizzes">view more</a>
         </div>
 
         <div class="column">
-            <h2>list of taken quizzes</h2>
+            <h2 style="color: #33ccff">list of taken quizzes</h2>
             <%
                 List<PassedQuiz> passedQuizzes = (List<PassedQuiz>) request.getAttribute("passedQuizzes");
                 index = 0;
@@ -72,18 +82,22 @@
                     long score = passedQuiz.getScore();
                     String duration = passedQuiz.getDuration();
                     String toShow = "quiz name: " + quizName + ", score: " + score + ", duration: " + duration;
-                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>",
+                    out.print(String.format("<a " +
+                                    "style = \"border-color: red; " +
+                                    "font-size: 20px; border-width: medium;\" " +
+                                    "href=\"/quizDescriptionPage/%d\">%s</a><br>",
                             passedQuiz.getQuiz().getId(), toShow));
                     index++;
 
                 }
             %>
             <%--        change count and view more logic--%>
-            <a href="/friendrequestpage">view more</a>
+            <a style = "border-color: black; font-size: 20px; color: red"
+               href="/allTakenQuizzes">view more</a>
         </div>
 
         <div class="column">
-            <h2>list of recently made quizzes</h2>
+            <h2 style="color: #33ccff">list of recently made quizzes</h2>
             <%
                 List<Quiz> userQuizes = (List<Quiz>) request.getAttribute("userQuizes");
                 index = 0;
@@ -93,11 +107,15 @@
                     String quizName = quiz.getName();
                     String toShow = "name: " + quizName;
                     long quizId = quiz.getId();
-                    out.print(String.format("<a href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
+                    out.print(String.format("<a " +
+                            "style = \"border-color: red; " +
+                            "font-size: 20px; border-width: medium;\" " +
+                            "href=\"/quizDescriptionPage/%d\">%s</a><br>", quizId, toShow));
                     index++;
                 }
             %>
-            <a href="/createNewQuiz">create new quiz</a>
+            <a style = "border-color: black; font-size: 20px; color: red"
+               href="/createNewQuiz">Create New Quiz</a>
         </div>
     </div>
 
