@@ -48,7 +48,7 @@
 
 </div>
 
-<!-- Log In Form -->
+<!-- Create Message Form -->
 <div id="createMessage" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-black w3-display-container">
