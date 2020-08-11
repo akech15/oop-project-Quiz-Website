@@ -40,17 +40,6 @@
             padding: 0;
         }
 
-        /*ul li {*/
-        /*    border-radius: 20px;*/
-        /*    background-color: #33ccff;*/
-        /*    color: red;*/
-        /*    font-family: Georgia, serif;*/
-        /*    font-size: 20px;*/
-        /*    text-align: center;*/
-        /*    border: 1px solid #ddd;*/
-        /*    margin: auto; !* Prevent double borders *!*/
-        /*    padding: 12px;*/
-        /*}*/
     </style>
 
 </head>
@@ -74,7 +63,7 @@
     <p
             style="margin: auto; text-align: center; font-size: 60px; border-radius: 20px;
             font-family: Georgia, serif;
-            color: red;
+            color: #800080;
             padding: 12px;">
         Email Info:
     </p>
