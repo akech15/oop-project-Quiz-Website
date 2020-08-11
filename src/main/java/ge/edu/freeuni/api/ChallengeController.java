@@ -37,8 +37,6 @@ public class ChallengeController {
     @Autowired
     private PassedQuizService passedQuizService;
     @Autowired
-    private MailService mailService;
-    @Autowired
     private ChallengeService challengeService;
 
     @RequestMapping("/createChallenge/{quizId}")
@@ -57,12 +55,10 @@ public class ChallengeController {
                                 Map<String, Object> model) {
 
         User toSend = userService.getUserByUsername(receiverUsername);
-
         FriendshipStatusType friendshipStatus = friendshipService
                 .getFriendshipStatus(authenticationService
                                 .getActiveUser(),
                         toSend);
-
         boolean valid = true;
         PassedQuiz passedQuiz = passedQuizService.getPassedQuizById(quizId);
         model.put("passedQuiz", passedQuiz);
@@ -94,7 +90,6 @@ public class ChallengeController {
                                       Map<String, Object> model) {
 
         Challenge challenge = challengeService.getChallengeById(challengeId);
-
         if (action.equals("approve")) {
             challengeService.approveChallenge(challenge);
             Quiz toAdd = challenge.getQuiz();
@@ -104,11 +99,8 @@ public class ChallengeController {
             model.put("topRatedUsersByQuiz", topRatedUsersByQuiz);
             return "quizDescription";
         }
-
         challengeService.removeChallenge(challenge);
-
         model.put("user", authenticationService.getActiveUser());
-
         List<Quiz> availableQuizzes = quizService.getAllQuizzes();
         List<PassedQuiz> passedQuizzes = passedQuizService
                 .getPassedQuizzesByUserId(authenticationService.getActiveUser().getId());

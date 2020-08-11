@@ -50,9 +50,7 @@ public class MailRepositoryImpl implements MailRepository {
                 mail.getContext(),
                 mail.getSent_date().getTime()
         );
-
         jdbcTemplate.update(query);
-
     }
 
 
@@ -68,17 +66,12 @@ public class MailRepositoryImpl implements MailRepository {
                 "SELECT id FROM mail WHERE receiver_id = \'%d\'",
                 receiver.getId()
         );
-
         List<Long> ids = new ArrayList<>();
         ids.addAll(jdbcTemplate.queryForList(query, Long.class));
-
         List<MailEntity> mails = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             mails.add(this.getMailById(id));
         }
-
         return mails;
     }
 
@@ -88,20 +81,12 @@ public class MailRepositoryImpl implements MailRepository {
                 "SELECT id FROM mail WHERE sender_id = \'%d\'",
                 sender.getId()
         );
-
         List<Long> MailIds = new ArrayList<>();
         MailIds.addAll(jdbcTemplate.queryForList(query, Long.class));
-
         List<MailEntity> mails = new ArrayList<>();
-
-        for (long id :
-                MailIds) {
+        for (long id : MailIds) {
             mails.add(this.getMailById(id));
         }
-
         return mails;
     }
-
-
-
 }

@@ -50,7 +50,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
             e.printStackTrace();
             return false;
         }
-
     }
 
     @Override
@@ -65,17 +64,11 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 "SELECT id FROM question WHERE quiz_id = \'%d\';",
                 quizId
         );
-
         List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
-
         List<QuestionEntity> res = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             res.add(this.getQuestionById(id));
         }
-
         return res;
     }
-
 }

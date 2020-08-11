@@ -1,6 +1,5 @@
 package ge.edu.freeuni.server.repository.user;
 
-import ge.edu.freeuni.server.model.quiz.QuizEntity;
 import ge.edu.freeuni.server.model.user.UserEntity;
 import ge.edu.freeuni.utils.Wyvili;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,16 +77,11 @@ public class UserRepositoryImpl implements UserRepository {
     public List<UserEntity> getUsersByUsernameFragment(String usernameFragment) {
 
         String query = "SELECT id FROM user WHERE username LIKE '%" + usernameFragment + "%';";
-
         List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
-
         List<UserEntity> usersList = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             usersList.add(this.getUserById(id));
         }
-
         return usersList;
     }
 
@@ -103,34 +97,24 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<UserEntity> getAllUsers() {
         String query = "SELECT id FROM user;";
-
         List<Long> ids = jdbcTemplate.queryForList(query, Long.class);
-
         List<UserEntity> usersList = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             usersList.add(this.getUserById(id));
         }
-
         return usersList;
     }
 
     @Override
     public List<Wyvili<UserEntity, Long>> getTopRatedUsers() {
         String queryIds = "select creator_id from quiz group by creator_id order by count(creator_id) desc;";
-
         String queryCounts = "select count(creator_id) from quiz group by creator_id order by 1 desc;";
-
         List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
         List<Long> counts = jdbcTemplate.queryForList(queryCounts, Long.class);
-
         List<Wyvili<UserEntity, Long>> res = new ArrayList<>();
-
-        for (int i = 0; i < ids.size(); i++){
+        for (int i = 0; i < ids.size(); i++) {
             res.add(new Wyvili<>(this.getUserById(ids.get(i)), counts.get(i)));
         }
-
         return res;
     }
 

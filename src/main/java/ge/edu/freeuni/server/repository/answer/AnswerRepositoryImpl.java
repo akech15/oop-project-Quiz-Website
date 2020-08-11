@@ -20,9 +20,6 @@ public class AnswerRepositoryImpl implements AnswerRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private QuestionRepositoryImpl questionRepository;
-
     private RowMapper<AnswerEntity> answerRawMapper = (ResultSet result, int numRow) ->
     {
         AnswerEntity entity1 = new AnswerEntity();
@@ -57,72 +54,5 @@ public class AnswerRepositoryImpl implements AnswerRepository {
         }
 
     }
-
-//    @Override
-//    public boolean isAnswerCorrect(AnswerEntity answerEntity) {
-//        QuestionEntity questionEntity = questionRepository.getQuestionById(answerEntity.getQuestionId());
-//
-//        switch (Enum.valueOf(QuestionType.class,questionEntity.getType())) {
-//            case QUESTION_RESPONSE:
-//                return isQuestionResponseCorrect(answerEntity, questionEntity);
-//            case FILL_IN_THE_BLANK:
-//                return isFillInBlankCorrect(answerEntity, questionEntity);
-//            case MULTIPLE_CHOICE:
-//                return isMultipleChoiceCorrect(answerEntity, questionEntity);
-//            case TRUE_FALSE:
-//                return isTrueOrFalseCorrect(answerEntity, questionEntity);
-//            case MULTIPLE_ANSWERS:
-//                return isMultipleAnswersCorrect(answerEntity, questionEntity);
-//            case MULTIPLE_BLANKS:
-//                return isMultipleBlanksCorrect(answerEntity, questionEntity);
-//            default:
-//                return isPictureResponseCorrect(answerEntity, questionEntity);
-//        }
-
-
-
-//        QuestionEntity questionEntity = questionRepository.getQuestionById(answer.getQuestionId());
-//        String type = questionEntity.getType();
-//
-//        if (type.equals(String.valueOf(QuestionType.MULTIPLE_CHOICE))) {
-//            String correctAnswer =
-//                    StringUtils.stringToList(questionEntity.getChoices(), ',').
-//                            get((int) questionEntity.getCorrectAnswerIndex() - 1);
-//            return correctAnswer.equals(answer.getUserAnswer());
-//        }
-//
-//        List<String> answers = StringUtils.stringToList(questionEntity.getChoices(), ',');
-//        return answers.contains(answer.getUserAnswer());
-
-
-//    private boolean isPictureResponseCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-//        String userAnswer =
-//        return false;
-//    }
-//
-//    private boolean isMultipleBlanksCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-//        return false;
-//    }
-//
-//    private boolean isMultipleAnswersCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-//        return false;
-//    }
-//
-//    private boolean isTrueOrFalseCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-//        return false;
-//    }
-//
-//    private boolean isMultipleChoiceCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-//        return false;
-//    }
-//
-//    private boolean isFillInBlankCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-//        return false;
-//    }
-//
-//    private boolean isQuestionResponseCorrect(AnswerEntity answerEntity, QuestionEntity questionEntity){
-//        return false;
-//    }
-
 
 }

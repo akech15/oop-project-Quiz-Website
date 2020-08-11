@@ -111,13 +111,9 @@ public class QuizRepositoryImpl implements QuizRepository {
                 "SELECT score FROM passed_quiz WHERE quiz_id = \'%d\' ORDER BY 1 desc",
                 quiz_id
         );
-
         List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
-
         List<Long> counts = jdbcTemplate.queryForList(queryScores, Long.class);
-
         List<Wyvili<UserEntity, Long>> res = new ArrayList<>();
-
         for (int i = 0; i < ids.size(); i++){
             res.add(new Wyvili<>(userRepository.getUserById(ids.get(i)), counts.get(i)));
         }
@@ -127,16 +123,11 @@ public class QuizRepositoryImpl implements QuizRepository {
 
     @Override
     public List<Wyvili<QuizEntity, Long>> getTopRatedQuizzes() {
-
         String queryIds = "select quiz_id from passed_quiz group by quiz_id order by count(quiz_id) desc;";
-
         String queryCounts = "select count(quiz_id) from passed_quiz group by quiz_id order by 1 desc;";
-
         List<Long> ids = jdbcTemplate.queryForList(queryIds, Long.class);
         List<Long> counts = jdbcTemplate.queryForList(queryCounts, Long.class);
-
         List<Wyvili<QuizEntity, Long>> res = new ArrayList<>();
-
         for (int i = 0; i < ids.size(); i++){
             res.add(new Wyvili<>(this.getQuizById(ids.get(i)), counts.get(i)));
         }
@@ -150,18 +141,11 @@ public class QuizRepositoryImpl implements QuizRepository {
                 "SELECT id FROM quiz WHERE creator_id = \'%d\';",
                 user_id
         );
-
         List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
-
         List<QuizEntity> res = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             res.add(this.getQuizById(id));
         }
-
         return res;
     }
-
-
 }

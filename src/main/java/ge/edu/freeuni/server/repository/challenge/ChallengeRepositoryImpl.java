@@ -62,17 +62,12 @@ public class ChallengeRepositoryImpl implements ChallengeRepository {
                 "SELECT id FROM challenges WHERE receiver_id = \'%d\'",
                 receiver.getId()
         );
-
         List<Long> ids = new ArrayList<>();
         ids.addAll(jdbcTemplate.queryForList(query, Long.class));
-
         List<ChallengeEntity> challenges = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             challenges.add(this.getChallengeById(id));
         }
-
         return challenges;
     }
 
@@ -82,18 +77,12 @@ public class ChallengeRepositoryImpl implements ChallengeRepository {
                 "SELECT id FROM challenges WHERE sender_id = \'%d\'",
                 sender.getId()
         );
-
         List<Long> ids = new ArrayList<>();
         ids.addAll(jdbcTemplate.queryForList(query, Long.class));
-
-
         List<ChallengeEntity> challenges = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             challenges.add(this.getChallengeById(id));
         }
-
         return challenges;
     }
 }

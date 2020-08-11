@@ -57,21 +57,18 @@ public class FriendsRepositoryImpl implements FriendsRepository {
 
     @Override
     public boolean approveRequest(long sender, long receiver) {
-
         String query = String.format(
                 "UPDATE friends SET status = \'%s\' WHERE sender_id = \'%d\' AND receiver_id = \'%d\';",
                 String.valueOf(FriendshipStatusType.APPROVED),
                 receiver,
                 sender
         );
-
         try {
             jdbcTemplate.update(query);
             return true;
         } catch (Exception e) {
             return false;
         }
-
     }
 
     @Override
@@ -81,14 +78,12 @@ public class FriendsRepositoryImpl implements FriendsRepository {
                 sender.getId(),
                 receiver.getId()
         );
-
         try {
             jdbcTemplate.update(query);
             return true;
         } catch (Exception e) {
             return false;
         }
-
     }
 
     @Override
@@ -101,7 +96,6 @@ public class FriendsRepositoryImpl implements FriendsRepository {
                 receiver.getId(),
                 sender.getId()
         );
-
         try {
             jdbcTemplate.update(query);
             return true;

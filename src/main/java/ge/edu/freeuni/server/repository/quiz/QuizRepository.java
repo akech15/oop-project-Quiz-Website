@@ -8,19 +8,19 @@ import java.util.List;
 
 public interface QuizRepository {
 
-	QuizEntity getQuizById(long id);
+    QuizEntity getQuizById(long id);
 
-	List<String> getAllQuizNames();
+    List<String> getAllQuizNames();
 
-	boolean addQuiz(QuizEntity quizEntity);
+    boolean addQuiz(QuizEntity quizEntity);
 
-	QuizEntity getQuizByIdentifiers(QuizEntity quizToEntity);
+    QuizEntity getQuizByIdentifiers(QuizEntity quizToEntity);
 
-	public List<QuizEntity> getAllQuizzes();
+    List<QuizEntity> getAllQuizzes();
 
     List<Wyvili<UserEntity, Long>> getTopRatedUsersByQuizId(long quiz_id);
 
     List<Wyvili<QuizEntity, Long>> getTopRatedQuizzes();
 
-	List<QuizEntity> getAllQuizesByUserId(long id);
+    List<QuizEntity> getAllQuizesByUserId(long id);
 }

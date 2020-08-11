@@ -50,48 +50,33 @@ public class UserController {
     public String login(@RequestParam String username, @RequestParam String password,
                         Map<String, Object> model) {
         model.put("username", username);
-
         boolean validUser = authenticationService.logIn(userService.getUserByUsernameAndPassword(username, password));
-
         if (validUser) {
-
             model.put("user", authenticationService.getActiveUser());
-
             List<Quiz> availableQuizzes = quizService.getAllQuizzes();
-
             List<PassedQuiz> passedQuizzes = passedQuizService
                     .getPassedQuizzesByUserId(authenticationService.getActiveUser().getId());
-
             List<Quiz> userQuizzes = quizService.getQuizesByUserId(authenticationService.getActiveUser().getId());
-
             model.put("quizzes", availableQuizzes);
             model.put("passedQuizzes", passedQuizzes);
             model.put("userQuizes", userQuizzes);
             model.put("userService", userService);
-
             return "userPage";
         }
-
         return "invalidUser";
     }
 
     @RequestMapping("/userhomepage")
     public String userPage(Map<String, Object> model) {
-
         model.put("user", authenticationService.getActiveUser());
-
         List<Quiz> availableQuizzes = quizService.getAllQuizzes();
-
         List<PassedQuiz> passedQuizzes = passedQuizService
                 .getPassedQuizzesByUserId(authenticationService.getActiveUser().getId());
-
         List<Quiz> userQuizzes = quizService.getQuizesByUserId(authenticationService.getActiveUser().getId());
-
         model.put("quizzes", availableQuizzes);
         model.put("passedQuizzes", passedQuizzes);
         model.put("userQuizes", userQuizzes);
         model.put("userService", userService);
-
         return "userPage";
     }
 
@@ -134,16 +119,12 @@ public class UserController {
     public String friendRequestAction(@PathVariable String action,
                                       @PathVariable long userId,
                                       Map<String, Object> model) {
-
-        if(action.equals("approve")){
+        if (action.equals("approve")) {
             friendshipService.approveRequest(authenticationService.getActiveUser().getId(), userId);
             friendshipService.approveRequest(userId, authenticationService.getActiveUser().getId());
-
-
-        }else{
+        } else {
             friendshipService.cancelRequest(authenticationService.getActiveUser(), userService.getUserById(userId));
         }
-
         model.put("user", authenticationService.getActiveUser());
         List<Quiz> availableQuizzes = quizService.getAllQuizzes();
         List<PassedQuiz> passedQuizzes = passedQuizService
@@ -155,7 +136,6 @@ public class UserController {
         model.put("userQuizes", userQuizzes);
         model.put("userService", userService);
         model.put("friendReq", friendRequest);
-
         return "friendRequests";
     }
 
@@ -173,7 +153,6 @@ public class UserController {
         boolean addUser = userService.addUser(toAdd);
         List<Wyvili<Quiz, Long>> topRatedQuizzes = quizService.getTopRatedQuizzes();
         List<Wyvili<User, Long>> topRatedUsers = userService.getTopRatedUsers();
-
         model.put("topRatedQuizzes", topRatedQuizzes);
         model.put("topRatedUsers", topRatedUsers);
         if (addUser) {
@@ -185,13 +164,10 @@ public class UserController {
     @RequestMapping("/logOut")
     public String logOut(Map<String, Object> model) {
         authenticationService.logOut();
-
         List<Wyvili<Quiz, Long>> topRatedQuizzes = quizService.getTopRatedQuizzes();
         List<Wyvili<User, Long>> topRatedUsers = userService.getTopRatedUsers();
-
         model.put("topRatedQuizzes", topRatedQuizzes);
         model.put("topRatedUsers", topRatedUsers);
-
         return "index";
     }
 
@@ -204,8 +180,8 @@ public class UserController {
                 .getPassedQuizzesByUserId(userId);
         List<Quiz> userQuizzes = quizService.getQuizesByUserId(userId);
         FriendshipStatusType friendship = friendshipService
-                                          .getFriendshipStatus(authenticationService
-                                                               .getActiveUser(), user);
+                .getFriendshipStatus(authenticationService
+                        .getActiveUser(), user);
         model.put("passedQuizzes", passedQuizzes);
         model.put("userQuizzes", userQuizzes);
         model.put("user", user);
@@ -230,7 +206,6 @@ public class UserController {
         } else {
             friendshipService.sendRequest(authenticationService.getActiveUser(), user);
         }
-
         FriendshipStatusType friendship = friendshipService.getFriendshipStatus(authenticationService.getActiveUser(), user);
         model.put("passedQuizzes", passedQuizzes);
         model.put("userQuizzes", userQuizzes);
@@ -248,7 +223,6 @@ public class UserController {
         model.put("usernameFragment", usernameFragment);
         return "viewUsers";
     }
-
 
 
 }

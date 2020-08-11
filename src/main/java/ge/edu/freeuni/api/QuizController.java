@@ -62,22 +62,18 @@ public class QuizController {
 
     @RequestMapping("/makeQuestions")
     public String makeQuestions(Map<String, Object> model) {
-
         return "makeQuestions";
     }
 
     @RequestMapping("/startQuizMaking")
     public String startQuizMaking(@RequestParam String quizName, @RequestParam String description,
                                   Map<String, Object> model) {
-
         quizService.startMakingQuiz(new Quiz(quizName, description));
-
         return "makeQuestions";
     }
 
     @RequestMapping("/multipleChoice")
     public String multipleChoice(Map<String, Object> model) {
-
         return "questionTypes/multipleChoice";
     }
 
@@ -89,13 +85,11 @@ public class QuizController {
 
     @RequestMapping("/trueFalse")
     public String trueFalse(Map<String, Object> model) {
-
         return "questionTypes/trueFalse";
     }
 
     @RequestMapping("/fillBlank")
     public String fillBlank(Map<String, Object> model) {
-
         return "questionTypes/fillBlank";
     }
 
@@ -113,20 +107,17 @@ public class QuizController {
 
     @RequestMapping("/imageAnswers")
     public String imageAnswers(Map<String, Object> model) {
-
         return "questionTypes/imageAnswers";
     }
 
     @RequestMapping("/imageAnswersSubmitted")
     public String imageAnswersSubmitted(@RequestParam String choiceCount, Map<String, Object> model) {
         model.put("choiceCount", choiceCount);
-
         return "questionTypes/imageAnswersSubmitted";
     }
 
     @RequestMapping("/viewQuiz")
     public String viewQuiz(Map<String, Object> model) {
-
         Quiz quiz = quizService.finishMakingQuiz();
         model.put("quiz", quiz);
         model.put("questions", questionService.getAllQuestionsByQuiz(quiz));

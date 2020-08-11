@@ -25,12 +25,6 @@ public class MailController {
     @Autowired
     private UserService userService;
     @Autowired
-    private QuizService quizService;
-    @Autowired
-    private FriendshipService friendshipService;
-    @Autowired
-    private PassedQuizService passedQuizService;
-    @Autowired
     private MailService mailService;
 
     @RequestMapping("/createMessage")

@@ -1,6 +1,4 @@
 <%@ page import="ge.edu.freeuni.api.model.question.Question" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,10 +40,6 @@
             String q = question.getQuestion();
             out.print("<p style=\"font-size:50px\"> Question #" + (choice + 1) + ", type: " + question.getType() + ":</p>");
             out.print("<p style=\"font-size:30px\">Question: <b>\"" + q + "\"</b></p>");
-            List<String> answers = question.getChoices();
-            List<Character> chars = new ArrayList<>();
-            char ch = 'a';
-            int id = 0;
             out.print("<h2> Fill In The Blank: </h2><br>");
             out.print("<br>");
             out.print("<br>");

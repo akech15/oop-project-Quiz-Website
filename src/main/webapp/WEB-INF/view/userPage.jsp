@@ -45,7 +45,7 @@
     <div class="row">
 
         <div class="column">
-            <h2 style="color: #33ccff">list of available quizzes</h2>
+            <h2 style="color: #33ccff">List Of Available Quizzes</h2>
             <%
                 List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
                 int index = 0;
@@ -71,7 +71,7 @@
         </div>
 
         <div class="column">
-            <h2 style="color: #33ccff">list of taken quizzes</h2>
+            <h2 style="color: #33ccff">List Of Taken Quizzes</h2>
             <%
                 List<PassedQuiz> passedQuizzes = (List<PassedQuiz>) request.getAttribute("passedQuizzes");
                 index = 0;
@@ -97,7 +97,7 @@
         </div>
 
         <div class="column">
-            <h2 style="color: #33ccff">list of recently made quizzes</h2>
+            <h2 style="color: #33ccff">List Of Recently Made Quizzes</h2>
             <%
                 List<Quiz> userQuizes = (List<Quiz>) request.getAttribute("userQuizes");
                 index = 0;

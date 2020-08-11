@@ -2,7 +2,6 @@ package ge.edu.freeuni.server.repository.passedQuiz;
 
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
 import ge.edu.freeuni.server.model.passedQuiz.PassedQuizEntity;
-import ge.edu.freeuni.server.model.question.QuestionEntity;
 import ge.edu.freeuni.server.repository.answer.AnswerRepositoryImpl;
 import ge.edu.freeuni.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +47,9 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
 
     @Override
     public boolean startQuiz(PassedQuizEntity passedQuizEntity) {
-
         long startDateDB = passedQuizEntity.getStartDate().getTime();
-
         long endDateDB = passedQuizEntity.getEndDate().getTime();
-
         long durationDB = DateUtils.timeToMillisecondsFormat(passedQuizEntity.getDuration());
-
         String query = String.format(
                 "INSERT INTO passed_quiz (user_id, quiz_id, score, start_date, end_date, duration)" +
                         "values (\'%d\', \'%d\', \'%d\', \'%d\', \'%d\', \'%d\');",
@@ -65,7 +60,6 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
                 endDateDB,
                 durationDB
         );
-
         try {
             jdbcTemplate.update(query);
             return true;
@@ -73,16 +67,13 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
             e.printStackTrace();
             return false;
         }
-
     }
 
     @Override
     public boolean finishQuiz(PassedQuizEntity passedQuizEntity) {
-
         long endDateDB = passedQuizEntity.getEndDate().getTime();
         long score = passedQuizEntity.getScore();
         long durationDB = DateUtils.timeToMillisecondsFormat(passedQuizEntity.getDuration());
-
         String query = String.format(
                 "UPDATE passed_quiz SET score = \'%d\', end_date = \'%d\', duration = \'%d\'" +
                         "WHERE id = \'%d\';",
@@ -91,64 +82,47 @@ public class PassedQuizRepositoryImpl implements PassedQuizRepository {
                 durationDB,
                 passedQuizEntity.getId()
         );
-
         jdbcTemplate.update(query);
         return true;
     }
 
     @Override
     public List<AnswerEntity> getAnswersByPassedQuiz(PassedQuizEntity passedQuizEntity) {
-
         String query = String.format(
                 "SELECT id FROM answer WHERE passed_quiz_id = \'%d\'",
                 passedQuizEntity.getId()
         );
-
         List<Long> answerIds = jdbcTemplate.queryForList(query, Long.class);
-
         List<AnswerEntity> answers = new ArrayList<>();
-
-        for (long answerId :
-                answerIds) {
+        for (long answerId : answerIds) {
             answers.add(answerRepository.getAnswerById(answerId));
         }
-
         return answers;
     }
 
     @Override
     public PassedQuizEntity getPassedQuizByIdentifiers(PassedQuizEntity passedQuizEntity) {
-
         long startDateDB = passedQuizEntity.getStartDate().getTime();
-
         String query = String.format(
                 "SELECT * FROM passed_quiz WHERE user_id = \'%d\' AND quiz_id = \'%d\' AND start_date = \'%d\';",
                 passedQuizEntity.getUserId(),
                 passedQuizEntity.getQuizId(),
                 startDateDB
         );
-
         return jdbcTemplate.queryForObject(query, passedQuizRawMapper);
-
     }
 
     @Override
-    public List<PassedQuizEntity> getPassedQuizesByUserId(long userId) {
+    public List<PassedQuizEntity> getPassedQuizzesByUserId(long userId) {
         String query = String.format(
                 "SELECT id FROM passed_quiz WHERE user_id = \'%d\';",
                 userId
         );
-
         List<Long> ids = new ArrayList<>(jdbcTemplate.queryForList(query, Long.class));
-
         List<PassedQuizEntity> res = new ArrayList<>();
-
-        for (long id :
-                ids) {
+        for (long id : ids) {
             res.add(this.getPassedQuizById(id));
         }
-
         return res;
     }
-
 }

@@ -139,7 +139,7 @@ public class PassedQuizServiceImpl implements PassedQuizService {
 
         return PassedQuizConverter.entityToPassedQuizList(userRepository,
                                                             quizRepository,
-                passedQuizRepository.getPassedQuizesByUserId(userId));
+                passedQuizRepository.getPassedQuizzesByUserId(userId));
 
     }
 

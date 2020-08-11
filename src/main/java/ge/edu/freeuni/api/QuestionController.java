@@ -38,16 +38,13 @@ public class QuestionController {
 
     @RequestMapping("/addMultipleChoice")
     public String addMultipleChoiceQuestion(@RequestParam String question, @RequestParam Map<String, String> params, Map<String, Object> model) {
-
         List<String> choices = new ArrayList<>();
-
         for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
             String toGet = "choice" + toAppend;
             String toAdd = params.get(toGet);
             choices.add(toAdd);
         }
-
         String correctAnswer = params.get("correctAnswer");
         Question addedQuestion = new Question();
         addedQuestion.setQuestion(question);
@@ -63,10 +60,8 @@ public class QuestionController {
     public String addFillInBlankQuestion(@RequestParam String firstPart, @RequestParam String secondPart,
                                          @RequestParam String blank,
                                          Map<String, Object> model) {
-
         String question = firstPart + "_" + secondPart;
         String correctAnswer = blank;
-
         Question toAdd = new Question();
         toAdd.setQuestion(question);
         toAdd.setType(QuestionType.FILL_IN_THE_BLANK);
@@ -74,7 +69,6 @@ public class QuestionController {
         toAdd.setCorrectAnswerIndex(-1);
         toAdd.setChoices(new ArrayList<>());
         questionService.addQuestion(toAdd);
-
         return "makeQuestions";
     }
 
@@ -82,7 +76,6 @@ public class QuestionController {
     public String addQuestionResponse(@RequestParam Map<String, String> params, Map<String, Object> model) {
         String question = params.get("question");
         List<String> answers = new ArrayList<>();
-
         for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
             String toGet = "choice" + toAppend;
@@ -97,8 +90,6 @@ public class QuestionController {
         addedQuestion.setCorrectAnswer(StringUtils.listToString(answers, ','));
         addedQuestion.setCorrectAnswerIndex(-1);
         questionService.addQuestion(addedQuestion);
-
-
         return "makeQuestions";
     }
 
@@ -118,7 +109,6 @@ public class QuestionController {
         addedQuestion.setCorrectAnswer(correctAnswer);
         addedQuestion.setCorrectAnswerIndex(-1);
         questionService.addQuestion(addedQuestion);
-
         return "makeQuestions";
     }
 
@@ -126,7 +116,6 @@ public class QuestionController {
     public String addImageAnswer(@RequestParam Map<String, String> params, Map<String, Object> model) {
         String question = params.get("question");
         List<String> answers = new ArrayList<>();
-
         for (int i = 0; i < params.size() - 1; i++) {
             int toAppend = i + 1;
             String toGet = "choice" + toAppend;
@@ -143,8 +132,6 @@ public class QuestionController {
         addedQuestion.setCorrectAnswerIndex(-1);
         addedQuestion.setPictureURL(imageURL);
         questionService.addQuestion(addedQuestion);
-
-
         return "makeQuestions";
     }
 

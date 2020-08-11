@@ -45,21 +45,17 @@ public class PassedQuizController {
         PassedQuiz passedQuiz = new PassedQuiz();
         passedQuiz.setQuiz(quiz);
         passedQuizService.startQuiz(passedQuiz);
-
         List<Question> questions = questionService.getAllQuestionsByQuiz(quiz);
-
-        if(questions.isEmpty()){
+        if (questions.isEmpty()) {
             passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
             model.put("questions", questions);
             System.out.println(passedQuiz.getScore());
             return "finishPlayingQuiz";
         }
-
         model.put("question", questions.get(0));
         model.put("index", (long) (0));
         model.put("quizId", quizId);
-
         return QuestionConverter.getJspFromType(questions.get(0).getType());
     }
 
@@ -68,19 +64,12 @@ public class PassedQuizController {
                                 @PathVariable long quizId,
                                 @PathVariable long index_of_question,
                                 Map<String, Object> model) {
-
         List<Question> questions = questionService.getAllQuestionsByQuiz(quizService.getQuizById(quizId));
-
         Question currQuestion = questions.get((int) index_of_question);
-
         Answer answer = new Answer();
-
         answer.setPassedQuiz(passedQuizService.getActivePassedQuiz());
         answer.setQuestion(currQuestion);
-
         String answerTextToSet;
-
-
         if (currQuestion.getType() == QuestionType.MULTIPLE_CHOICE) {
             String yle = (String) params.get("correctAnswer");
             answerTextToSet = currQuestion.getChoices().get(yle.charAt(0) - 'a');
@@ -90,11 +79,8 @@ public class PassedQuizController {
         } else {
             answerTextToSet = (String) params.get("correctAnswer");
         }
-
         answer.setUserAnswer(answerTextToSet);
-
         answerService.addAnswer(answer);
-
         if (index_of_question >= questions.size() - 1) {
             PassedQuiz passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
@@ -102,24 +88,20 @@ public class PassedQuizController {
             System.out.println(passedQuiz.getScore());
             return "finishPlayingQuiz";
         }
-
         Question nextQuestion = questions.get((int) (index_of_question + 1));
-
         model.put("quizId", quizId);
         model.put("question", nextQuestion);
         model.put("index", index_of_question + 1);
-
         return QuestionConverter.getJspFromType(nextQuestion.getType());
     }
 
     @RequestMapping("/allTakenQuizzes")
-    public String allTakenQuizzes(Map<String, Object> model){
+    public String allTakenQuizzes(Map<String, Object> model) {
         List<PassedQuiz> takenQuizzes = passedQuizService
                 .getPassedQuizzesByUserId(authenticationService
                         .getActiveUser()
                         .getId());
         model.put("takenQuizzes", takenQuizzes);
-
         return "takenQuizzes";
     }
 
