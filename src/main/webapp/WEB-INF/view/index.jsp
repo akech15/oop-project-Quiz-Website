@@ -110,13 +110,17 @@
     </div>
 </div>
 
-<!-- Top rated users -->
+
+
+
 <div id="topUsers" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-black w3-display-container">
             <span onclick="document.getElementById('topUsers').style.display='none'"
                   class="w3-button w3-display-topright w3-large">x</span>
             <h1>Top Users By Created Quizzes</h1>
+        </div>
+        <div class="w3-container">
             <%
                 int index = 0;
                 for (Wyvili<User, Long> pair : topRatedUsers) {
@@ -134,6 +138,7 @@
     </div>
 </div>
 
+
 <!-- Top rated quizzes -->
 <div id="topQuizzes" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
@@ -141,6 +146,8 @@
             <span onclick="document.getElementById('topQuizzes').style.display='none'"
                   class="w3-button w3-display-topright w3-large">x</span>
             <h1>Mostly Played Quizzes</h1>
+        </div>
+        <div class="w3-container">
             <%
                 index = 0;
                 for (Wyvili<Quiz, Long> pair : topRatedQuizzes) {

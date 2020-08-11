@@ -33,7 +33,7 @@
     <form action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
         <%
             String q = question.getQuestion();
-            out.print("<h1> Question: #" + choice + " : " + q + "</h1><br>");
+            out.print("<h1> Question: #" + (choice +1) + " : " + q + "</h1><br>");
             out.print("<br>");
         %>
         <input type="text" name="correctAnswer" required placeholder="Enter correct answer" id="correctAnswer"/>

@@ -85,7 +85,7 @@
 <div id="topUsers" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-black w3-display-container">
-            <span onclick="document.getElementById('aboutQuiz').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+            <span onclick="document.getElementById('topUsers').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
             <h1>Top Users</h1>
         </div>
 
@@ -94,11 +94,12 @@
                 for (Wyvili<User, Long> pair:
                      topRatedUsersByQuiz) {
                     String toPrint = String.format(
-                            "<a href=\"/viewUserPage/%d\">Username: %s, Score: %d</a>",
+                            "<a href=\"/viewUserPage/%d\">Username: %s, Score: %d</a><br>",
                             pair.first.getId(),
                             pair.first.getUsername(),
                             pair.second
                     );
+                    out.print(toPrint);
                 }
             %>
 
