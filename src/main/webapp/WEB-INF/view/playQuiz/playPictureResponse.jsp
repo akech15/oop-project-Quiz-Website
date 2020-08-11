@@ -38,7 +38,7 @@
 
 	</div>
 
-	<img src="<%=URL%>" alt="Trulli" width="500" height="333">
+		<img src="<%=URL%>" alt="Trulli" width="500" height="333">
 
 	<form action="${pageContext.request.contextPath}/questionsWrapper/<%=choice%>/<%=quizId%>" method="post">
 		<%

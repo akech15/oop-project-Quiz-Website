@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>OOPS</title>
+<title>Create Account</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -15,6 +15,17 @@
         });
     </script>
 
+    <style>
+        #nameBox {
+            border-radius: 25px;
+            border: 2px solid #609;
+            padding: 20px;
+            width: 200px;
+            height: 15px;
+            outline: none;
+        }
+    </style>
+</head>
 <body>
 <div class="bgimg w3-display-container w3-text-white">
 
@@ -22,7 +33,6 @@
         <p><button onclick="document.getElementById('login').style.display='block'" class="w3-button w3-black">Log In</button></p>
         <p><button onclick="document.getElementById('about').style.display='block'" class="w3-button w3-black">About Quiz Time</button></p>
     </div>
-
 </div>
 
 <!-- Log In Form -->
@@ -30,13 +40,13 @@
     <div class="w3-modal-content w3-animate-zoom">
         <div class="w3-container w3-black w3-display-container">
             <span onclick="document.getElementById('login').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
-            <h1>Sign Up</h1>
+            <h1>Username Already Exists</h1>
         </div>
+        <h1>Please Try Again</h1>
         <div class="login-item">
-            <h2>username ${username} already exists</h2>
-            <h2>please try again</h2>
             <form action="${pageContext.request.contextPath}/createAccount" method="post">
-                Username: <input type="text" name="username" placeholder="Enter User Name" id = "usernameBox"/><br>
+                Name: <input type="text" name="name" placeholder="Enter Name" id = "nameBox"/><br>
+                Username: <input type="text" name="username" placeholder="Enter Username" id = "usernameBox"/><br>
                 Password: <input type="password" name="password" placeholder="Enter Password" id = "passwordBox"/><br><br>
                 <input class="btn" type="submit" value="Create Account" id="loginButton">
             </form>
@@ -56,6 +66,8 @@
         </div>
     </div>
 </div>
+
+<!-- Top rated users -->
 
 </body>
 </html>
