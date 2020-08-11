@@ -1,18 +1,12 @@
 package ge.edu.freeuni.server.repository.answer;
 
-import ge.edu.freeuni.api.model.question.Question;
-import ge.edu.freeuni.api.model.question.QuestionType;
 import ge.edu.freeuni.server.model.answer.AnswerEntity;
-import ge.edu.freeuni.server.model.question.QuestionEntity;
-import ge.edu.freeuni.server.repository.question.QuestionRepositoryImpl;
-import ge.edu.freeuni.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
-import java.util.List;
 
 @Repository
 public class AnswerRepositoryImpl implements AnswerRepository {

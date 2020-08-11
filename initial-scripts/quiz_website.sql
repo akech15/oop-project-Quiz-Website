@@ -51,7 +51,7 @@ CREATE TABLE question
     choices              varchar(200) not null,
     correct_answer       varchar(200) not null,
     correct_answer_index int          not null,
-    picture_url          varchar(100),
+    picture_url          varchar(1000),
     PRIMARY KEY (id),
     FOREIGN KEY (quiz_id) references quiz (id)
 );
@@ -84,9 +84,9 @@ CREATE TABLE answer
 
 CREATE TABLE mail
 (
-    id          int         NOT NULL AUTO_INCREMENT,
-    sender_id   int         NOT NULL,
-    receiver_id int         NOT NULL,
+    id          int          NOT NULL AUTO_INCREMENT,
+    sender_id   int          NOT NULL,
+    receiver_id int          NOT NULL,
     context     VARCHAR(300) NOT NULL,
     sent_date   long,
     foreign key (sender_id) references user (id),
@@ -108,3 +108,24 @@ create table challenges
 );
 
 
+
+insert into user (name, username, password)
+values ('amiko', 'amalzet@freeuni.edu.ge', 'a');
+insert into user (name, username, password)
+values ('davita', 'dsolo17@freeuni.edu.ge', 'a');
+insert into user (name, username, password)
+values ('lado', 'lniko17@freeuni.edu.ge', 'a');
+insert into user (name, username, password)
+values ('mari', 'mormo17@freeuni.edu.ge', 'a');
+
+
+insert into friends (sender_id, receiver_id, status)
+values (1, 2, 'APPROVED');
+insert into friends (sender_id, receiver_id, status)
+values (2, 3, 'APPROVED');
+insert into friends (sender_id, receiver_id, status)
+values (1, 4, 'APPROVED');
+insert into friends (sender_id, receiver_id, status)
+values (2, 4, 'APPROVED');
+insert into friends (sender_id, receiver_id, status)
+values (3, 4, 'APPROVED');

@@ -50,7 +50,6 @@ public class PassedQuizController {
             passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
             model.put("questions", questions);
-            System.out.println(passedQuiz.getScore());
             return "finishPlayingQuiz";
         }
         model.put("question", questions.get(0));
@@ -71,11 +70,10 @@ public class PassedQuizController {
         answer.setQuestion(currQuestion);
         String answerTextToSet;
         if (currQuestion.getType() == QuestionType.MULTIPLE_CHOICE) {
-            String yle = (String) params.get("correctAnswer");
-            answerTextToSet = currQuestion.getChoices().get(yle.charAt(0) - 'a');
+            String str = (String) params.get("correctAnswer");
+            answerTextToSet = currQuestion.getChoices().get(str.charAt(0) - 'a');
         } else if (currQuestion.getType() == QuestionType.TRUE_FALSE) {
             answerTextToSet = (params.get("trueCheckBox") != null) ? "True" : "False";
-
         } else {
             answerTextToSet = (String) params.get("correctAnswer");
         }
@@ -85,7 +83,6 @@ public class PassedQuizController {
             PassedQuiz passedQuiz = passedQuizService.finishQuiz();
             model.put("passedQuiz", passedQuiz);
             model.put("questions", questions);
-            System.out.println(passedQuiz.getScore());
             return "finishPlayingQuiz";
         }
         Question nextQuestion = questions.get((int) (index_of_question + 1));

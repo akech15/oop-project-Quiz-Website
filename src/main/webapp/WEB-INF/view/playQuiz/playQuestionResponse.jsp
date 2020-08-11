@@ -16,6 +16,12 @@
         Long quizId = (Long) request.getAttribute("quizId");
     %>
 
+    <style>
+        .bgimg{
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 

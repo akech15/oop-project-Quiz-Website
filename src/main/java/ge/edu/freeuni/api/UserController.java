@@ -198,7 +198,6 @@ public class UserController {
         List<PassedQuiz> passedQuizzes = passedQuizService
                 .getPassedQuizzesByUserId(userId);
         List<Quiz> userQuizzes = quizService.getQuizesByUserId(userId);
-
         if (action.equals("cancel")) {
             friendshipService.removeRequest(authenticationService.getActiveUser(), user);
         } else if (action.equals("remove")) {

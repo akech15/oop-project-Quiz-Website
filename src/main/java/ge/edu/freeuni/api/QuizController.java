@@ -25,16 +25,8 @@ public class QuizController {
     private QuizService quizService;
 
     @Autowired
-    private AuthenticationService authenticationService;
-
-    @Autowired
-    private UserServiceImpl userService;
-
-    @Autowired
     private QuestionService questionService;
 
-    @Autowired
-    private PassedQuizService passedQuizService;
 
     @RequestMapping("/createNewQuiz")
     public String createQuiz(Map<String, Object> model) {
