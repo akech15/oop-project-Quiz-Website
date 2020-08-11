@@ -41,13 +41,13 @@
         ul li {
             border-radius: 20px;
             /*border-color: #33ccff;*/
-            background-color: #33ccff;
+            background-color: #800080;
             color: red;
             font-family: Georgia, serif;
             font-size: 20px;
             text-align: center;
             max-width: 300px;
-            border: 1px solid #ddd;
+            border: 1px solid #DDA0DD;
             margin: auto; /* Prevent double borders */
             padding: 12px;
         }
@@ -70,10 +70,10 @@
     <p
             style="margin: auto; text-align: center; font-size: 50px; color: black; border-radius: 20px;
 
-            background-color: #33ccff;
+            background-color: #800080;
             font-family: Georgia, serif;
             max-width: 720px;
-            border: 1px solid #ddd;
+            border: 1px solid #DDA0DD;
             padding: 12px;">
             Users by username fragment: <%=usernameFragment%>
     </p>
